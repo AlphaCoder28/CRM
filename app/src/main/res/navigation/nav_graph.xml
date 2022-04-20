@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    >
+<!--    app:startDestination="@id/homeFragment"-->
+    <!--        android:label="First"-->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.goldmedal.crm.ui.dashboard.home.HomeFragment"
+        tools:layout="@layout/home_fragment">
+
+<!--        <action-->
+<!--            android:id="@+id/action_FirstFragment_to_SecondFragment"-->
+<!--            app:destination="@id/SecondFragment" />-->
+    </fragment>
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/acceptedTicketFragment"-->
+<!--        android:name="com.goldmedal.crm.ui.ticket.AcceptedTicketFragment"-->
+<!--        android:label="Accepted Ticket"-->
+<!--        tools:layout="@layout/activity_accepted_ticket" />-->
+    <fragment
+        android:id="@+id/serviceTicketFragment"
+        android:name="com.goldmedal.crm.ui.ticket.ServiceTicketFragment"
+        android:label="fragment_service_ticket"
+        tools:layout="@layout/fragment_service_ticket" />
+    <fragment
+        android:id="@+id/ManagerHomeFragment"
+        android:name="com.goldmedal.crm.ui.dashboard.Manager.ManagerHomeFragment"
+        tools:layout="@layout/fragment_manager" />
+    <fragment
+        android:id="@+id/BlankFragment"
+        android:name="com.goldmedal.crm.ui.dashboard.BlankFragment"
+        tools:layout="@layout/fragment_manager" />
+    <!--    <fragment-->
+<!--        android:id="@+id/SecondFragment"-->
+<!--        android:name="com.goldmedal.crm.SecondFragment"-->
+<!--        android:label="Second"-->
+<!--        tools:layout="@layout/fragment_second">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+<!--            app:destination="@id/FirstFragment" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/homeFragment2"-->
+<!--        android:name="com.goldmedal.crm.ui.dashboard.home.HomeFragment"-->
+<!--        android:label="HomeFragment" />-->
+</navigation>

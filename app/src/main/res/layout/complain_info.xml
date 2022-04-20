@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/complain_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:visibility="gone"
+    android:background="@color/appBg"
+    tools:visibility="gone"
+    android:orientation="vertical">
+    <!--added by akshay-->
+
+    <TextView
+        android:id="@+id/txtProductDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_4"
+        android:layout_marginStart="@dimen/dp_6"
+        android:padding="@dimen/dp_8"
+        android:text="@string/str_complain_details" />
+
+
+    <LinearLayout
+        android:id="@+id/llUploadSelfieImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_margin="@dimen/dp_4"
+            app:srcCompat="@drawable/ic_add_photo" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_marginStart="@dimen/dp_6"
+                android:padding="@dimen/dp_4"
+                android:text="@string/str_upload_selfie" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:id="@+id/widget_Selfie"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/icon_Selfie"
+                            android:layout_width="@dimen/medium_icon_width"
+                            android:layout_height="@dimen/medium_icon_height"
+                            android:layout_alignParentStart="true"
+                            android:layout_margin="@dimen/dp_4"
+                            app:civ_border_color="#FF000000"
+                            tools:src="@drawable/ic_outline_pdf" />
+
+
+                        <ImageView
+                            android:id="@+id/icon_remove_Selfie"
+                            android:layout_width="@dimen/dp_20"
+                            android:layout_height="@dimen/dp_20"
+                            android:layout_alignParentTop="true"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_cancel"
+                            app:tint="@color/colorRed" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_Selfie"
+                        android:layout_width="@dimen/dp_140"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/str_add_selfie"
+                        android:textAllCaps="false" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_view_Selfie_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dip">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/installation" />
+
+
+        <TextView
+            android:id="@+id/text_view_complain_title"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_toEndOf="@+id/icon"
+            android:gravity="center_vertical"
+            android:text="@string/dash" />
+
+
+        <TextView
+            android:id="@+id/text_view_complain_subtitle"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_complain_title"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toEndOf="@+id/icon"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dip">
+
+        <ImageView
+            android:id="@+id/icon_symptoms"
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/symptoms" />
+
+
+        <TextView
+            android:id="@+id/text_view_symptoms"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_toEndOf="@+id/icon_symptoms"
+            android:gravity="center_vertical"
+            android:text="@string/str_symptoms" />
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGrp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:layout_below="@id/text_view_symptoms"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toEndOf="@+id/icon_symptoms"
+            app:singleSelection="false">
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dip">
+
+        <ImageView
+            android:id="@+id/icon_profile"
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/check_for_solution" />
+
+
+        <TextView
+            android:id="@+id/text_view_instructions_title"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_toEndOf="@+id/icon_profile"
+            android:gravity="center_vertical"
+            android:text="@string/str_instructions" />
+
+
+        <TextView
+            android:id="@+id/text_view_instructions_subtitle"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_instructions_title"
+            android:layout_marginStart="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toEndOf="@+id/icon_profile"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,362 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceOverlay.LargeComponents</item>
+          <item name="shapeAppearanceSmallComponent">@style/ShapeAppearanceOverlay.SmallComponents</item>
+        <item name="snackbarStyle">@style/MySnackBarStyle</item>
+    </style>
+
+    <style name="FullScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
+<!--        <item name="android:fitsSystemWindows">true</item>-->
+    </style>
+
+
+    <!--    <style name="ThemeWithActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">-->
+    <style name="ThemeWithActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearanceOverlay.LargeComponents</item>
+<!--        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearanceOverlay.MediumComponents</item>-->
+
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<!--    <style name="spinnerStyle" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+<!--        <item name="smsp_errorTextColor">@color/error_color</item>-->
+<!--        <item name="smsp_floatingLabelColor">@color/floating_color</item>-->
+<!--        <item name="smsp_underlineColor">@color/underline_color</item>-->
+<!--        <item name="smsp_errorTextSize">13sp</item>-->
+<!--        <item name="smsp_itemSize">14sp</item>-->
+<!--        <item name="smsp_hintSize">14sp</item>-->
+<!--    </style>-->
+
+
+    <style name="spinnerStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="smsp_errorTextColor">@color/error_color</item>
+        <item name="smsp_floatingLabelColor">@color/floating_color</item>
+        <item name="smsp_underlineColor">@color/underline_color</item>
+        <item name="smsp_errorTextSize">13sp</item>
+        <item name="smsp_itemSize">14sp</item>
+        <item name="smsp_hintSize">14sp</item>
+    </style>
+
+    <style name="default_red_btn">
+        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/colorRed</item>
+    </style>
+
+    <style name="default_green_btn">
+        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:background">@color/colorGreen</item>
+    </style>
+
+
+    <style name="small_txt_dark">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+<!--    <style name="small_txt_dark">-->
+<!--        <item name="android:fontFamily">@font/roboto_regular</item>-->
+<!--        <item name="android:textSize">@dimen/sp_10</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textAlignment">center</item>-->
+<!--    </style>-->
+
+    <style name="small_txt_thin">
+        <item name="android:fontFamily">@font/roboto_thin</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/fontLightText</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="medium_txt_regular">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="medium_light_txt_regular">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/fontDarkText</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="medium_txt_bold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_txt_bold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/txt_large_font</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_txt_dark">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/txt_large_font</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_extra_bold_dark">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_extra_dark">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_medium_dark">
+        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_extra_normal">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/sp_22</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="header_txt_dark">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="medium_txt_white">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_txt_bold_white">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/txt_large_font</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="large_txt_white">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/txt_large_font</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="header_txt">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="main_header_txt">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="main_header_txt_dark">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="big_number_txt">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_30</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="white_big_number_txt">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_30</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+    <style name="login_edt_txt">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorDarkText</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="login_btn_gray">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/dp_16</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/fontDarkText</item>
+    </style>
+
+    <style name="login_detail_txt_light">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/dp_16</item>
+        <item name="android:textColor">@color/colorLightText</item>
+    </style>
+
+
+    <style name="large_dark_text">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/fontDarkText</item>
+    </style>
+
+
+    <style name="large_light_text">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/fontLightText</item>
+    </style>
+
+
+        <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">95sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">59sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">48sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">34sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">24sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">20sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">16sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">12sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">16sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">14sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">14sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="android:textSize">12sp</item>
+        </style>
+        <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
+            <item name="fontFamily">@font/open_sans</item>
+            <item name="android:fontFamily">@font/open_sans</item>
+            <item name="textColor">@color/material_grey_400</item>
+            <item name="android:textSize">10sp</item>
+        </style>
+
+
+
+    <style name="TextFieldShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_16</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.LargeComponents" parent="">
+        <item name="cornerSize">32dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+      <style name="ShapeAppearanceOverlay.SmallComponents" parent="">
+        <item name="cornerSize">@dimen/dp_16</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+
+<!--    <style name="ShapeAppearanceOverlay.MediumComponents" parent="">-->
+<!--        <item name="cornerSize">8dp</item>-->
+<!--        <item name="cornerFamily">rounded</item>-->
+<!--    </style>-->
+
+
+</resources>

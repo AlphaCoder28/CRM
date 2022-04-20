@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_16">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/medium_header_height"
+                    android:background="@color/colorPrimary">
+
+
+                    <TextView
+                        style="@style/large_txt_bold_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="29dp"
+                        android:layout_centerInParent="true"
+                        android:text="Parts"
+                        android:textAlignment="center"
+                        tools:ignore="RelativeOverlap" />
+
+
+                    <ImageView
+                        android:id="@+id/imvClose"
+                        android:layout_width="@dimen/small_icon_width"
+                        android:layout_height="@dimen/small_icon_height"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        app:srcCompat="@drawable/ic_cancel" />
+
+                </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/txtHeaderDialog"
+                        style="@style/large_txt_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginRight="@dimen/dp_8"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        android:layout_gravity="center"
+                        android:text="@string/dash"
+                        />
+
+
+                <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:background="@drawable/spinner_border"
+                        android:layout_marginTop="@dimen/dp_16"
+                        app:iconifiedByDefault="false"
+                        app:queryHint="Search" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPartsDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        tools:listitem="@layout/used_part_row_dialog"
+                        />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.goldmedal.crm.util.ViewCommonCustom
+            android:id="@+id/view_common"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_100"
+            android:layout_height="300dp"/>
+
+        <com.goldmedal.crm.common.RotateLoading
+            android:id="@+id/progress_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            app:loading_color="@color/darkBackground"
+            app:loading_width="@dimen/dp_2" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

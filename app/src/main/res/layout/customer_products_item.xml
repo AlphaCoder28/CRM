@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/dp_6"
+    android:id="@+id/root_layout"
+    android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_8"
+    android:layout_height="wrap_content">
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon_profile"
+            android:layout_width="@dimen/medium_icon_width"
+            android:layout_height="@dimen/medium_icon_height"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/dp_8"
+            android:src="@drawable/product_black" />
+
+
+        <TextView
+            android:id="@+id/text_view_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_toEndOf="@+id/icon_profile"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_toStartOf="@+id/imv_arrowhead"
+            android:gravity="center_vertical"
+            android:minHeight="30dp"
+            android:text="@string/dash"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1" />
+
+
+
+
+
+        <ImageView
+
+            android:src="@drawable/right_arrow"
+            android:id="@+id/imv_arrowhead"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            tools:ignore="ContentDescription"
+            app:tint="@color/colorBlack" />
+
+        <TextView
+            android:id="@+id/text_view_category_name"
+            style="@style/small_txt_thin"
+            android:text="@string/dash"
+            android:layout_toStartOf="@+id/imv_arrowhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/sp_14"
+            android:layout_below="@id/text_view_product"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_toEndOf="@+id/icon_profile" />
+
+
+
+
+
+    </RelativeLayout>
+
+

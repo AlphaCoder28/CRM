@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="assignedticket"
+            type="com.goldmedal.crm.data.model.GetAllAssignedTicketsData" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/dp_8"
+        app:cardCornerRadius="@dimen/dp_8"
+        android:background="@color/darkGray"
+        android:layout_margin="@dimen/dp_8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/base_icon_width"
+                        android:layout_height="@dimen/base_icon_width"
+                        android:layout_margin="@dimen/dp_4"
+                        android:src="@drawable/image_upload">
+
+                    </ImageView>
+
+                    <TextView
+                        style="@style/small_txt_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_4"
+                        android:text="#xdfcgdsfg">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/medium_txt_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:background="@drawable/rounded_red_background"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:text="Urgent">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/medium_txt_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:background="@drawable/rounded_teal_background"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:paddingRight="@dimen/dp_10"
+                        android:text="In-Progress">
+
+                    </TextView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base_icon_width"
+                    android:layout_height="@dimen/base_icon_width"
+                    android:layout_margin="@dimen/dp_4"
+                    android:src="@drawable/image_upload">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    style="@style/small_txt_dark"
+                    android:text="10:00 - 78:99 - - - - - - - ">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="@dimen/base_icon_width"
+                        android:layout_height="@dimen/base_icon_width"
+                        android:layout_margin="@dimen/dp_4"
+                        android:src="@drawable/image_upload">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_4"
+                        style="@style/small_txt_dark"
+                        android:text="#xdfcgdsfg">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/rounded_red_background"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/dp_24"
+                        android:paddingRight="@dimen/dp_24"
+                        android:layout_height="20dp">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:src="@drawable/icon_contact_us"
+                            android:layout_gravity="center"
+                            android:layout_height="15dp">
+
+                        </ImageView>
+
+                        <TextView
+                            style="@style/medium_txt_white"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp_2"
+                            android:layout_height="wrap_content"
+                            android:text="Call">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base_icon_width"
+                    android:layout_height="@dimen/base_icon_width"
+                    android:layout_margin="@dimen/dp_4"
+                    android:src="@drawable/image_upload">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    style="@style/small_txt_dark"
+                    android:text="10:00 - 78:99 - - - - - - - ">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base_icon_width"
+                    android:layout_height="@dimen/base_icon_width"
+                    android:layout_margin="@dimen/dp_4"
+                    android:src="@drawable/image_upload">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    style="@style/small_txt_dark"
+                    android:text="10:00 - 78:99 - - - - - - - ">
+
+                </TextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

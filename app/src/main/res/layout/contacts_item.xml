@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_8"
+    android:layout_marginTop="@dimen/dp_8"
+    android:id="@+id/root_layout"
+    android:layout_marginEnd="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_4"
+    android:padding="6dip">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_profile"
+        android:layout_width="@dimen/medium_icon_width"
+        android:layout_height="@dimen/medium_icon_height"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_person_outline"
+        app:civ_fill_color="@color/appBg" />
+
+
+    <TextView
+        android:id="@+id/txtCustomerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_toEndOf="@+id/icon_profile"
+        android:gravity="center_vertical"
+        android:text="@string/dash"
+
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Body1" />
+
+
+    <TextView
+        android:id="@+id/txtCustomerAddress"
+        style="@style/small_txt_thin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCustomerName"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_toStartOf="@+id/imv_call"
+
+        android:layout_toEndOf="@+id/icon_profile"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/dash"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/sp_14" />
+
+    <ImageView
+        android:id="@+id/imv_call"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/dp_4"
+        android:src="@drawable/ic_call"
+        app:tint="@color/colorMaterialGreen" />
+</RelativeLayout>

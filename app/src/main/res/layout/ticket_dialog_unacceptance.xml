@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><!--added by akshay-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="@dimen/dp_16">
+
+    <!--android:background="@color/appBg"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_primary_background">
+
+            <TextView
+                android:id="@+id/txt_punch_header"
+                style="@style/TextAppearance.MdcTypographyStyles.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/dp_8"
+                android:text="@string/str_tkt_unacceptance_details"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_4"
+                app:srcCompat="@drawable/ic_cancel" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_tkt_unacceptance_reason" />
+
+            <!--                app:helperTextTextColor="@color/colorWhite"-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:helperText="@string/str_remark"
+                app:helperTextEnabled="true"
+                app:shapeAppearance="@style/TextFieldShapeAppearance.SmallComponent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+
+                    />
+                <!-- android:text="@={viewmodel.strUserName}"-->
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/btn_ok"-->
+        <!--            android:layout_width="@dimen/common_button_width"-->
+        <!--            android:layout_height="@dimen/common_button_height"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginStart="@dimen/dp_8"-->
+        <!--            android:layout_marginTop="@dimen/dp_16"-->
+        <!--            android:layout_marginEnd="@dimen/dp_8"-->
+        <!--            android:layout_marginBottom="@dimen/dp_16"-->
+        <!--            android:background="@drawable/color_checkin"-->
+        <!--            android:gravity="center"-->
+        <!--            android:onClick="@{viewmodel::onPunchAttendanceButtonClick}"-->
+        <!--            android:padding="@dimen/dp_8"-->
+        <!--            android:text="@string/str_submit"-->
+        <!--            android:textColor="#FFFFFF" />-->
+
+
+    </LinearLayout>
+
+    <com.goldmedal.crm.common.RotateLoading
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        app:loading_color="@color/darkBackground"
+        app:loading_width="@dimen/dp_2" />
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progress_bar"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal|center_vertical"-->
+    <!--        android:visibility="invisible" />-->
+</com.google.android.material.card.MaterialCardView>

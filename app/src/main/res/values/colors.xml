@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--<color name="colorPrimary">#008577</color> -->
+
+    <!--APP BRAND COLORS-->
+
+
+    <!--    <color name="appBg">#E6E6E6</color>-->
+<!--    <color name="appBg">#f5f5f5</color>-->
+    <color name="appBg">#ECEFF1</color>
+    <color name="fontDarkText">#505050</color>
+    <color name="fontLightText">#666666</color>
+
+    <color name="darkBackground">#353535</color>
+<!--    <color name="colorPrimary">#3c4655</color>-->
+    <color name="colorPrimary">#d32f2f</color>
+    <color name="colorPrimaryDark">#b82a2a</color>
+<!--    <color name="colorPrimaryDark">#839AAA</color>-->
+    <color name="colorAccent">@color/colorPrimaryDark</color>
+    <color name="colorBackground">#5B5A5A</color>
+
+
+
+    <!--    <color name="colorPrimary">#CC0000</color>-->
+    <!--    <color name="colorPrimaryDark">#b70000</color>-->
+    <!--    <color name="colorAccent">#db4c4c</color>-->
+    <color name="colorGreen">#388e3c</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorCyan">#00FFFF</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorYellow">#fab63a</color>
+    <color name="colorSkyBlue">#29D7EF</color>
+    <color name="colorPink">#ec3a8b</color>
+
+    <color name="colorOrange">#ff8a42</color>
+    <color name="colorMaterialIndigo">#65499c</color>
+    <color name="colorMaterialCyan">#009faf</color>
+    <color name="colorMaterialGreen">#519657</color>
+    <color name="colorMaterialPink">#ba2d65</color>
+    <color name="colorMaterialBlue">#2286c3</color>
+    <color name="colorMaterialAmber">#c8a415</color>
+    <color name="colorMaterialLime">#a8b545</color>
+
+    <color name="colorTextDisable">#66FFFFFF</color>
+
+    <color name="lightGray">#EFEFEF</color>
+    <color name="mediumGray">#CBCBCB</color>
+    <color name="primaryGray">#B6B6B6</color>
+    <color name="darkGray">#808080</color>
+
+
+    <color name="base_color">#d46a6a</color>
+    <color name="hint_color">#d46a6a</color>
+    <color name="floating_color">#009688</color>
+    <color name="underline_color">#4851504e</color>
+
+    <color name="custom_item_color">#2196F3</color>
+    <color name="custom_item_list_color">#3F51B5</color>
+    <color name="custom_selected_item_color">#E91E63</color>
+    <color name="error_color">#9C27B0</color>
+
+    <color name="search_hint_color">#F00051</color>
+    <color name="search_text_color">#8300D6</color>
+
+
+    <!-- Calendar Legends -->
+
+    <color name="colorPresent">#228B22</color>
+    <color name="colorAbsent">#AD160F</color>
+    <color name="colorHalfDay">#2577E7</color>
+    <color name="colorMissedPunch">#ff9922</color>
+    <color name="colorHoliday">#000000</color>
+
+
+    <color name="colorAppleLight">#dfebf1</color>
+    <color name="colorAppleDark">#00a4ee</color>
+
+
+    <!-- Teal -->
+    <color name="material_teal_50">#E0F2F1</color>
+    <color name="material_teal_100">#B2DFDB</color>
+    <color name="material_teal_200">#80CBC4</color>
+    <color name="material_teal_300">#4DB6AC</color>
+    <color name="material_teal_400">#26A69A</color>
+    <color name="material_teal_500">#009688</color>
+    <color name="material_teal_600">#00897B</color>
+    <color name="material_teal_700">#00796B</color>
+    <color name="material_teal_800">#00695C</color>
+    <color name="material_teal_900">#004D40</color>
+    <color name="material_teal_accent_100">#A7FFEB</color>
+    <color name="material_teal_accent_200">#64FFDA</color>
+    <color name="material_teal_accent_400">#1DE9B6</color>
+    <color name="material_teal_accent_700">#00BFA5</color>
+
+
+    <!-- Grey -->
+    <color name="material_grey_50" tools:ignore="PrivateResource">#FAFAFA</color>
+    <color name="material_grey_100" tools:ignore="PrivateResource">#F5F5F5</color>
+    <color name="material_grey_200">#EEEEEE</color>
+    <color name="material_grey_300" tools:ignore="PrivateResource">#E0E0E0</color>
+    <color name="material_grey_400">#BDBDBD</color>
+    <color name="material_grey_500">#9E9E9E</color>
+    <color name="material_grey_600" tools:ignore="PrivateResource">#757575</color>
+    <color name="material_grey_700" tools:ignore="PrivateResource">#616161</color>
+    <color name="material_grey_800" tools:ignore="PrivateResource">#424242</color>
+    <color name="material_grey_900" tools:ignore="PrivateResource">#212121</color>
+    <!-- Blue Grey -->
+    <color name="material_blue_grey_50">#ECEFF1</color>
+    <color name="material_blue_grey_100">#CFD8DC</color>
+    <color name="material_blue_grey_200">#B0BEC5</color>
+    <color name="material_blue_grey_300">#90A4AE</color>
+    <color name="material_blue_grey_400">#78909C</color>
+    <color name="material_blue_grey_500">#607D8B</color>
+    <color name="material_blue_grey_600">#546E7A</color>
+    <color name="material_blue_grey_700">#455A64</color>
+    <color name="material_blue_grey_800" tools:ignore="PrivateResource">#37474F</color>
+    <color name="material_blue_grey_900" tools:ignore="PrivateResource">#263238</color>
+    <!-- Black -->
+    <color name="material_light_black">#000000</color>
+    <!-- White -->
+    <color name="material_light_white">#FFFFFF</color>
+
+    <color name="colorLightText">#666666</color>
+    <color name="colorDarkText">#515050</color>
+    <color name="dashboardDarkText">#232425</color>
+    <color name="colorRed">#d32f2f</color>
+
+    <color name="colorHighLightedRed">#65E73838</color>
+    <color name="ripple_color">#f2f2f2</color>
+    <color name="colorDivider">#55000000</color>
+
+
+    <!--    <color name="default_text_color">#3e3e3d</color>-->
+    <color name="default_text_color">@color/material_grey_400</color>
+    <color name="default_text_color_checked">#ffffff</color>
+
+    <!--    <color name="default_segment_color">#f8f8f8</color>-->
+    <color name="default_segment_color">@color/material_grey_200</color>
+    <!--    <color name="default_segment_color_checked">#7F6A93</color>-->
+    <color name="default_segment_color_checked">@color/colorBlack</color>
+
+    <color name="default_ripple_color">#e4e4e4</color>
+    <color name="default_ripple_color_checked">#C695A4</color>
+
+    <color name="default_border_color">#e4e4e4</color>
+
+    <!--Banner-->
+
+    <color name="red_checked_color">#FF4C39</color>
+    <color name="red_normal_color">#935656</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_alpha_75">#BFFFFFFF</color>
+    <color name="white_alpha_45">#6FFFFFFF</color>
+
+    <color name="black">#000000</color>
+    <color name="purple_200">#9c27b0</color>
+    <color name="purple_500">#9c27b0</color>
+    <color name="purple_700">#700e7f</color>
+    <color name="teal_200">#008080</color>
+    <color name="teal_700">#00796b</color>
+
+    <color name="bar_red">#FF5D5D</color>
+    <color name="bar_blue">#25A9E1</color>
+
+
+    <color name="colorMLKitCard">#FFCCBC</color>
+    <color name="colorZxingCard">#BBDEFB</color>
+
+    <color name="barcode_reticle_background">#99000000</color>
+    <color name="barcode_reticle_stroke">#ffffff</color>
+
+
+</resources>
+

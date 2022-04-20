@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_layout"
+    tools:context=".ui.parts.UsedPartsActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.tabs.TabItem
+                    android:text="Items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:text="Parts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:background="@drawable/spinner_border"
+                android:layout_marginTop="@dimen/dp_16"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search" />
+
+            <include
+                android:id="@+id/layout_items"
+                layout="@layout/used_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <include
+                android:id="@+id/layout_parts"
+                layout="@layout/used_parts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <androidx.appcompat.widget.SearchView-->
+<!--                    android:id="@+id/search_view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/dp_50"-->
+<!--                    android:layout_marginStart="@dimen/dp_8"-->
+<!--                    android:layout_marginEnd="@dimen/dp_8"-->
+<!--                    android:background="@drawable/spinner_border"-->
+<!--                    android:layout_marginTop="@dimen/dp_16"-->
+<!--                    app:iconifiedByDefault="false"-->
+<!--                    app:queryHint="Search" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvItemsDetail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginTop="@dimen/dp_10"-->
+<!--                    tools:listitem="@layout/used_item_row"-->
+<!--                    android:visibility="visible"-->
+<!--                    />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvPartsDetail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginTop="@dimen/dp_10"-->
+<!--                    tools:listitem="@layout/used_part_row"-->
+<!--                    android:visibility="gone"-->
+<!--                    />-->
+
+
+<!--                <com.goldmedal.crm.util.ViewCommonCustom-->
+<!--                    android:id="@+id/view_common"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                  />-->
+
+<!--            </LinearLayout>-->
+
+        </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

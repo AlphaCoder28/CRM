@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_8"
+            android:background="@drawable/spinner_border"
+            android:padding="@dimen/dp_6">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/account"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/txt_last_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_toStartOf="@+id/imv_refresh"
+                android:text="@string/last_updated" />
+
+
+            <ImageView
+                android:id="@+id/imv_refresh"
+                android:layout_width="@dimen/dp_32"
+                android:layout_height="@dimen/dp_32"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_refresh" />
+
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/appBg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llAssignedTicketMain"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/assigned_ticket" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="@string/str_assigned_tickets" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="240dp">
+
+                            <com.zhpan.bannerview.BannerViewPager
+                                android:id="@+id/verticalAssignedTicketsBanner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                app:bvp_indicator_visibility="visible"
+                                app:bvp_round_corner="@dimen/dp_8" />
+
+
+                            <com.zhpan.indicator.IndicatorView
+                                android:id="@+id/indicator_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/verticalAssignedTicketsBanner"
+                                android:layout_centerHorizontal="true" />
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                                <com.goldmedal.crm.common.RotateLoading
+                                    android:id="@+id/assigned_tickets_progress_bar"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerInParent="true"
+                                    app:loading_color="@color/darkBackground"
+                                    app:loading_width="@dimen/dp_2" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--Ticket Count-->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/my_tickets" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="My Tickets" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_150">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvList"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:paddingStart="@dimen/dp_12"
+                            android:paddingEnd="@dimen/dp_12"
+                            tools:listitem="@layout/ticket_count_item" />
+
+                        <com.goldmedal.crm.util.ViewCommonCustom
+                            android:id="@+id/service_tickets_view_common"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
+                    </RelativeLayout>
+
+
+
+                    <!--Today's  Appointment-->
+                    <LinearLayout
+                        android:id="@+id/llAppointmentTicketMain"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/today_appointment" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="@string/str_today_appointment" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_250">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvAppointmentList"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:clipToPadding="false"
+                            android:paddingStart="@dimen/dp_12"
+                            android:paddingEnd="@dimen/dp_12"
+                            tools:listitem="@layout/appointment_item" />
+
+
+                        <com.goldmedal.crm.util.ViewCommonCustom
+                            android:id="@+id/todays_appointment_view_common"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/my_tickets" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="@string/str_ticket_analysis" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="158dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/dp_32"
+                                    android:layout_marginRight="@dimen/dp_32"
+                                    android:baselineAligned="false"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <LinearLayout
+                                        android:id="@+id/layout_all_tickets"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/dp_120"
+                                        android:layout_margin="@dimen/dp_16"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rounded_pink_background"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <!--                                    <LinearLayout-->
+                                        <!--                                        android:layout_width="match_parent"-->
+                                        <!--                                        android:orientation="vertical"-->
+                                        <!--                                        android:layout_gravity="center"-->
+                                        <!--                                        android:layout_height="wrap_content">-->
+
+                                        <TextView
+                                            android:id="@+id/tvAllTicket"
+                                            style="@style/white_big_number_txt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="0" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="All Tickets" />
+
+                                        <!--                                    </LinearLayout>-->
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/layout_urgent_tickets"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/dp_120"
+                                        android:layout_margin="@dimen/dp_16"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rounded_corner_button_red">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:id="@+id/tvUrgentTicket"
+                                                style="@style/white_big_number_txt"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:text="0" />
+
+                                            <TextView
+                                                style="@style/large_txt_bold_white"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dp_8"
+                                                android:gravity="center"
+                                                android:text="Urgent Tickets" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/dp_150"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/dp_32"
+                                    android:layout_marginRight="@dimen/dp_32"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <LinearLayout
+                                        android:id="@+id/layout_in_progress_tickets"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/dp_120"
+                                        android:layout_margin="@dimen/dp_16"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rounded_teal_background">
+
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:id="@+id/tvInProgressTicket"
+                                                style="@style/white_big_number_txt"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:text="0" />
+
+                                            <TextView
+                                                style="@style/large_txt_bold_white"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dp_8"
+                                                android:gravity="center"
+                                                android:text="In-Progress Tickets" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/layout_pending_tickets"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/dp_120"
+                                        android:layout_margin="@dimen/dp_16"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/rounded_yellow_background">
+
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:id="@+id/tvPendingTicket"
+                                                style="@style/white_big_number_txt"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:text="0" />
+
+                                            <TextView
+                                                style="@style/large_txt_bold_white"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dp_8"
+                                                android:gravity="center"
+                                                android:text="Pending Tickets" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <RelativeLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp">
+
+
+                                <com.goldmedal.crm.common.RotateLoading
+                                    android:id="@+id/dashboard_tickets_progress_bar"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_centerVertical="true"
+                                    app:loading_color="@color/darkBackground"
+                                    app:loading_width="@dimen/dp_2" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/customer" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="Customers" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_32"
+                                android:layout_marginRight="@dimen/dp_32"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_contacts"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_blue_background">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/contact" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Customers" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/layout_accounts"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_lightblue_background">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/accounts" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Accounts" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_32"
+                                android:layout_marginRight="@dimen/dp_32"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_unpaid_tickets"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_purple_background">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/unpaid_ticket" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Un-Paid Tickets" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/layout_paid_tickets"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_teal_background">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/paid_ticket" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Paid Tickets" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/small_header_height"
+                        android:layout_margin="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/colorRed"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/small_icon_height"
+                                android:layout_height="@dimen/small_icon_width"
+                                android:layout_margin="@dimen/dp_6"
+                                android:src="@drawable/inventory" />
+
+                            <TextView
+                                style="@style/large_txt_bold_white"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dp_6"
+                                android:gravity="center"
+                                android:text="Inventory" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/dp_16"
+                        android:layout_marginBottom="@dimen/dp_16"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/dp_16">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_32"
+                                android:layout_marginRight="@dimen/dp_32"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_availableParts"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_pink_background">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/available_parts" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Available Parts" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_teal_background">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/product" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Products" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/dp_32"
+                                android:layout_marginRight="@dimen/dp_32"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:id="@+id/layout_partsRequirement"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_blue_background">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/parts_used" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="My part Requirements" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/layout_usedParts"
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/dp_120"
+                                    android:layout_margin="@dimen/dp_16"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rounded_purple_background">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/medium_icon_width"
+                                            android:layout_height="@dimen/medium_icon_height"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/dp_6"
+                                            android:src="@drawable/parts_used" />
+
+                                        <TextView
+                                            style="@style/large_txt_bold_white"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dp_8"
+                                            android:gravity="center"
+                                            android:text="Parts Used" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="150dp"
+                         android:layout_marginLeft="@dimen/dp_16"
+                         android:layout_marginTop="@dimen/dp_32"
+                         android:layout_marginRight="@dimen/dp_16"
+                         android:layout_marginBottom="@dimen/dp_16"
+                         android:orientation="horizontal">
+
+
+                         <RelativeLayout
+                             android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_margin="@dimen/dp_6"
+                             android:layout_weight="1">
+
+                             <com.github.mikephil.charting.charts.PieChart
+                                 android:id="@+id/chartOpenTkts"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent" />
+
+                             <TextView
+                                 style="@style/header_txt_dark"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_alignParentBottom="true"
+                                 android:layout_marginBottom="@dimen/dp_32"
+                                 android:text="OPEN TICKETS" />
+
+
+                         </RelativeLayout>
+
+                         <RelativeLayout
+                             android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_margin="@dimen/dp_6"
+                             android:layout_weight="1">
+
+                             <com.github.mikephil.charting.charts.PieChart
+                                 android:id="@+id/chartWorkInProgress"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="match_parent" />
+
+                             <TextView
+                                 style="@style/header_txt_dark"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_alignParentBottom="true"
+                                 android:layout_marginBottom="@dimen/dp_32"
+                                 android:text="WORK IN PROGRESS" />
+
+                         </RelativeLayout>
+
+                     </LinearLayout>-->
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <data>
+
+        <variable
+            name="viewmodelHome"
+            type="com.goldmedal.crm.ui.dashboard.home.HomeViewModel" />
+
+    </data>
+</layout>

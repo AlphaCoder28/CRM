@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigationView">
+    <item android:title="@string/home">
+        <menu>
+
+
+            <item
+                android:id="@+id/homeFragment"
+                android:title="@string/dashboard_small" />
+            <!--                <item-->
+            <!--                    android:id="@+id/mapsActivity"-->
+            <!--                    android:title="@string/check_in_out" />-->
+
+
+        </menu>
+    </item>
+    <item android:title="@string/service_engineer">
+        <menu>
+            <!--            android:id="@+id/assignedTicketFragment"-->
+            <item
+                android:id="@+id/actionAssignedTicket"
+                android:title="@string/accepted_ticket" />
+
+            <!--            android:id="@+id/serviceTicketFragment"-->
+            <item
+                android:id="@+id/actionServiceTicket"
+                android:title="@string/service_ticket" />
+
+            <item
+                android:id="@+id/actionTicketHistory"
+                android:title="@string/ticket_history" />
+            <item
+                android:id="@+id/actionUpcomingAppointments"
+                android:title="@string/appointments" />
+
+            <item
+                android:id="@+id/actionInvoiceList"
+                android:title="@string/invoice_list" />
+
+            <item
+                android:id="@+id/actionProgressReport"
+                android:title="@string/progress_report" />
+
+        </menu>
+    </item>
+
+
+    <!--    <group-->
+    <!--        android:id="@+id/DetailsGrp"-->
+    <!--        android:checkableBehavior="none">-->
+
+    <!--        <item-->
+    <!--            android:id="@+id/contactUsActivity"-->
+
+    <!--            android:title="@string/contact_us" />-->
+    <!--        <item-->
+    <!--            android:id="@+id/aboutUsActivity"-->
+
+    <!--            android:title="@string/about_us" />-->
+    <!--        <item-->
+    <!--            android:id="@+id/settingsActivity"-->
+    <!--            android:title="@string/settings" />-->
+    <!--        <item-->
+    <!--            android:id="@+id/privacyPolicyActivity"-->
+    <!--            android:title="@string/privacy" />-->
+
+
+    <!--    </group>-->
+
+
+    <group
+        android:id="@+id/logoutGrp"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/actionLogout"
+            android:title="@string/str_logout" />
+    </group>
+</menu>

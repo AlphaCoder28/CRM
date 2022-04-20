@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_scan"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_qr_code_scan"
+        android:text="@string/str_scan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_search"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_search"
+        android:text="@string/str_search_by_qr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_scan" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_eanNo"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_search"
+        android:text="@string/str_search_by_ean"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_search" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_productCode"
+        style="@style/BottomSheetItem"
+        android:drawableStart="@drawable/ic_search"
+        android:text="@string/str_search_by_product_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_eanNo" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

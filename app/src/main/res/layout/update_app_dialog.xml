@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorRed"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:text="UPDATE"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="@dimen/sp_22"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+<TextView
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:textSize="@dimen/sp_18"
+    android:textColor="@color/colorWhite"
+    android:fontFamily="sans-serif-condensed-light"
+    android:text="@string/app_update_description_text"
+    android:layout_height="wrap_content"/>
+
+
+
+    <Button
+        android:layout_marginTop="@dimen/dp_50"
+        app:backgroundTint="@null"
+        android:background="@drawable/color_checkin"
+        android:id="@+id/buttonUpdate"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:textAllCaps="false"
+        android:text="Update"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/default_btn_height"/>
+
+    <Button
+        app:backgroundTint="@null"
+        android:background="@drawable/selector_checkout"
+        android:layout_marginTop="@dimen/dp_20"
+        android:id="@+id/buttonCancel"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:textAllCaps="false"
+        android:text="No Thanks"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/default_btn_height"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/dp_120"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+</RelativeLayout>

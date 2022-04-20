@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <data>-->
+
+<!--        <variable-->
+<!--            name="viewmodel"-->
+<!--            type="com.goldmedal.crm.ui.ticket.TicketViewModel" />-->
+
+<!--    </data>-->
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/dp_16">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/dp_8">
+
+                <!--android:background="@color/appBg"-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/medium_header_height"
+                    android:background="@color/colorPrimary">
+
+
+                    <TextView
+                        android:id="@+id/tvPopupHeader"
+                        style="@style/large_txt_bold_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/str_reschedule"
+                        android:textAlignment="center"
+                        tools:ignore="RelativeOverlap" />
+
+
+                    <ImageView
+                        android:id="@+id/imvClose"
+                        android:layout_width="@dimen/small_icon_width"
+                        android:layout_height="@dimen/small_icon_height"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        app:srcCompat="@drawable/ic_cancel" />
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_16"
+                android:orientation="vertical">
+
+
+                <include
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:id="@+id/layout_engineer_remark_close_popup"
+                    layout="@layout/remarks_layout"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@string/str_submit" />
+
+        </LinearLayout>
+
+        <com.goldmedal.crm.common.RotateLoading
+            android:id="@+id/progress_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            app:loading_color="@color/darkBackground"
+            app:loading_width="@dimen/dp_2" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    tools:context=".ui.ticket.TicketHistoryActivity">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.goldmedal.crm.common.VerticalTextView
+            android:id="@+id/txt_tickets"
+            android:text="TICKETS OF MONTH"
+            android:layout_marginStart="@dimen/dp_4"
+            style="@style/large_txt_bold"
+            android:layout_width="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:gravity="bottom"
+            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content"/>
+
+        <com.github.mikephil.charting.charts.CombinedChart
+            android:id="@+id/chart"
+            android:layout_toEndOf="@+id/txt_tickets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

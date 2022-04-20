@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/colorBlue"
+    android:layout_marginEnd="4dp"
+    android:id="@+id/root_background"
+    android:layout_marginStart="4dp"
+    android:elevation="@dimen/dp_8">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16">
+
+
+            <TextView
+                android:id="@+id/txt_tickets_count"
+                style="@style/TextAppearance.MaterialComponents.Headline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="04"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+            <!--                android:textColor="@color/white"-->
+
+
+            <ImageView
+                android:id="@+id/imv_tickets"
+                android:layout_width="@dimen/medium_icon_width"
+                android:layout_height="@dimen/medium_icon_height"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/txt_tickets_count"
+                android:src="@drawable/image_upload" />
+        </RelativeLayout>
+
+
+<TextView
+    android:id="@+id/txt_ticket_name"
+    android:layout_marginStart="@dimen/dp_16"
+    android:layout_marginBottom="@dimen/dp_8"
+    tools:text="@string/assigned_ticket"
+    style="@style/TextAppearance.MaterialComponents.Headline6"
+    android:layout_width="match_parent"
+    android:textColor="@color/white"
+    android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

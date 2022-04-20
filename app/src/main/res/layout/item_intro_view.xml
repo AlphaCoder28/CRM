@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/banner_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_enableMergePathsForKitKatAndAbove="true"
+        android:contentDescription="@string/guide"
+        android:scaleType="fitCenter"
+        app:lottie_loop="true" />
+    <!--    -->
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_150"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_32"
+        android:src="@drawable/goldmedal_transparent_logo" />
+
+</RelativeLayout>

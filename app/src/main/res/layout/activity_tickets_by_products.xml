@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root_layout"
+    android:layout_height="match_parent"
+    tools:context=".ui.customers.TicketsByProductsActivity">
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        tools:listitem="@layout/tickets_by_products_item"/>
+
+
+    <com.goldmedal.crm.util.ViewCommonCustom
+        android:id="@+id/view_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.goldmedal.crm.util.ViewCommonCustom>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

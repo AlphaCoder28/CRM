@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.goldmedal.crm">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name=".AppDelegate"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CRM">
+        <activity android:name=".ui.ticket.TicketViewDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.customers.TicketsByProductsActivity"
+            android:label="@string/ticket_overview"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dashboard.leftpanel.ProgressReportActivity"
+            android:label="@string/progress_report"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.UserProfileActivity"
+            android:label="@string/user_profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.customers.CustomerProductsActivity"
+            android:label="@string/str_products"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.dashboard.home.AppointmentsActivity"
+            android:label="@string/appointments"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ticket.TicketHistoryActivity"
+            android:label="@string/ticket_history"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.customers.ContactsActivity"
+            android:label="@string/str_contact"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.parts.UsedPartsActivity"
+            android:label="@string/str_used_parts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.parts.AvailablePartsActivity"
+            android:label="@string/str_available_parts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.invoice.GenerateInvoiceActivity"
+            android:label="@string/str_generate_invoice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.invoice.InvoiceListActivity"
+            android:label="@string/invoice_list"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.invoice.EditInvoiceActivity"
+            android:label="@string/edit_invoice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.parts.PartsRequirementActivity"
+            android:label="@string/parts_requirement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.WebActivity"
+            android:label="@string/pdf_view"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ticket.scanner.QrCodeScanActivity"
+            android:label="@string/str_scan" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".ui.ticket.CheckInActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRM.NoActionBar" />
+        <activity
+            android:name=".ui.ticket.AcceptedTicketsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ticket.ServiceTicketActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.VerifyOTPActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".ui.auth.IntroActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".ui.auth.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CRM.NoActionBar">
+
+            <!-- android:theme="@style/FullScreenTheme"> -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.dashboard.notification.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ticket.TicketInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".common.FullscreenImageActivity"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.common.GenericFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+    </application>
+
+</manifest>

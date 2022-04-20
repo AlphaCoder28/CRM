@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item  android:color="@color/colorPrimary" android:state_enabled="true" android:state_selected="true"/>
+    <item  android:color="@color/colorPrimary" android:state_enabled="true" android:state_checked="true"/>
+<!--    android:alpha="0.70"-->
+    <!-- 12% of 87% opacity -->
+<!--    <item android:alpha="0.40" android:color="?attr/colorOnSurface" android:state_enabled="true"/>-->
+<!--    <item android:alpha="0.42" android:color="?attr/colorOnSurface"/>-->
+
+    <item android:alpha="0.40" android:color="@color/colorWhite" android:state_enabled="true"/>
+    <item android:alpha="0.42" android:color="@color/colorWhite"/>
+
+
+
+<!--    <item android:color="@color/primaryLightColor" android:state_enabled="true" android:state_selected="true"/>-->
+<!--    <item android:color="@color/primaryLightColor" android:state_enabled="true" android:state_checked="true"/>-->
+<!--    &lt;!&ndash; 87% opacity. &ndash;&gt;-->
+<!--    <item android:alpha="0.87" android:color="#C6CCCD" android:state_enabled="true"/>-->
+<!--    &lt;!&ndash; 38% of 87% opacity. &ndash;&gt;-->
+<!--    <item android:alpha="0.33" android:color="#C6CCCD"/>-->
+</selector>

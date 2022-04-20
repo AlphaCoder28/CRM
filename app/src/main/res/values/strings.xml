@@ -1,0 +1,283 @@
+<resources>
+    <string name="app_name">CRM</string>
+
+
+    <string name="dash">-</string>
+
+    <!--Menu-->
+    <string name="attendance">Attendance</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="check_in_out">Check In/Out</string>
+    <string name="settings">Settings</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="payslip">PaySlip</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about_us">About Us</string>
+    <string name="holiday_list">Holiday List</string>
+    <string name="leave_record">Leave Records</string>
+
+    <!--Leave management-->
+    <string name="leave_management">LEAVE MANAGEMENT</string>
+    <string name="leave">Apply Leave</string>
+    <string name="stats">Attendance Stats</string>
+    <!--    <string name="str_view_leaves"><u>View Remaining Leaves</u></string>-->
+    <string name="approval">Leave Approval</string>
+    <string name="record">Leave Records</string>
+
+    <string name="service_engineer">SERVICE ENGINEER</string>
+    <string name="assigned_ticket">Assigned Tickets</string>
+    <string name="accepted_ticket">Accepted Tickets</string>
+    <string name="service_ticket">Service Tickets</string>
+
+
+    <string name="logout">Logout</string>
+    <string name="dashboard">DASHBOARD</string>
+    <string name="dashboard_small">Dashboard</string>
+
+    <string name="intro">IntroScreen</string>
+    <string name="login">Login</string>
+    <string name="verify_otp">OTP</string>
+    <string name="forgot_password">ForgotPassword</string>
+    <string name="validate_user">ValidateUser</string>
+
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+    <string name="tab_daily">Daily</string>
+    <string name="tab_monthly">Monthly</string>
+    <string name="tab_me">Me</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCuYEQogqF3cTj_f8oj-eM3YabPaF57js4</string>
+
+    <!--    AIzaSyASJ3yPEVAo2pR4840alRVTw8yxYhFKZwY-->
+
+
+    <!--PROFILE DETAILS-->
+
+    <string name="str_customer_name">Customer Name</string>
+    <string name="str_contact">Contacts</string>
+    <string name="str_used_parts">Used Parts</string>
+    <string name="str_available_parts">Available Parts</string>
+    <string name="str_parts_requirement">Parts not Available?\nRaise Request</string>
+    <string name="str_generate_invoice">Generate Invoice</string>
+    <string name="str_generate_invoice_again">Generate Invoice Again</string>
+    <string name="str_residence">Residence</string>
+
+    <string name="str_DOB">Date of Birth</string>
+    <string name="str_reporting_person">Reporting Person</string>
+    <string name="str_branch">Branch</string>
+    <string name="str_office_address">Service Centre Address</string>
+    <string name="str_home_address">Home Address</string>
+    <string name="str_change_password">Change Password</string>
+    <string name="str_success">Success</string>
+    <string name="str_ok">OK</string>
+    <string name="str_otp_verify">CANCEL USING OTP</string>
+    <string name="str_otp_cancel">CLOSE</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_punch_in">PUNCH IN</string>
+    <string name="str_submit">Submit</string>
+    <string name="str_reschedule">Reschedule</string>
+    <string name="str_close">Close</string>
+    <string name="str_reassign">Reassign</string>
+    <string name="str_logout">Logout</string>
+    <string name="str_forgot_password"><u>Forgot Password?</u></string>
+    <string name="str_pdf_already_generated"><u>Invoice PDF is Already Generated</u></string>
+    <string name="str_punch_out">PUNCH OUT</string>
+    <string name="str_camera_permission">To capture photos,allow crm access to your camera</string>
+    <!--    <string name="str_check_in_alert">You need to be near office premises to Check-IN,Please move within office range and Try again</string>-->
+    <string name="str_check_out_alert">You need to be near office premises to Check-Out,Please move within office range and Try again</string>
+    <string name="str_check_in_alert">You need to be near customer address to Check-IN,Please move within range and Try again</string>
+
+    <!--MANAGER-->
+
+    <string name="limit_detail">Limit Detail</string>
+    <string name="increase_limit">Increase limit</string>
+    <string name="str_present">PRESENT</string>
+    <string name="str_absent">ABSENT</string>
+
+
+    <string name="str_employee_attendance">Employee Attendance</string>
+    <string name="str_emailid">Email Id</string>
+    <string name="str_phone">Phone no</string>
+    <string name="str_captcha">Enter captcha</string>
+    <string name="str_req_no">Req No</string>
+    <string name="str_enter_otp">Enter OTP</string>
+    <string name="str_enter_password">Enter Password</string>
+    <string name="str_password">Password</string>
+    <string name="str_old_password">Old Password</string>
+    <string name="str_new_password">New Password</string>
+    <string name="str_confirm_password">Confirm Password</string>
+    <string name="notifications">Notifications</string>
+    <string name="str_set_password">SET PASSWORD</string>
+    <string name="str_verify_password">VERIFY PASSWORD</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="leave_requests">Leave Requests</string>
+    <string name="paid_leaves_text">Enter paid leave</string>
+
+    <string name="str_unpaid_leave">Unpaid Leave : </string>
+    <string name="supporting_text_accept">Do you wish to accept this ticket?</string>
+    <string name="supporting_text_reject">Do you wish to reject this ticket?</string>
+    <string name="supporting_text_reschedule">Do you wish to reschedule this ticket?</string>
+    <string name="supporting_text_close">Do you wish to close this ticket?</string>
+    <string name="supporting_text_reassign">Do you wish to reassign this ticket?</string>
+    <string name="str_upcoming_holidays">Upcoming Holidays</string>
+    <string name="str_birthdays_this_week">Birthday This Week</string>
+    <string name="str_anniversary_this_week">Anniversary This Week</string>
+
+
+    <!--Banner-->
+
+    <string name="guide">guide</string>
+    <string name="account">My Account</string>
+    <string name="press_back_again">Please click BACK again to exit</string>
+
+    <!--Product Info-->
+    <string name="str_product_details"><u>Product Details</u></string>
+    <string name="str_product_under_warranty">Product <i>(Under Warranty)</i>  <font color='#FF0000'>*</font></string>
+    <string name="str_upload_bill_copy">Upload Bill Copy</string>
+    <string name="str_is_no_repair">"Is Repair Done?"</string>
+    <string name="str_is_replacement_reqd">"Is Replacement Required?"</string>
+    <string name="str_add_sl_no">Do you have Serial NO ?</string>
+    <string name="str_upload_product">Upload Product</string>
+    <string name="str_upload_qrcode">Upload QR Code</string>
+    <string name="str_upload_replacement_qrcode">Upload Product Replace QR</string>
+    <string name="str_upload_selfie">Upload Selfie with product</string>
+    <string name="str_date_of_purchase">Purchase Date <font color='#FF0000'>*</font></string>
+    <string name="str_replace_parts">Replace Parts</string>
+    <string name="str_add_bill">Add Bill</string>
+    <string name="str_add_parts">Add Parts</string>
+
+    <!--Complain Info-->
+    <string name="str_symptoms">Symptoms</string>
+    <string name="str_complain_details"><u>Complain Details</u></string>
+
+    <!--Dialog strings-->
+    <string name="str_tkt_unacceptance_details">Ticket Unacceptance Details</string>
+    <string name="str_tkt_unacceptance_reason">Ticket Unacceptance Reason</string>
+    <string name="str_remark">Remark</string>
+
+    <!--added by shetty 6 jan 21-->
+    <!--Login-->
+    <string name="app_update_description_text">There is a newer version available for download! Please update the app by visiting the Play Store.</string>
+    <string name="str_verify_otp"><u>Verify Using OTP</u></string>
+    <string name="str_verify_proceed">Verify &amp; Proceed</string>
+    <string name="str_get_otp">Get OTP</string>
+    <string name="str_pincode">Pincode*</string>
+    <string name="str_state">State</string>
+    <string name="str_district">District</string>
+    <string name="str_city">City*</string>
+    <string name="str_bldgo_no">Address Line*</string>
+    <string name="str_bldgo_no1">Address Line 1*</string>
+    <string name="str_bldgo_no2">Address Line 2</string>
+    <string name="str_bldgo_no3">Address Line 3</string>
+    <string name="str_please_select">Select</string>
+    <string name="str_urgent">Urgent</string>
+    <string name="str_check_in">Check In</string>
+    <string name="str_call">Call</string>
+
+    <!--added by shetty 9 feb 21-->
+    <string name="str_product_info">Product Information</string>
+    <string name="str_complain_info">Complain Information</string>
+    <string name="str_accounts_info">Accounts Information</string>
+    <string name="str_scan">Scan QR Code</string>
+    <string name="str_search_by_qr">Enter QR Code</string>
+    <string name="str_search_by_ean">Enter Item EAN No</string>
+    <string name="str_search_by_product_code">Enter Product Code</string>
+    <string name="str_scan_or_search">Select Product</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_no">No</string>
+    <string name="str_ean_no">Enter Item EAN No</string>
+    <string name="str_sl_no">Item Serial No</string>
+    <string name="str_instructions">Instructions for Engineer</string>
+
+    <string name="str_visit_status">Visit Status <font color='#FF0000'>*</font></string>
+    <string name="str_payment_status">Payment Status <font color='#FF0000'>*</font></string>
+    <string name="str_payment_method">Payment Method <font color='#FF0000'>*</font></string>
+    <string name="str_time_slot">Time Slot <font color='#FF0000'>*</font></string>
+    <string name="str_update_status">Update Ticket Status</string>
+    <string name="str_engineer_remark">Engineer Remark <font color='#FF0000'>*</font></string>
+    <string name="str_sl_remark">No Item Serial Number Remark <font color='#FF0000'>*</font></string>
+    <string name="appointment_date">Appointment Date <font color='#FF0000'>*</font></string>
+
+    <!--Permissions-->
+
+    <string name="permission_camera_rationale_message">This app needs access to your camera so you can take pictures.</string>
+    <string name="permission_storage_rationale_message">This app needs access to your storage so you can upload documents.</string>
+    <string name="permission_location_rationale_message">This app needs access to your location to check in.</string>
+    <string name="str_verified_address">Verified Address</string>
+    <string name="str_un_verified_address">Address not verified</string>
+
+
+    <!--MOCK LOCATION ALERTS-->
+
+    <string name="mock_location_alert">Mock Location check should be disabled to punch attendance.If already disabled,kindly uninstall app and install again or restart device</string>
+    <string name="str_settings">GO TO SETTINGS</string>
+
+
+    <!--TICKETS-->
+
+    <string name="str_assigned_tickets">Assigned Tickets</string>
+    <string name="str_accepted_tickets">Accepted Tickets</string>
+    <string name="str_visited_tickets">Visited Tickets</string>
+    <string name="str_rescheduled_tickets">Rescheduled Tickets</string>
+    <string name="str_closed_tickets">Closed Tickets</string>
+    <string name="str_from_date">From Date</string>
+    <string name="str_to_date">To Date</string>
+    <string name="str_today_appointment">Today\'s Appointment</string>
+    <string name="str_ticket_analysis">Ticket Analysis</string>
+    <string name="last_updated">Last updated\n</string>
+    <string name="str_not_accepted">Not accepted</string>
+    <string name="ticket_history">Ticket History</string>
+    <string name="appointments">Appointments</string>
+    <string name="free_service">Free Service</string>
+    <string name="str_products">Customer Products</string>
+    <string name="progress_report">Progress Report</string>
+    <string name="invoice_list">Invoice History</string>
+    <string name="edit_invoice">Edit Invoice</string>
+    <string name="parts_requirement">Parts Requirement</string>
+    <string name="pdf_view">PDF View</string>
+    <string name="user_profile">My Profile</string>
+    <string name="str_product">Product</string>
+    <string name="ticket_no">Ticket Number</string>
+    <string name="str_division">Division</string>
+    <string name="str_category">Category</string>
+    <string name="str_product_issues">Product Issues</string>
+    <string name="str_product_symptoms">Symptoms</string>
+    <string name="str_warranty_validity">Warranty Validity</string>
+    <string name="str_service_fee">Service Fee</string>
+    <string name="ticket_overview">Ticket Overview</string>
+
+    <!--Timeline-->
+    <string name="str_assigned">Assigned</string>
+    <string name="str_accepted">Accepted</string>
+    <string name="str_appointment">Appointment</string>
+    <string name="str_serviced">Serviced</string>
+    <string name="str_last_3_months">Last 3 months</string>
+    <string name="str_last_6_months">Last 6 months</string>
+    <string name="str_filter_time">Filter Time</string>
+    <string name="str_mfg_date">Mfg Date : </string>
+    <string name="str_add_selfie">Add Selfie</string>
+    <string name="str_add_product">Add Product</string>
+    <string name="str_add_QrCode">Add QrCode</string>
+    <string name="str_replacement_QrCode">Replace Qr</string>
+    <string name="str_employee_code">Employee Code</string>
+    <string name="str_office_email">Email ID</string>
+    <string name="str_joining_date">Joining Date</string>
+    <string name="str_highest_qualification">Highest Qualification</string>
+    <string name="service_manager">Service Manager</string>
+</resources>

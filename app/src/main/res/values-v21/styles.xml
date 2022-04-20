@@ -1,0 +1,57 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+
+    <!--ICON BUTTON-->
+
+
+<!--    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button.Icon">-->
+<!--        &lt;!&ndash;    <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;    <item name="android:textAppearance">@style/TextAppearance.App.Button</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <item name="colorPrimary">@color/colorSkyBlue</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="backgroundTint">@color/colorSkyBlue</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;         <item name="colorOnPrimary">@color/colorSkyBlue</item>&ndash;&gt;-->
+<!--        &lt;!&ndash;           <item name="colorOnPrimary">@color/colorSkyBlue</item>&ndash;&gt;-->
+<!--        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>-->
+<!--    </style>-->
+
+    <style name="ThemeOverlay.App.Button.TextButton" parent="">
+        <item name="colorPrimary">@color/colorSkyBlue</item>
+    </style>
+
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dp_16</item>
+    </style>
+
+
+     <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
+    </style>
+
+
+    <style name="BottomSheetItem">
+        <item name="android:textSize">20sp</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="SpinnerDatePickerStyle" parent="android:Theme.Material.Dialog">
+        <item name="android:datePickerStyle">@style/SpinnerDatePicker</item>
+    </style>
+
+    <style name="SpinnerDatePicker" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+    </style>
+
+
+</resources>

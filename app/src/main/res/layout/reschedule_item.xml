@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reschedule_root"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:visibility="gone"
+    android:orientation="vertical"
+    tools:visibility="visible"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/llDOP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            app:srcCompat="@drawable/appointment_date" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_marginStart="@dimen/dp_6"
+                android:padding="@dimen/dp_4"
+                android:text="@string/appointment_date" />
+
+
+            <TextView
+                android:id="@+id/txtAppointmentDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/spinner_border"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_marginStart="@dimen/dp_16"
+                android:padding="@dimen/dp_4"
+                android:text="@string/str_please_select"
+                app:drawableEndCompat="@drawable/arrow_down" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/small_icon_width"
+            android:layout_height="@dimen/small_icon_height"
+            android:layout_margin="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            app:srcCompat="@drawable/time" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_6"
+            android:padding="@dimen/dp_4"
+            android:text="@string/str_time_slot" />
+
+
+    </LinearLayout>
+
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner_time_slot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_32"
+        android:layout_width="wrap_content"
+        style="@style/TextAppearance.MdcTypographyStyles.Headline6"
+        android:text="@string/str_filter_time"
+        android:layout_height="wrap_content"/>
+
+
+    <RadioGroup
+        android:layout_margin="@dimen/dp_8"
+        android:id="@+id/radio_group_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RadioButton
+            android:id="@+id/radio_button_last_3_months"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:text="@string/str_last_3_months" />
+
+        <RadioButton
+            android:id="@+id/radio_button_last_6_months"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            android:text="@string/str_last_6_months" />
+
+
+        <RadioButton
+            android:id="@+id/radio_button_current_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            tools:text="2021" />
+
+        <RadioButton
+            android:id="@+id/radio_button_last_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            tools:text="2020" />
+
+        <RadioButton
+            android:id="@+id/radio_button_penultimate_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8"
+            tools:text="2019" />
+
+
+    </RadioGroup>
+
+</LinearLayout>

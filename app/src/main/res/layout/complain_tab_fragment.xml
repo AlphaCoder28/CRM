@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    tools:context="com.goldmedal.crm.ui.ticket.ComplainTabFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:elevation="@dimen/dp_8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+
+                <include
+                    android:id="@+id/layout_complain_ticket"
+                    layout="@layout/complain_ticket_item" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_scan_qr"
+                    android:layout_width="wrap_content"
+                    app:icon="@drawable/ic_qr_code_scan"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    android:text="@string/str_scan_or_search"
+                    android:layout_height="wrap_content"/>
+
+
+                <include
+                    android:id="@+id/layout_product_info_header"
+                    layout="@layout/expandable_item"
+                    />
+
+                <include
+                    android:id="@+id/layout_product_info"
+                    layout="@layout/product_info" />
+
+                <include
+                    android:id="@+id/layout_complain_info_header"
+                    layout="@layout/expandable_item"/>
+
+                <include
+                    android:id="@+id/layout_complain_info"
+                    layout="@layout/complain_info" />
+
+
+                <include
+                    android:id="@+id/layout_accounts_info_header"
+                    layout="@layout/expandable_item"
+                    android:visibility="gone"
+                    />
+
+                <include
+                    android:visibility="gone"
+                    android:id="@+id/layout_accounts_info"
+                    layout="@layout/complain_info" />
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:padding="@dimen/dp_4"
+                    android:text="@string/str_visit_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/spinner_visit_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <include
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:id="@+id/layout_reschedule"
+                    layout="@layout/reschedule_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:id="@+id/layout_engineer_remark"
+                    layout="@layout/remarks_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_update_status"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/str_update_status"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <com.goldmedal.crm.common.RotateLoading
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/medium_icon_width"
+        android:layout_height="@dimen/medium_icon_height"
+        android:layout_gravity="center_horizontal|center_vertical"
+        app:loading_width="@dimen/dp_2"
+        app:loading_color="@color/darkBackground"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

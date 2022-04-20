@@ -1,0 +1,1299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.ticket.TicketViewDetailsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_header_height"
+            android:layout_margin="@dimen/dp_16"
+            app:cardBackgroundColor="@color/colorRed"
+            app:cardCornerRadius="@dimen/dp_16">
+            
+                <TextView
+                    style="@style/large_txt_bold_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dp_6"
+                    android:gravity="center"
+                    android:text="TICKET DETAILS" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Ticket Number"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_tktNo"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Ticket Date"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_date"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Time Slot"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_time_slot"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Division Name"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_div_name"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Ticket Priority"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_priority"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="SC Address Verified"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_sc_address_verified"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Appointment Date"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_appointment_date"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="In Warranty"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_in_warranty"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Checked In"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_checkedIn"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Ticket Status"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_tktStatus"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Reschedule Detail"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_reschedule_date"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Reschedule Remark"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_reschedule_remark"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Dealer"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_dealer_call"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Is Repair Done"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_dealer_isNoRepair"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_header_height"
+            android:layout_margin="@dimen/dp_16"
+            app:cardBackgroundColor="@color/colorRed"
+            app:cardCornerRadius="@dimen/dp_16">
+
+            <TextView
+                style="@style/large_txt_bold_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_6"
+                android:gravity="center"
+                android:text="CUSTOMER DETAILS" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Name"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_cust_name"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Contact Number"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_contact_no"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Email ID"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_cust_emailId"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Address Detail"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_cust_address"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Party Name"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_party_name"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Party Address"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_party_address"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_header_height"
+            android:layout_margin="@dimen/dp_16"
+            app:cardBackgroundColor="@color/colorRed"
+            app:cardCornerRadius="@dimen/dp_16">
+
+            <TextView
+                style="@style/large_txt_bold_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp_6"
+                android:gravity="center"
+                android:text="ITEM DETAILS" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Name"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_name"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Manufacture Date"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_manufacture_date"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="QR Code"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_qr_code"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="EAN No"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_ean_no"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Product Code"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_product_code"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Purchase Date"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_purchase_date"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Product Warranty"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_prod_warranty"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Product Issues"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_issues"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Issue Description"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_item_descr"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/dp_2"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                style="@style/large_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="Warranty Upto Date"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_warranty_uptoDate"-->
+<!--                style="@style/header_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="@string/dash"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/dp_2"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                style="@style/large_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="Due By Date"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_due_by_date"-->
+<!--                style="@style/header_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="@string/dash"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--        </LinearLayout>-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/dp_2"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                style="@style/large_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="Is Free Service"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_free_service"-->
+<!--                style="@style/header_txt_dark"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/dp_2"-->
+<!--                android:text="@string/dash"-->
+<!--                android:textAlignment="textStart">-->
+
+<!--            </TextView>-->
+
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_2"
+            android:layout_marginRight="@dimen/dp_2"
+            android:layout_marginTop="@dimen/dp_2"
+            android:layout_marginBottom="@dimen/dp_12"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Engineer Instruction"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txt_engg_instruction"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llImgMain"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_160"
+                android:layout_margin="@dimen/dp_8"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_bill_image"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_txt_regular"
+                        android:text="Bill Image"/>
+
+                    <ImageView
+                        android:id="@+id/imgBill"
+                        android:src="@drawable/no_image_icon"
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/dp_4"
+                        android:layout_height="@dimen/dp_100"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/dp_8"
+                        android:weightSum="2"
+                        android:layout_height="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_bill_view"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_4"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_blue_background"
+                            android:text="View"/>
+
+                        <TextView
+                            android:id="@+id/txt_bill_download"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_red_background"
+                            android:text="Download"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_selfie_image"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_txt_regular"
+                        android:text="Product Image"/>
+
+                    <ImageView
+                        android:id="@+id/imgProduct"
+                        android:src="@drawable/no_image_icon"
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/dp_4"
+                        android:layout_height="@dimen/dp_100"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/dp_8"
+                        android:weightSum="2"
+                        android:layout_height="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_product_view"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_4"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_blue_background"
+                            android:text="View"/>
+
+                        <TextView
+                            android:id="@+id/txt_product_download"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_red_background"
+                            android:text="Download"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_160"
+                android:layout_margin="@dimen/dp_8"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_qr_image"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_txt_regular"
+                        android:text="QR Image"/>
+
+                    <ImageView
+                        android:id="@+id/imgQR"
+                        android:src="@drawable/no_image_icon"
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/dp_4"
+                        android:layout_height="@dimen/dp_100"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/dp_8"
+                        android:weightSum="2"
+                        android:layout_height="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_qr_view"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_4"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_blue_background"
+                            android:text="View"/>
+
+                        <TextView
+                            android:id="@+id/txt_qr_download"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_red_background"
+                            android:text="Download"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_product_image"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/medium_txt_regular"
+                        android:text="Selfie Image"/>
+
+                    <ImageView
+                        android:id="@+id/imgSelfie"
+                        android:src="@drawable/no_image_icon"
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/dp_4"
+                        android:layout_height="@dimen/dp_100"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/dp_8"
+                        android:weightSum="2"
+                        android:layout_height="20dp">
+
+                        <TextView
+                            android:id="@+id/txt_selfie_view"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_4"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_blue_background"
+                            android:text="View"/>
+
+                        <TextView
+                            android:id="@+id/txt_selfie_download"
+                            style="@style/medium_txt_white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_red_background"
+                            android:text="Download"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

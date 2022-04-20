@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_12"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_item_name"
+        style="@style/large_light_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:lines="2"
+        android:padding="@dimen/dp_4"
+        android:text="@string/dash">
+
+    </TextView>
+
+</LinearLayout>

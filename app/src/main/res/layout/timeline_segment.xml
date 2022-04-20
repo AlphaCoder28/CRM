@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:weightSum="1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.goldmedal.crm.common.TimelineSegment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:padding="3dp"
+        android:textAlignment="textEnd"
+        tools:text="Top"
+        android:id="@+id/top_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:background="@color/appBg"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp" />
+
+        <ImageView
+            android:background="@drawable/circular_text"
+            android:layout_width="15dp"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:background="@color/appBg"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:padding="3dp"
+        android:gravity="center"
+        tools:text="bottom"
+        android:id="@+id/bottom_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

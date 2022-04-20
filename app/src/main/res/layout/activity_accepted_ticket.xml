@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodelAcceptedTicket"
+            type="com.goldmedal.crm.ui.ticket.TicketViewModel" />
+
+    </data>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:background="@drawable/spinner_border"
+            android:layout_marginTop="@dimen/dp_16"
+            app:iconifiedByDefault="false"
+            app:queryHint="Ticket No, Customer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_8"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFromDateHeader"
+                        style="@style/small_txt_thin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="From Date" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_startDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:background="@drawable/spinner_border">
+                        <TextView
+                            android:id="@+id/tvSelectStartDate"
+                            style="@style/large_txt_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/dash" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_8"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvToDateHeader"
+                        style="@style/small_txt_thin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="To Date" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_endDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        android:background="@drawable/spinner_border">
+                        <TextView
+                            android:id="@+id/tvSelectEndDate"
+                            style="@style/large_txt_dark"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/dash" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:background="@color/appBg"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <View
+        android:background="@color/primaryGray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_8"
+            tools:listitem="@layout/accepted_ticket_row">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    <com.goldmedal.crm.util.ViewCommonCustom
+        android:id="@+id/view_common"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp_150"
+        android:layout_height="match_parent"
+        >
+<!--        android:layout_marginTop="50dp"-->
+    </com.goldmedal.crm.util.ViewCommonCustom>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

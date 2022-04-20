@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_16">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/medium_header_height"
+                    android:background="@color/colorPrimary">
+
+
+                    <TextView
+                        style="@style/large_txt_bold_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="PARTS"
+                        android:textAlignment="center"
+                        tools:ignore="RelativeOverlap" />
+
+
+                    <ImageView
+                        android:id="@+id/imvClose"
+                        android:layout_width="@dimen/small_icon_width"
+                        android:layout_height="@dimen/small_icon_height"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="@dimen/dp_8"
+                        app:srcCompat="@drawable/ic_cancel" />
+
+                </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llPartsReqItemMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/black"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/medium_txt_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1.25"
+                        android:background="@color/mediumGray"
+                        android:gravity="center"
+                        android:text="Part Name" />
+
+                    <TextView
+                        android:id="@+id/txtQtyHeader"
+                        style="@style/medium_txt_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_weight="0.75"
+                        android:background="@color/mediumGray"
+                        android:gravity="center"
+                        android:text="Available Quantity" />
+
+                </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPartsReqItemsDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/parts_req_item_row_dialog"
+                        tools:itemCount="2"
+                        android:visibility="visible"
+                        />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/black"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        style="@style/medium_txt_bold"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:layout_weight="1.25"
+                        android:background="@color/lightGray"
+                        android:gravity="center"
+                        android:text="TOTAL" />
+
+                    <TextView
+                        android:id="@+id/txtTotalQty"
+                        style="@style/large_extra_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_weight="0.75"
+                        android:background="@color/lightGray"
+                        android:gravity="center"
+                        android:text="-" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.goldmedal.crm.util.ViewCommonCustom
+            android:id="@+id/view_common"
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_height="300dp"/>
+
+        <com.goldmedal.crm.common.RotateLoading
+            android:id="@+id/progress_bar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            app:loading_color="@color/darkBackground"
+            app:loading_width="@dimen/dp_2" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

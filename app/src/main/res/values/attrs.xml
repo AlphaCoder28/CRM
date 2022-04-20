@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="CircleView">
+        <attr name="cv_titleText" format="string" />
+        <attr name="cv_subtitleText" format="string" />
+        <attr name="cv_titleSize" format="dimension" />
+        <attr name="cv_subtitleSize" format="dimension" />
+        <attr name="cv_titleSubtitleSpace" format="float" />
+        <attr name="cv_strokeWidthSize" format="float" />
+        <attr name="cv_fillRadius" format="float" />
+        <attr name="cv_titleColor" format="color" />
+        <attr name="cv_subtitleColor" format="color" />
+        <attr name="cv_fillColor" format="color" />
+        <attr name="cv_strokeColorValue" format="color" />
+        <attr name="cv_backgroundColorValue" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SegmentedButton">
+        <attr name="textSize" format="dimension"/>
+        <attr name="segmentHeight" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textColorChecked" format="color"/>
+        <attr name="segmentColor" format="color"/>
+        <attr name="segmentColorChecked" format="color"/>
+        <attr name="rippleColor" format="color"/>
+        <attr name="rippleColorChecked" format="color"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="segmentFont" format="reference"/>
+        <attr name="segmentFontChecked" format="reference"/>
+
+        <attr name="spreadType" format="enum">
+            <enum name="evenly" value="0"/>
+            <enum name="wrap" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RotateLoading">
+        <attr name="loading_width" format="dimension"/>
+        <attr name="loading_color" format="color"/>
+        <attr name="shadow_position" format="integer"/>
+        <attr name="loading_speed" format="integer"/>
+    </declare-styleable>
+
+
+<!--    <declare-styleable name="HorizontalCalendarView">-->
+<!--        &lt;!&ndash; Default text color for all texts &ndash;&gt;-->
+<!--        <attr name="textColorNormal" format="color" />-->
+<!--        &lt;!&ndash; Default top text color &ndash;&gt;-->
+<!--        <attr name="colorTopText" format="color" />-->
+<!--        &lt;!&ndash; Default Middle text color &ndash;&gt;-->
+<!--        <attr name="colorMiddleText" format="color" />-->
+<!--        &lt;!&ndash; Default Bottom text color &ndash;&gt;-->
+<!--        <attr name="colorBottomText" format="color" />-->
+
+<!--        &lt;!&ndash; Selected item's text color for all texts &ndash;&gt;-->
+<!--        <attr name="textColorSelected" format="color" />-->
+<!--        &lt;!&ndash; Selected item's top text color &ndash;&gt;-->
+<!--        <attr name="colorTopTextSelected" format="color" />-->
+<!--        &lt;!&ndash; Selected item's Middle text color &ndash;&gt;-->
+<!--        <attr name="colorMiddleTextSelected" format="color" />-->
+<!--        &lt;!&ndash; Selected item's Bottom text color &ndash;&gt;-->
+<!--        <attr name="colorBottomTextSelected" format="color" />-->
+<!--        &lt;!&ndash; Selected item's background drawable &ndash;&gt;-->
+<!--        <attr name="selectedDateBackground" format="reference" />-->
+
+<!--        &lt;!&ndash; Background color for selector bar. &ndash;&gt;-->
+<!--        <attr name="selectorColor" format="color" />-->
+
+<!--        &lt;!&ndash; Top text size &ndash;&gt;-->
+<!--        <attr name="sizeTopText" format="dimension" />-->
+<!--        &lt;!&ndash; Middle text size &ndash;&gt;-->
+<!--        <attr name="sizeMiddleText" format="dimension" />-->
+<!--        &lt;!&ndash; Bottom text size &ndash;&gt;-->
+<!--        <attr name="sizeBottomText" format="dimension" />-->
+
+<!--    </declare-styleable>-->
+
+
+
+    <declare-styleable name="TicketView">
+        <attr name="ticketOrientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="ticketBackgroundColor" format="color" />
+        <attr name="ticketScallopRadius" format="dimension" />
+        <attr name="ticketScallopPositionPercent" format="float" />
+        <attr name="ticketShowBorder" format="boolean" />
+        <attr name="ticketBorderWidth" format="dimension" />
+        <attr name="ticketBorderColor" format="color" />
+        <attr name="ticketShowDivider" format="boolean" />
+        <attr name="ticketDividerWidth" format="dimension" />
+        <attr name="ticketDividerPadding" format="dimension" />
+        <attr name="ticketDividerColor" format="color" />
+        <attr name="ticketDividerType" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="dash" value="1" />
+        </attr>
+        <attr name="ticketDividerDashGap" format="dimension" />
+        <attr name="ticketDividerDashLength" format="dimension" />
+        <attr name="ticketCornerType" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="rounded" value="1" />
+            <enum name="scallop" value="2" />
+        </attr>
+        <attr name="ticketCornerRadius" format="dimension" />
+        <attr name="android:elevation" />
+        <attr name="ticketElevation" format="dimension" />
+        <attr name="ticketBackgroundBeforeDivider" format="reference" />
+        <attr name="ticketBackgroundAfterDivider" format="reference" />
+        <attr name="ticketShadowColor" format="color"/>
+    </declare-styleable>
+
+
+</resources>

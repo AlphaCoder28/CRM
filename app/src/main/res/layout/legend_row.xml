@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    android:orientation="horizontal">
+
+
+    <com.goldmedal.crm.common.CircleView
+        android:id="@+id/view_legend_color"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_16"
+        android:layout_gravity="center"
+        app:cv_strokeColorValue="@android:color/transparent"
+        app:cv_strokeWidthSize="0" />
+
+    <TextView
+        android:id="@+id/txt_att_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_4"
+        android:textColor="#333333"
+        android:textSize="@dimen/dp_12" />
+
+</LinearLayout>
