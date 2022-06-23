@@ -7,12 +7,12 @@ data class GetItemForInvoiceData(
         val ItemColor: String,
         val Category: String,
         val SubCategory: String,
-        val Rate: Int,
+        val Rate: Double,
         val TaxPer: Double,
-        val TaxAmount1: Int,
-        val TaxAmount2: Int,
-        val TotalTaxAmount: Int,
-        val FinalAmountAsMRP: Int,
+        val TaxAmount1: Double,
+        val TaxAmount2: Double,
+        val TotalTaxAmount: Double,
+        val FinalAmountAsMRP: Double,
         val DiscountPer: Double,
-        val DiscountAmt: Int
+        val DiscountAmt: Double
 )

@@ -195,14 +195,14 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         totalQty = edt_qty.text.toString().toInt()
 
         afterDiscountAmnt =
-            ((itemPrice.toInt()) - (selectedItem?.DiscountAmt ?: 0))
-        preTaxAmount = (itemPrice * totalQty).toDouble().roundToInt()
+            ((itemPrice.toInt()) - (selectedItem?.DiscountAmt?.toInt() ?: 0))
+        preTaxAmount = (itemPrice * totalQty).roundToInt()
 
         taxPercent1 = String.format("%.2f", totalTaxPercent / 2.0).toDouble()
-        taxAmount1 = (preTaxAmount * (taxPercent1 / 100.0)).toDouble().roundToInt()
+        taxAmount1 = (preTaxAmount * (taxPercent1 / 100.0)).roundToInt()
 
         taxPercent2 = String.format("%.2f", totalTaxPercent / 2.0).toDouble()
-        taxAmount2 = (preTaxAmount * (taxPercent2 / 100.0)).toDouble().roundToInt()
+        taxAmount2 = (preTaxAmount * (taxPercent2 / 100.0)).roundToInt()
 
         amountAfterTax = (preTaxAmount + taxAmount1 + taxAmount2).toDouble().roundToInt()
 
@@ -213,7 +213,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
             totalQty,
             itemPrice,
             selectedItem?.DiscountPer ?: 0.0,
-            selectedItem?.DiscountAmt ?: 0,
+            selectedItem?.DiscountAmt?.toInt() ?: 0,
             afterDiscountAmnt,
             taxType,
             taxAmount1,
