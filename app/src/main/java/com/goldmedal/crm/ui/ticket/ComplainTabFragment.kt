@@ -984,7 +984,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
         builder.setNegativeButton(R.string.str_no) { dialog, which ->
             val strInput = input.text?.toString()
-            Log.d("Input textfield ** **", strInput)
+            strInput?.let { Log.d("Input textfield ** **", it) }
             if (strInput.isNullOrEmpty() || strInput.equals("-")) {
                 binding.rootLayout.snackbar("Please Enter Valid Remark")
                 return@setNegativeButton

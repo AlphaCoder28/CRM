@@ -88,7 +88,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         intent?.let {
             modelItem = it.getParcelableExtra(ARG_PARAM)
             scanType = it.getIntExtra("ScanType",1)
-            qrCode = it.getStringExtra("QrCode")
+            qrCode = it.getStringExtra("QrCode").toString()
             if(qrCode.isEmpty()){
                 qrCode = "-"
             }

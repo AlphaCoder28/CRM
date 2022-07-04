@@ -59,7 +59,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        callFromScreen = intent.getStringExtra("CallFrom")
+        callFromScreen = intent.getStringExtra("CallFrom").toString()
         modelItem = intent.getParcelableExtra("TicketDetail")
 
         //  toast("callfrom - - - - "+callFrom)

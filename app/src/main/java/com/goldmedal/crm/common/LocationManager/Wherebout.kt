@@ -209,6 +209,7 @@ class Wherebout(context: Context) : EasyPermissions.PermissionCallbacks {
                 .setCancelable(false)
                 .setPositiveButton(mcontext!!.resources.getString(com.goldmedal.crm.R.string.str_ok)) { dialog, which ->
                     mcontext!!.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                    dialog.dismiss()
                 }
                 .show()
     }

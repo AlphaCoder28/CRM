@@ -219,14 +219,16 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         txt_last_updated?.text = getString(R.string.last_updated) + formatDateString(timeStamp ?: "", "MM/dd/yyyy hh:mm:ss a", "dd/MM/yyyy hh:mm:ss a")
 
         if(latitude!! == 0.0 && longitude!! == 0.0){
-            Wherebout(requireContext()).onChange(object : Workable<GPSPoint?> {
-                override fun work(t: GPSPoint?) {
-                    // draw something in the UI with this new data
-                    latitude = t?.latitude
-                    longitude = t?.longitude
+            mContext?.let {
+                Wherebout(it).onChange(object : Workable<GPSPoint?> {
+                    override fun work(t: GPSPoint?) {
+                        // draw something in the UI with this new data
+                        latitude = t?.latitude
+                        longitude = t?.longitude
 
-                }
-            })
+                    }
+                })
+            }
         }
     }
 
@@ -259,7 +261,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private fun List<GetTicketsCountData?>.toTicketsCount(): List<TicketCountItem?> {
         return this.map {
-            TicketCountItem(it, requireContext())
+            mContext?.let { it1 -> TicketCountItem(it, it1) }
         }
     }
 
@@ -277,7 +279,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
         rvList.apply {
             layoutManager =
-                PeekingLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                PeekingLinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
             setHasFixedSize(true)
             //  addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -292,7 +294,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private fun List<GetAppointmentsData?>.toTodayAppointment(): List<AppointmentsItem?> {
         return this.map {
-            AppointmentsItem(it, requireContext(), this@HomeFragment,latitude,longitude)
+            mContext?.let { it1 -> AppointmentsItem(it, it1, this@HomeFragment,latitude,longitude) }
         }
     }
 
@@ -325,7 +327,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         rvAppointmentList
             .apply {
                 layoutManager =
-                    PeekingLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    PeekingLinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
                 setHasFixedSize(true)
                 //  addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -345,10 +347,12 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
                 setInterval(7000)
                 setPageMargin(0)
                 //   setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_4), 0)
-                adapter = VerticalBannerAdapter(
-                    resources.getDimensionPixelOffset(R.dimen.dp_8),
-                    this@HomeFragment
-                )
+                adapter = mContext?.resources?.let { it1 ->
+                    VerticalBannerAdapter(
+                        it1.getDimensionPixelOffset(R.dimen.dp_8),
+                        this@HomeFragment
+                    )
+                }
                 setPageStyle(PageStyle.MULTI_PAGE_SCALE)
             }.create()
 
@@ -364,17 +368,23 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         }
 
         indicator_view?.visibility = View.INVISIBLE
-        verticalAssignedTicketsBanner.setAutoPlay(true).setCanLoop(true)
-            .setIndicatorSlideMode(IndicatorSlideMode.NORMAL)
-            .setIndicatorVisibility(View.VISIBLE)
-            .setIndicatorGravity(IndicatorGravity.END)
-            .setIndicatorMargin(
-                0,
-                0,
-                resources.getDimensionPixelOffset(R.dimen.dp_16),
-                resources.getDimensionPixelOffset(R.dimen.dp_16)
-            )
-            .setIndicatorView(setupIndicatorView()).refreshData(list)
+        try {
+            mContext?.resources?.let {
+                verticalAssignedTicketsBanner.setAutoPlay(true).setCanLoop(true)
+                    .setIndicatorSlideMode(IndicatorSlideMode.NORMAL)
+                    .setIndicatorVisibility(View.VISIBLE)
+                    .setIndicatorGravity(IndicatorGravity.END)
+                    .setIndicatorMargin(
+                        0,
+                        0,
+                        it.getDimensionPixelOffset(R.dimen.dp_16),
+                        resources.getDimensionPixelOffset(R.dimen.dp_16)
+                    )
+                    .setIndicatorView(setupIndicatorView()).refreshData(list)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun setupIndicatorView(): IIndicator? {

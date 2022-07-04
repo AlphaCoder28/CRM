@@ -149,12 +149,12 @@ class ServiceTicketItem(
 
 
             layoutRoot.setOnClickListener {
-                if (tktStatus?.toLowerCase().equals("closed") || tktStatus?.toLowerCase()
+                if (tktStatus?.lowercase(Locale.getDefault()).equals("closed") || tktStatus?.lowercase(Locale.getDefault())
                         .equals("reassign")
                 ) {
-                    Log.d("statusBy  - - - - ", tktStatus?.toLowerCase())
+                    tktStatus?.lowercase()?.let { it1 -> Log.d("statusBy  - - - - ", it1) }
                 } else {
-                    Log.d("statusBy  - - - - ", tktStatus?.toLowerCase())
+                    tktStatus?.lowercase()?.let { it1 -> Log.d("statusBy  - - - - ", it1) }
                     callBackStatusListener?.observeCheckInStatus(serviceTicketData?.TicketID)
                 }
 
