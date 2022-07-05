@@ -277,7 +277,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
             addAll(toTicketsCount)
         }
 
-        rvList.apply {
+        homeFragmentBinding.rvList.apply {
             layoutManager =
                 PeekingLinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
 
