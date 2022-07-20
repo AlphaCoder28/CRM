@@ -3,7 +3,6 @@ package com.goldmedal.crm.ui.auth
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,11 +11,8 @@ import com.goldmedal.crm.R
 import com.goldmedal.crm.data.model.SessionData
 import com.goldmedal.crm.databinding.ActivityLoginBinding
 import com.goldmedal.crm.ui.dashboard.DashboardActivity
-import com.goldmedal.crm.util.generateRandomCaptcha
 import com.goldmedal.crm.util.getDeviceId
 import com.goldmedal.crm.util.snackbar
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_login.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein

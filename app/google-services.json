@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8565874499",
+    "project_id": "g-crm-440bd",
+    "storage_bucket": "g-crm-440bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8565874499:android:70059d2cc2f986342399f6",
+        "android_client_info": {
+          "package_name": "com.goldmedal.crm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8565874499-jd5sic4ktigmfe0c39hidn57msks2clg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpvD6z86QruKtSMrNidSD0BNIPMGmdufA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8565874499-jd5sic4ktigmfe0c39hidn57msks2clg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

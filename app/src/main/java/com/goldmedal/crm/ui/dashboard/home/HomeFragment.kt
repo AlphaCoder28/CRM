@@ -55,7 +55,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.util.*
-import kotlin.collections.ArrayList
 
 private const val ARG_PARAM = "model_item"
 private const val ARG_STATUS_BY = "status_by"
