@@ -111,12 +111,12 @@ class SplashActivity : AppCompatActivity(), KodeinAware,AuthListener<Any>, Updat
 
     override fun pressedUpdate() {
         val appPackageName = packageName
-        val appUrl = "https://we.tl/t-s0PDUPuKpb"
+        //val appUrl = "https://we.tl/t-s0PDUPuKpb"
         try {
-            viewModel.appUpdate(appUrl)
-            //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+            //viewModel.appUpdate(appUrl)
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
         } catch (anfe: ActivityNotFoundException) {
-            // startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
         }
     }
 

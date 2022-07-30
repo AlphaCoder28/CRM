@@ -1,6 +1,8 @@
 package com.goldmedal.crm.ui.dashboard
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +18,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.goldmedal.crm.BuildConfig
 import com.goldmedal.crm.R
 import com.goldmedal.crm.data.model.GetTicketsCountData
 import com.goldmedal.crm.databinding.ActivityDashboardBinding
@@ -30,14 +33,23 @@ import com.goldmedal.crm.ui.invoice.InvoiceListActivity
 import com.goldmedal.crm.ui.ticket.AcceptedTicketsActivity
 import com.goldmedal.crm.ui.ticket.ServiceTicketActivity
 import com.goldmedal.crm.ui.ticket.TicketHistoryActivity
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
+import com.google.android.play.core.install.model.ActivityResult
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.activity_dashboard.*
-
 import kotlinx.android.synthetic.main.nav_header_home_screen.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
+private const val APP_UPDATE_TYPE_SUPPORTED = AppUpdateType.IMMEDIATE
+private const val REQUEST_UPDATE = 100
 
 class DashboardActivity : AppCompatActivity(), KodeinAware {
 
@@ -69,8 +81,6 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-
         mToast =
             Toast.makeText(this@DashboardActivity, R.string.press_back_again, Toast.LENGTH_SHORT)
 
@@ -149,7 +159,95 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
             }
         })
 
+        checkForUpdates()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (REQUEST_UPDATE == requestCode) {
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    if (APP_UPDATE_TYPE_SUPPORTED == AppUpdateType.IMMEDIATE) {
+                        Toast.makeText(baseContext, "Updated Successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(baseContext, "Update Started", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                Activity.RESULT_CANCELED -> {
+                    Toast.makeText(baseContext, "Update cancelled", Toast.LENGTH_SHORT).show()
+                }
+                ActivityResult.RESULT_IN_APP_UPDATE_FAILED -> {
+                    Toast.makeText(baseContext, "Update Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun checkForUpdates() {
+        val appUpdateManager : AppUpdateManager
+        if (BuildConfig.DEBUG) {
+            appUpdateManager = FakeAppUpdateManager(baseContext)
+            appUpdateManager.setUpdateAvailable(2)
+        } else {
+            appUpdateManager = AppUpdateManagerFactory.create(baseContext)
+        }
+        val appUpdateInfo = appUpdateManager.appUpdateInfo
+        appUpdateInfo.addOnSuccessListener {
+            handleUpdate(appUpdateManager, appUpdateInfo)
+        }
+    }
+
+    private fun handleUpdate(manager: AppUpdateManager, info: Task<AppUpdateInfo>) {
+        if (APP_UPDATE_TYPE_SUPPORTED == AppUpdateType.IMMEDIATE) {
+            handleImmediateUpdate(manager, info)
+        } else if (APP_UPDATE_TYPE_SUPPORTED == AppUpdateType.FLEXIBLE) {
+            //handleFlexibleUpdate(manager, info)
+        }
+    }
+
+    private fun handleImmediateUpdate(manager: AppUpdateManager, info: Task<AppUpdateInfo>) {
+        if ((info.result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE ||
+                    info.result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) &&
+            info.result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+        ) {
+            manager.startUpdateFlowForResult(
+                info.result,
+                AppUpdateType.IMMEDIATE,
+                this,
+                REQUEST_UPDATE
+            )
+            if (BuildConfig.DEBUG) {
+                val fakeAppUpdate = manager as FakeAppUpdateManager
+                if (fakeAppUpdate.isImmediateFlowVisible) {
+                    fakeAppUpdate.userAcceptsUpdate()
+                    fakeAppUpdate.downloadStarts()
+                    fakeAppUpdate.downloadCompletes()
+                    launchRestartDialog(manager)
+                }
+            }
+        }
+    }
+
+    private fun launchRestartDialog(manager: AppUpdateManager) {
+        AlertDialog.Builder(this)
+            .setTitle("App Update")
+            .setMessage("Application Successfully updated! You need to restart the app.")
+            .setPositiveButton("Restart") { _, _ ->
+                manager.completeUpdate()
+            }
+            .create().show()
+    }
+
+    /*private fun handleFlexibleUpdate(manager: AppUpdateManager, info: Task<AppUpdateInfo>) {
+        if ((info.result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE ||
+                    info.result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) &&
+            info.result.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+            btn_update.visibility = View.VISIBLE
+            setUpdateAction(manager, info)
+        }
+    }*/
+
 
     private fun bindServiceEngMenus() {
 
