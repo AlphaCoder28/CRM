@@ -125,7 +125,8 @@
         <activity
             android:name=".ui.auth.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.CRM.NoActionBar">
+            android:theme="@style/Theme.CRM.NoActionBar"
+            android:exported="true">
 
             <!-- android:theme="@style/FullScreenTheme"> -->
             <intent-filter>

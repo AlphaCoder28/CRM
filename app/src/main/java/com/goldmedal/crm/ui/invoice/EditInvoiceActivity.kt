@@ -26,7 +26,7 @@ import org.angmarch.views.SpinnerTextFormatter
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
-import java.util.ArrayList
+import java.util.*
 
 class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any> {
 
@@ -161,24 +161,24 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
 
     private fun bindUI(modelItem: EditInvoiceData?) = Coroutines.main {
         modelItem?.let {
-            txtCustName.text = modelItem?.CustName
-            txtTktNumber.text = modelItem?.TktNo
+            txtCustName.text = modelItem.CustName
+            txtTktNumber.text = modelItem.TktNo
 
-            if(modelItem?.IsPaid == 0){
+            if(modelItem.IsPaid == 0){
                 txtAmountPaid.text ="No"
             }else{
                 txtAmountPaid.text = "Yes"
             }
-            txtFinalAmount.text = modelItem?.FinalTotal
+            txtFinalAmount.text = modelItem.FinalTotal
 
-            strPaymentMethod = modelItem?.PaymentMethod
-            strPaymentStatus = modelItem?.PaymentStatus
+            strPaymentMethod = modelItem.PaymentMethod
+            strPaymentStatus = modelItem.PaymentStatus
 
-            if(modelItem?.PaymentStatus.toLowerCase().equals("paid")){
+            if(modelItem.PaymentStatus.lowercase(Locale.getDefault()) == "paid"){
                 boolPaymentStatus = true
                 strPaymentStatus = "Paid"
                 spinner_payment_status.text = strPaymentStatus
-            }else if(modelItem?.PaymentStatus.toLowerCase().equals("unpaid")){
+            }else if(modelItem.PaymentStatus.lowercase(Locale.getDefault()) == "unpaid"){
                 boolPaymentStatus = false
                 strPaymentStatus = "UnPaid"
                 spinner_payment_status.text  = strPaymentStatus
@@ -188,15 +188,15 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
                 spinner_payment_status.text  = strPaymentStatus
             }
 
-            if(modelItem?.PaymentMethod.toLowerCase().equals("cash")){
+            if(modelItem.PaymentMethod.lowercase(Locale.getDefault()) == "cash"){
                 strPaymentMethod = "Cash"
-                spinner_payment_method.text = strPaymentMethod
-            }else if(modelItem?.PaymentMethod.toLowerCase().equals("online")){
+                binding.spinnerPaymentMethod.text = strPaymentMethod
+            }else if(modelItem.PaymentMethod.lowercase(Locale.getDefault()) == "online"){
                 strPaymentMethod = "Online"
-                spinner_payment_method.text  = strPaymentMethod
+                binding.spinnerPaymentMethod.text  = strPaymentMethod
             }else{
                 strPaymentMethod = "Select"
-                spinner_payment_method.text  = strPaymentMethod
+                binding.spinnerPaymentMethod.text  = strPaymentMethod
             }
 
 
