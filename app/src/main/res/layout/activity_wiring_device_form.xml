@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.ticket.WiringDeviceFormFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Site Visit Details"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/sp_18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPhaseTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="Phase: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/cbPhaseSingle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cbPhaseSingle" />
+
+        <!--Phase checkbox multi selection views-->
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbPhaseSingle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Single"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toEndOf="@id/tvPhaseTxt"
+            app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbPhaseThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Three"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toEndOf="@id/cbPhaseSingle"
+            app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbPhaseSingle" />
+
+        <!--Supply checkbox multi selection views-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSupplyTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="Supply: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/cbSupplyNormal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cbSupplyNormal" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbSupplyNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Normal"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toEndOf="@id/tvSupplyTxt"
+            app:layout_constraintTop_toBottomOf="@id/cbPhaseSingle" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbSupplyInverter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Inverter"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintStart_toEndOf="@id/cbSupplyNormal"
+            app:layout_constraintTop_toBottomOf="@id/cbPhaseSingle" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbSupplyGenerator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Generator"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/cbSupplyInverter"
+            app:layout_constraintTop_toBottomOf="@id/cbPhaseSingle" />
+
+        <View
+            android:id="@+id/dividerSupplyVoltage"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbSupplyNormal" />
+
+        <!--Voltage multi selection with remark view-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvVoltageTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Voltage: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
+            app:layout_constraintEnd_toStartOf="@id/viewVoltageAdd"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewVoltageAdd" />
+
+        <!--View add with icon start-->
+        <View
+            android:id="@+id/viewVoltageAdd"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/rounded_red_background_8_radius"
+            app:layout_constraintEnd_toEndOf="@id/tvVoltageAdd"
+            app:layout_constraintStart_toStartOf="@id/ivVoltageAdd"
+            app:layout_constraintTop_toBottomOf="@id/dividerSupplyVoltage" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivVoltageAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
+            app:layout_constraintEnd_toStartOf="@id/dividerVoltageAdd"
+            app:layout_constraintTop_toTopOf="@id/viewVoltageAdd" />
+
+        <View
+            android:id="@+id/dividerVoltageAdd"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
+            app:layout_constraintStart_toEndOf="@id/ivVoltageAdd"
+            app:layout_constraintTop_toTopOf="@id/viewVoltageAdd" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvVoltageAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/dp_12"
+            android:text="Add"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
+            app:layout_constraintEnd_toStartOf="@id/tvVoltageClearAll"
+            app:layout_constraintStart_toEndOf="@id/dividerVoltageAdd"
+            app:layout_constraintTop_toTopOf="@id/viewVoltageAdd" />
+        <!--View add with icon end-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvVoltageClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Clear All"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewVoltageAdd"
+            app:layout_constraintTop_toTopOf="@id/viewVoltageAdd" />
+
+        <!--Include this layout for all multi selections with remarks-->
+
+        <LinearLayout
+            android:id="@+id/llVoltage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewVoltageAdd"/>
+
+        <View
+            android:id="@+id/dividerVoltageChannel"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llVoltage" />
+        <!--Voltage multi selection with remark view: End-->
+
+        <!--Faulty Channel multi selection with remark view-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFaultyChannelTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Faulty Channel: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintEnd_toStartOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewFaultyChannelAdd" />
+
+        <!--View add with icon start-->
+        <View
+            android:id="@+id/viewFaultyChannelAdd"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/rounded_red_background_8_radius"
+            app:layout_constraintEnd_toEndOf="@id/tvFaultyChannelAdd"
+            app:layout_constraintStart_toStartOf="@id/ivFaultyChannelAdd"
+            app:layout_constraintTop_toBottomOf="@id/dividerVoltageChannel" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFaultyChannelAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintEnd_toStartOf="@id/dividerFaultyChannelAdd"
+            app:layout_constraintTop_toTopOf="@id/viewFaultyChannelAdd" />
+
+        <View
+            android:id="@+id/dividerFaultyChannelAdd"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintStart_toEndOf="@id/ivFaultyChannelAdd"
+            app:layout_constraintTop_toTopOf="@id/viewFaultyChannelAdd" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFaultyChannelAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/dp_12"
+            android:text="Add"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintEnd_toStartOf="@id/tvFaultyChannelClearAll"
+            app:layout_constraintStart_toEndOf="@id/dividerFaultyChannelAdd"
+            app:layout_constraintTop_toTopOf="@id/viewFaultyChannelAdd" />
+        <!--View add with icon end-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFaultyChannelClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Clear All"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewFaultyChannelAdd"
+            app:layout_constraintTop_toTopOf="@id/viewFaultyChannelAdd" />
+
+        <LinearLayout
+            android:id="@+id/llFaultyChannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewFaultyChannelAdd"/>
+
+        <View
+            android:id="@+id/dividerChannelPower"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llFaultyChannel" />
+
+        <!--Power factor with remark view : Start-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPowerFactorTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Power Factor: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerChannelPower" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPowerFactor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPowerFactorTxt"
+            app:shapeAppearance="@style/TextFieldShapeAppearance.SmallComponent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietPowerFactor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLines="3"
+                android:minLines="2" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--Power factor with remark view : End-->
+
+        <View
+            android:id="@+id/dividerPowerLoad"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilPowerFactor" />
+
+        <!--Load Description multi selection with remark view-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLoadDescriptionTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Load Description: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintEnd_toStartOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewLoadDescriptionAdd" />
+
+        <!--View add with icon start-->
+        <View
+            android:id="@+id/viewLoadDescriptionAdd"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/rounded_red_background_8_radius"
+            app:layout_constraintEnd_toEndOf="@id/tvLoadDescriptionAdd"
+            app:layout_constraintStart_toStartOf="@id/ivLoadDescriptionAdd"
+            app:layout_constraintTop_toBottomOf="@id/dividerPowerLoad" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLoadDescriptionAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintEnd_toStartOf="@id/dividerLoadDescriptionAdd"
+            app:layout_constraintTop_toTopOf="@id/viewLoadDescriptionAdd" />
+
+        <View
+            android:id="@+id/dividerLoadDescriptionAdd"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintStart_toEndOf="@id/ivLoadDescriptionAdd"
+            app:layout_constraintTop_toTopOf="@id/viewLoadDescriptionAdd" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLoadDescriptionAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/dp_12"
+            android:text="Add"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintEnd_toStartOf="@id/tvLoadDescriptionClearAll"
+            app:layout_constraintStart_toEndOf="@id/dividerLoadDescriptionAdd"
+            app:layout_constraintTop_toTopOf="@id/viewLoadDescriptionAdd" />
+        <!--View add with icon end-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLoadDescriptionClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Clear All"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewLoadDescriptionAdd"
+            app:layout_constraintTop_toTopOf="@id/viewLoadDescriptionAdd" />
+
+        <LinearLayout
+            android:id="@+id/llLoadDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewLoadDescriptionAdd"/>
+        <!--Load Description multi selection with remark view : End-->
+
+        <View
+            android:id="@+id/dividerLoadLed"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llLoadDescription" />
+
+        <!--Type of LED multi selection with remark view-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTypeLedTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Type of LED: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
+            app:layout_constraintEnd_toStartOf="@id/viewTypeLedAdd"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewTypeLedAdd" />
+
+        <!--View add with icon start-->
+        <View
+            android:id="@+id/viewTypeLedAdd"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@drawable/rounded_red_background_8_radius"
+            app:layout_constraintEnd_toEndOf="@id/tvTypeLedAdd"
+            app:layout_constraintStart_toStartOf="@id/ivTypeLedAdd"
+            app:layout_constraintTop_toBottomOf="@id/dividerLoadLed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTypeLedAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_6"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
+            app:layout_constraintEnd_toStartOf="@id/dividerTypeLedAdd"
+            app:layout_constraintTop_toTopOf="@id/viewTypeLedAdd" />
+
+        <View
+            android:id="@+id/dividerTypeLedAdd"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
+            app:layout_constraintStart_toEndOf="@id/ivTypeLedAdd"
+            app:layout_constraintTop_toTopOf="@id/viewTypeLedAdd" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTypeLedAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="@dimen/dp_12"
+            android:text="Add"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
+            app:layout_constraintEnd_toStartOf="@id/tvTypeLedClearAll"
+            app:layout_constraintStart_toEndOf="@id/dividerTypeLedAdd"
+            app:layout_constraintTop_toTopOf="@id/viewTypeLedAdd" />
+        <!--View add with icon end-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTypeLedClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Clear All"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/smsp_default_text_and_hint_size"
+            app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viewTypeLedAdd"
+            app:layout_constraintTop_toTopOf="@id/viewTypeLedAdd" />
+
+        <LinearLayout
+            android:id="@+id/llTypeLed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewTypeLedAdd"/>
+        <!--Load Description multi selection with remark view : End-->
+
+        <View
+            android:id="@+id/dividerLedDetails"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llTypeLed" />
+
+        <!--Details with remark view : Start-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDetailsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Details: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerLedDetails" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetailsTxt"
+            app:shapeAppearance="@style/TextFieldShapeAppearance.SmallComponent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLines="3"
+                android:minLines="2" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--Details with remark view : End-->
+
+        <View
+            android:id="@+id/dividerDetailsMake"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:background="@color/colorBlack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilDetails" />
+
+        <!--Details with remark view : Start-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMakeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Make: "
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerDetailsMake" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilMake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMakeTxt"
+            app:shapeAppearance="@style/TextFieldShapeAppearance.SmallComponent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietMake"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:background="@drawable/rounded_light_grey_background"
+                android:lines="2"
+                android:maxLines="3"
+                android:minLines="2" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--Details with remark view : End-->
+
+        <TableLayout
+            android:id="@+id/tlPoints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMake">
+
+            <TableRow
+                android:id="@+id/trPointHeaders"
+                android:background="@color/colorPrimary">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPointsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_8"
+                    android:background="@drawable/cell_shape_white_red"
+                    android:text="Point"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="2"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvL1Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape_white_red"
+                    android:padding="@dimen/dp_8"
+                    android:text="L1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvL2Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape_white_red"
+                    android:padding="@dimen/dp_8"
+                    android:text="L2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvL3Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape_white_red"
+                    android:padding="@dimen/dp_8"
+                    android:text="L3"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvL4Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cell_shape_white_red"
+                    android:padding="@dimen/dp_8"
+                    android:text="L4"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trWattage">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWattageTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:text="Wattage"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="2"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWattageL1"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"
+                    tools:text="999999999"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWattageL2"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWattageL3"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvWattageL4"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trPF">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:text="PF"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="2"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPfL1"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPfL2"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPfL3"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"
+                    tools:text="99999999"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvPfL4"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trCurrent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:text="Current"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_weight="2"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentL1"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentL2"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentL3"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentL4"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cell_shape_black"
+                    android:padding="@dimen/dp_6"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_14"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_weight="1"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="Submit"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tlPoints"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

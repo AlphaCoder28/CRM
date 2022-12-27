@@ -11,5 +11,6 @@ data class ProductInfoData(
     val QRCode: String,
     val Warranty: Int,
     val PurchaseDt: String,
-    val Out: Int
+    val Out: Int,
+    val ProductDescription: String
 )

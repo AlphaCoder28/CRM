@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:clickable="true">
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Select"
+        android:layout_weight="1.5"
+        app:arrowTint="@color/colorRed"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etRemarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:background="@android:color/transparent"
+        android:hint="Remarks"
+        android:textSize="@dimen/smsp_default_text_and_hint_size"
+        android:minLines="2"
+        android:maxLines="4"
+        android:layout_weight="2"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_8"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel"
+        android:tint="@color/colorRed"
+        android:layout_gravity="center"
+        android:clickable="false"/>
+
+</LinearLayout>

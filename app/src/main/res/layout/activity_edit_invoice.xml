@@ -85,6 +85,29 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/medium_txt_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GST Number" />
+
+                    <TextView
+                        android:id="@+id/txtGstNumber"
+                        style="@style/large_light_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:text="@string/dash"
+                        android:textAlignment="textStart" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
 

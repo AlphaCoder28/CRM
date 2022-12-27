@@ -213,6 +213,7 @@
     <string name="str_engineer_remark">Engineer Remark <font color='#FF0000'>*</font></string>
     <string name="str_sl_remark">No Item Serial Number Remark <font color='#FF0000'>*</font></string>
     <string name="appointment_date">Appointment Date <font color='#FF0000'>*</font></string>
+    <string name="call_close_with">Call Close with <font color='#FF0000'>*</font></string>
 
     <!--Permissions-->
 

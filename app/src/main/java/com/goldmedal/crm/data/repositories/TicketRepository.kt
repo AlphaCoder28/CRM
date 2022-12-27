@@ -169,7 +169,8 @@ class TicketRepository(
         strCheckoutDistance: String,
         isNorepair: Boolean,
         isProductReplaced: Boolean,
-        replacementQRCode: String
+        replacementQRCode: String,
+        callClosedTypeId: Int
     ): UpdateVisitStatusResponse {
         return apiRequest {
             api.updateVisitStatus(
@@ -203,7 +204,8 @@ class TicketRepository(
                 checkOutDistance = strCheckoutDistance,
                 isNoRepair = isNorepair,
                 isProductReplaced = isProductReplaced,
-                replacementQRCode = replacementQRCode
+                replacementQRCode = replacementQRCode,
+                callClosedTypeID = callClosedTypeId
             )
         }
     }
@@ -352,7 +354,9 @@ class TicketRepository(
         userID: Int,
         logNo: Int,
         applicationID: Int,
-        invoiceItemDetail: JSONArray
+        invoiceItemDetail: JSONArray,
+        paymentMethod: String,
+        gstNumber: String
     ): UpdateVisitStatusResponse {
         return apiRequest {
             api.generateInvoiceForItems(
@@ -370,7 +374,9 @@ class TicketRepository(
                 userID,
                 logNo,
                 applicationID,
-                invoiceItemDetail
+                invoiceItemDetail,
+                paymentMethod,
+                gstNumber
             )
         }
     }

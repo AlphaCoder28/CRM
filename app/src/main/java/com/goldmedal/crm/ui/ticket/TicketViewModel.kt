@@ -34,6 +34,7 @@ class TicketViewModel(
     var inWarranty: Boolean? = false
     var isSlNoAvailable: Boolean? = true
     var actionId: Int = -1
+    var callCloseTypeId: Int = -1
     var divisionId: Int? = null
     var categoryId: Int? = null
     var productId: Int? = null
@@ -681,6 +682,11 @@ class TicketViewModel(
                     }
                 }
 
+                if (callCloseTypeId == -1) {
+                    apiListener?.onValidationError("Select Close Call with", "update_ticket_status")
+                    return
+                }
+
             }
             else -> {
                 apiListener?.onValidationError("Select Visit Status", "close_otp")
@@ -694,16 +700,16 @@ class TicketViewModel(
         Coroutines.main {
             try {
                 val closeOtpResponse = repository.sendClosedOTP(
-                    strMobileNo!!,
-                    intTicketId!!,
-                    strTicketNo!!,
-                    intUserId!!,
-                    strCustName!!,
-                    intResendOtp!!,
-                    strDeviceId!!
+                    strMobileNo,
+                    intTicketId,
+                    strTicketNo,
+                    intUserId,
+                    strCustName,
+                    intResendOtp,
+                    strDeviceId
                 )
 
-                if (!closeOtpResponse.closedOtp?.isNullOrEmpty()!!) {
+                if (!closeOtpResponse.closedOtp?.isEmpty()!!) {
                     closeOtpResponse.closedOtp.let {
                         apiListener?.onSuccess(it, "close_otp")
                         return@main
@@ -810,7 +816,8 @@ class TicketViewModel(
                     strCheckoutDistance,
                     isNoRepair,
                     isProductReplaced ?: false,
-                    strReplacementImage ?: "-"
+                    strReplacementImage ?: "-",
+                    callCloseTypeId
                 )
 
                 if (!updateStatusResponse.updateStatus?.isNullOrEmpty()!!) {
@@ -1008,7 +1015,9 @@ class TicketViewModel(
         userID: Int,
         logNo: Int,
         applicationID: Int,
-        invoiceItemDetail: JSONArray
+        invoiceItemDetail: JSONArray,
+        paymentMethod: String,
+        gstNumber: String
     ) {
 
         apiListener?.onStarted("invoice_generate")
@@ -1030,7 +1039,9 @@ class TicketViewModel(
                     userID,
                     logNo,
                     applicationID,
-                    invoiceItemDetail
+                    invoiceItemDetail,
+                    paymentMethod,
+                    gstNumber
                 )
 
                 if (!invoiceGenerateResponse.updateStatus?.isNullOrEmpty()!!) {

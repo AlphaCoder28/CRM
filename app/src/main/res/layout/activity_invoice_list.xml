@@ -20,9 +20,10 @@
         app:queryHint="Search Customer Name/Ticket No" />
 
     <RelativeLayout
-        android:layout_marginTop="80dp"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvInvoiceHistoryList"

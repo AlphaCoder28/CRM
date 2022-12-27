@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -18,20 +18,21 @@ import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.model.AddedInvoiceItemData
 import com.goldmedal.crm.data.model.GetItemForInvoiceData
 import com.goldmedal.crm.data.model.GetTicketDetailsData
+import com.goldmedal.crm.data.model.PaymentMethodData
 import com.goldmedal.crm.databinding.ActivityGenerateInvoiceBinding
-import com.goldmedal.crm.ui.ticket.*
+import com.goldmedal.crm.ui.ticket.TicketViewModel
+import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
 import com.goldmedal.crm.util.Coroutines
-import com.goldmedal.crm.util.alertDialog
-import com.goldmedal.crm.util.interfaces.IStatusListener
 import com.goldmedal.crm.util.interfaces.OnRefreshListener
 import com.goldmedal.crm.util.interfaces.OnRemoveInvoiceItemListener
 import com.goldmedal.crm.util.snackbar
 import com.goldmedal.crm.util.toast
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_generate_invoice.*
+import org.angmarch.views.OnSpinnerItemSelectedListener
+import org.angmarch.views.SpinnerTextFormatter
 import org.json.JSONArray
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -81,6 +82,8 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
     private var scanType: Int = 1
     private var qrCode: String = ""
+    private val paymentMethod: MutableList<PaymentMethodData> = java.util.ArrayList()
+    private var strPaymentMethod = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,6 +133,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                 tvContactNo.text = modelItem?.CustContactNo ?: "-"
                 tvEmailID.text = modelItem?.EmailID ?: "-"
                 tvTktStatus.text = modelItem?.TicketStatus ?: "-"
+                initPaymentMethodSpinner()
             }
         })
 
@@ -179,7 +183,9 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                             user.UserId ?: 0,
                             1,
                             1,
-                            jsonArray
+                            jsonArray,
+                            strPaymentMethod,
+                            edt_gst_no.text.toString()
                         )
                     }
                 })
@@ -187,6 +193,25 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
         }
 
+    }
+
+    private fun initPaymentMethodSpinner() {
+        paymentMethod.add(PaymentMethodData("Select", 0))
+        paymentMethod.add(PaymentMethodData("Cash", 1))
+        paymentMethod.add(PaymentMethodData("Online", 2))
+
+        val textFormatter = SpinnerTextFormatter<PaymentMethodData> { obj ->
+            SpannableString(obj.PaymentMethod)
+        }
+
+        binding.spinnerPaymentMethod.setSpinnerTextFormatter(textFormatter)
+        binding.spinnerPaymentMethod.setSelectedTextFormatter(textFormatter)
+        binding.spinnerPaymentMethod.attachDataSource(paymentMethod)
+        binding.spinnerPaymentMethod.onSpinnerItemSelectedListener =
+            OnSpinnerItemSelectedListener { parent, view, position, id ->
+                val item = binding.spinnerPaymentMethod.selectedItem as PaymentMethodData
+                strPaymentMethod = item.PaymentMethod ?: ""
+            }
     }
 
     private fun addItem() {

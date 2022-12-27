@@ -27,7 +27,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CRM">
-        <activity android:name=".ui.ticket.TicketViewDetailsActivity"
+        <activity
+            android:name=".ui.ticket.WiringDeviceFormActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.ticket.TicketInfoActivity"/>
+        <activity
+            android:name=".ui.ticket.TicketViewDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.customers.TicketsByProductsActivity"
@@ -124,9 +130,9 @@
             android:theme="@style/FullScreenTheme" />
         <activity
             android:name=".ui.auth.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.CRM.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.CRM.NoActionBar">
 
             <!-- android:theme="@style/FullScreenTheme"> -->
             <intent-filter>

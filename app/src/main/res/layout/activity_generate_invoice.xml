@@ -399,6 +399,57 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/medium_txt_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gst No. *" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_gst_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:maxLength="15"
+                        android:padding="@dimen/dp_2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/medium_txt_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="@string/str_payment_method" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_border"
+                android:padding="@dimen/dp_2">
+
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/spinner_payment_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvAddItem"
                 style="@style/medium_txt_white"
@@ -422,8 +473,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvListInvoice"
                     android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     tools:listitem="@layout/invoice_added_item_row">
 
                 </androidx.recyclerview.widget.RecyclerView>
@@ -455,10 +506,10 @@
                         style="@style/medium_txt_white"
                         android:layout_width="150dp"
                         android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        android:layout_centerInParent="true"
                         android:layout_alignParentRight="true"
-                       android:layout_margin="@dimen/dp_12"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/dp_12"
                         android:background="@drawable/rounded_primary_background"
                         android:gravity="center"
                         android:text="GENERATE INVOICE" />
@@ -469,9 +520,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_centerInParent="true"
-                        android:layout_toLeftOf="@+id/tvGenerateInvoice"
                         android:layout_margin="@dimen/dp_12"
-                       >
+                        android:layout_toLeftOf="@+id/tvGenerateInvoice">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edt_roundoff_amount"

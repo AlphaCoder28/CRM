@@ -218,12 +218,12 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
         if (callFrom == "product_info_scan" || callFrom == "product_info_search") {
             val qrScanData = _object as List<ProductInfoData>
-            if(qrScanData.size > 0) {
-                viewModel.strDateOfPurchase = qrScanData.get(0).PurchaseDt
+            if(qrScanData.isNotEmpty()) {
+                viewModel.strDateOfPurchase = qrScanData[0].PurchaseDt
                 binding.layoutProductInfo.txtDOP.text = viewModel.strDateOfPurchase
             }
 
-            if (callFrom == "product_info_search" && !strInput.isEmpty()) {
+            if (callFrom == "product_info_search" && strInput.isNotEmpty()) {
                 passSearchType = intSearchType
                 qrCode = strInput
             }
@@ -252,7 +252,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         if (callFrom == "close_otp") {
             Log.d(
                 "INV GENERATED - - - -",
-                invGenerated.toString() + " - - - - " + isNoRepair.toString()
+                "$invGenerated - - - - $isNoRepair"
             )
             if (invGenerated || isNoRepair) {
                 closeTicketOtpPopup(_object as List<closedOtpData>?)
@@ -283,14 +283,14 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             val qrCode = data?.getStringExtra("qr_code")
             val callFrom = data?.getStringExtra("callFrom")
             val qrMaster = data?.getBooleanExtra("master", false)
-            Log.d("CALLFROM - - -", "onActivityResult: "+callFrom)
+            Log.d("CALLFROM - - -", "onActivityResult: $callFrom")
 
             if(callFrom.equals("scan")){
                 viewModel.strQrCode = qrCode
                 viewModel.master = qrMaster
 
                 Coroutines.main {
-                    if (modelItem?.CustomerID ?: 0 == 0) {
+                    if ((modelItem?.CustomerID ?: 0) == 0) {
                         Toast.makeText(requireContext(), "Invalid Customer", Toast.LENGTH_SHORT).show()
                     } else {
                         viewModel.scanQrCode(
@@ -442,7 +442,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             binding.layoutProductInfo.edtEanRemark.setText("")
 
             // - - - To show generate invoice or not - - - -
-            if (modelItem?.IsInvoiceGenrated ?: true) {
+            if (modelItem?.IsInvoiceGenrated == true) {
                 binding.layoutProductInfo.btnGenerateInvoice.visibility = View.GONE
                 binding.layoutProductInfo.txtPdf.visibility = View.VISIBLE
                 binding.btnScanQr.visibility = View.GONE
@@ -540,21 +540,49 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                 if (item.ActionId == -1) {
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.GONE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.GONE
+                    binding.llCloseType.visibility = View.GONE
 
-
+                } else if (item.ActionId == 1) {
+                    binding.layoutEngineerRemark.remarksRoot.visibility = View.VISIBLE
+                    binding.layoutReschedule.rescheduleRoot.visibility = View.GONE
+                    binding.llCloseType.visibility = View.GONE
                 } else if (item.ActionId == 2) {
-
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.VISIBLE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.VISIBLE
+                    binding.llCloseType.visibility = View.GONE
                     viewModel.getTimeSlots()
 
                 } else {
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.VISIBLE
+                    binding.llCloseType.visibility = View.VISIBLE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.GONE
                 }
                 viewModel.actionId = item.ActionId ?: -1
             }
         binding.spinnerVisitStatus.attachDataSource(visitStatus)
+
+        // Call Close with spinner
+        val callCloseWith: MutableList<VisitStatusData> = ArrayList()
+
+        callCloseWith.add(VisitStatusData("Select", -1))
+        callCloseWith.add(VisitStatusData("With Consumption", 1))
+        callCloseWith.add(VisitStatusData("Without Consumption", 2))
+
+        val textFormatter1 =
+            SpinnerTextFormatter<VisitStatusData> { obj ->
+                SpannableString(
+                    obj.VisitStatus
+                )
+            }
+        binding.spinnerCallClose.setSpinnerTextFormatter(textFormatter1)
+        binding.spinnerCallClose.setSelectedTextFormatter(textFormatter1)
+
+        binding.spinnerCallClose.onSpinnerItemSelectedListener =
+            OnSpinnerItemSelectedListener { parent, view, position, id ->
+                val item = binding.spinnerCallClose.selectedItem as VisitStatusData
+                viewModel.callCloseTypeId = item.ActionId ?: -1
+            }
+        binding.spinnerCallClose.attachDataSource(callCloseWith)
     }
 
 
@@ -568,6 +596,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
             binding.layoutProductInfo.txtProductName.text = list[0]?.ProductName
             binding.layoutProductInfo.txtDivisionName.text = list[0]?.divisionnm
+            binding.layoutProductInfo.txtProductDescription.text = list[0]?.ProductDescription
 
             binding.layoutProductInfo.imvQrPlaceHolder.visibility = View.VISIBLE
             binding.layoutProductInfo.txtQrCode.text = viewModel.strQrCode
@@ -793,7 +822,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             QrCodeScanActivity.start(requireContext(), this,"replacement")
         }
 
-
+        binding.layoutComplainInfo.btnWiringForm.setOnClickListener {
+            context?.let { it1 -> WiringDeviceFormActivity.
+            start(it1) }
+        }
 
 
         binding.layoutProductInfo.txtDOP.setOnClickListener {

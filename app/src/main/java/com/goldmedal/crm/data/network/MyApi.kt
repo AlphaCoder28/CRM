@@ -396,7 +396,8 @@ interface MyApi {
         @Field("CheckOutDistance") checkOutDistance: String,
         @Field("IsNoRepair") isNoRepair: Boolean,
         @Field("IsProductReplaced") isProductReplaced: Boolean,
-        @Field("ReplacementQRCode") replacementQRCode: String
+        @Field("ReplacementQRCode") replacementQRCode: String,
+        @Field("CallClosedTypeID") callClosedTypeID: Int
 
     ): Response<UpdateVisitStatusResponse>
 
@@ -476,7 +477,9 @@ interface MyApi {
         @Field("UserID") userID: Int,
         @Field("LogNo") logNo: Int,
         @Field("ApplicationID") applicationID: Int,
-        @Field("InvoiceItemDetails") invoiceItemDetail: JSONArray
+        @Field("InvoiceItemDetails") invoiceItemDetail: JSONArray,
+        @Field("PaymentMethod") paymentMethod: String,
+        @Field("GSTNo") gstNumber: String
     ): Response<UpdateVisitStatusResponse>
 
 

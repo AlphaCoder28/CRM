@@ -43,6 +43,7 @@
     <color name="colorMaterialLime">#a8b545</color>
 
     <color name="colorTextDisable">#66FFFFFF</color>
+    <color name="colorTextSecondary">#484545</color>
 
     <color name="lightGray">#EFEFEF</color>
     <color name="mediumGray">#CBCBCB</color>
@@ -170,6 +171,8 @@
 
     <color name="barcode_reticle_background">#99000000</color>
     <color name="barcode_reticle_stroke">#ffffff</color>
+
+    <color name="multi_line_input_background">#F6F6F6</color>
 
 
 </resources>

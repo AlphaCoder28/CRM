@@ -194,12 +194,22 @@
             android:layout_toEndOf="@+id/icon_symptoms"
             app:singleSelection="false">
 
-
         </com.google.android.material.chip.ChipGroup>
 
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_6">
 
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_wiring_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Wiring Device Form"
+            android:textAllCaps="false" />
 
     </RelativeLayout>
 

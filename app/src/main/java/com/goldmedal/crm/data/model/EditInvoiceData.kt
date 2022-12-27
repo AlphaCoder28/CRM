@@ -9,5 +9,6 @@ data class EditInvoiceData(
     val PaymentStatus: String,
     val SlNo: Int,
     val TicketID: Int,
-    val TktNo: String
+    val TktNo: String,
+    val GSTNumber: String
 )

@@ -57,45 +57,8 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
         viewModel = ViewModelProvider(this, factory).get(TicketViewModel::class.java)
         viewModel.apiListener = this
 
-        paymentMethod.add(PaymentMethodData("Select", 0))
-        paymentMethod.add(PaymentMethodData("Cash", 1))
-        paymentMethod.add(PaymentMethodData("Online", 2))
-
-        val textFormatter1 =
-            SpinnerTextFormatter<PaymentMethodData> { obj ->
-                SpannableString(
-                    obj.PaymentMethod
-                )
-            }
-        binding.spinnerPaymentMethod.setSpinnerTextFormatter(textFormatter1)
-        binding.spinnerPaymentMethod.setSelectedTextFormatter(textFormatter1)
-        binding.spinnerPaymentMethod.attachDataSource(paymentMethod)
-        binding.spinnerPaymentMethod.onSpinnerItemSelectedListener =
-            OnSpinnerItemSelectedListener { parent, view, position, id ->
-                val item = binding.spinnerPaymentMethod.selectedItem as PaymentMethodData
-                strPaymentMethod = item.PaymentMethod ?: ""
-            }
-
-        paymentStatus.add(PaymentStatusData("Select", false))
-        paymentStatus.add(PaymentStatusData("Unpaid", false))
-        paymentStatus.add(PaymentStatusData("Paid", true))
-
-        val textFormatter2 =
-            SpinnerTextFormatter<PaymentStatusData> { obj ->
-                SpannableString(
-                    obj.PaymentStatus
-                )
-            }
-        binding.spinnerPaymentStatus.setSpinnerTextFormatter(textFormatter2)
-        binding.spinnerPaymentStatus.setSelectedTextFormatter(textFormatter2)
-        binding.spinnerPaymentStatus.attachDataSource(paymentStatus)
-        binding.spinnerPaymentStatus.onSpinnerItemSelectedListener =
-            OnSpinnerItemSelectedListener { parent, view, position, id ->
-                val item = binding.spinnerPaymentStatus.selectedItem as PaymentStatusData
-               boolPaymentStatus = item.ActionId ?: false
-                strPaymentStatus = item.PaymentStatus ?: ""
-            }
-
+        setPaymentMethodSpinner()
+        setPaymentStatusSpinner()
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
             if (user != null) {
@@ -128,6 +91,49 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
                 }
             })
         }
+    }
+
+    private fun setPaymentStatusSpinner() {
+        paymentStatus.add(PaymentStatusData("Select", false))
+        paymentStatus.add(PaymentStatusData("Unpaid", false))
+        paymentStatus.add(PaymentStatusData("Paid", true))
+
+        val textFormatter2 =
+            SpinnerTextFormatter<PaymentStatusData> { obj ->
+                SpannableString(
+                    obj.PaymentStatus
+                )
+            }
+        binding.spinnerPaymentStatus.setSpinnerTextFormatter(textFormatter2)
+        binding.spinnerPaymentStatus.setSelectedTextFormatter(textFormatter2)
+        binding.spinnerPaymentStatus.attachDataSource(paymentStatus)
+        binding.spinnerPaymentStatus.onSpinnerItemSelectedListener =
+            OnSpinnerItemSelectedListener { parent, view, position, id ->
+                val item = binding.spinnerPaymentStatus.selectedItem as PaymentStatusData
+                boolPaymentStatus = item.ActionId ?: false
+                strPaymentStatus = item.PaymentStatus ?: ""
+            }
+    }
+
+    private fun setPaymentMethodSpinner() {
+        paymentMethod.add(PaymentMethodData("Select", 0))
+        paymentMethod.add(PaymentMethodData("Cash", 1))
+        paymentMethod.add(PaymentMethodData("Online", 2))
+
+        val textFormatter1 =
+            SpinnerTextFormatter<PaymentMethodData> { obj ->
+                SpannableString(
+                    obj.PaymentMethod
+                )
+            }
+        binding.spinnerPaymentMethod.setSpinnerTextFormatter(textFormatter1)
+        binding.spinnerPaymentMethod.setSelectedTextFormatter(textFormatter1)
+        binding.spinnerPaymentMethod.attachDataSource(paymentMethod)
+        binding.spinnerPaymentMethod.onSpinnerItemSelectedListener =
+            OnSpinnerItemSelectedListener { parent, view, position, id ->
+                val item = binding.spinnerPaymentMethod.selectedItem as PaymentMethodData
+                strPaymentMethod = item.PaymentMethod ?: ""
+            }
     }
 
 
@@ -163,6 +169,7 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
         modelItem?.let {
             txtCustName.text = modelItem.CustName
             txtTktNumber.text = modelItem.TktNo
+            txtGstNumber.text = modelItem.GSTNumber.ifEmpty { "-" }
 
             if(modelItem.IsPaid == 0){
                 txtAmountPaid.text ="No"
