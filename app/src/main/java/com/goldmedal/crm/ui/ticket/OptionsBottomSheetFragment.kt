@@ -37,7 +37,7 @@ class OptionsBottomSheetFragment : BottomSheetDialogFragment() {
             mListener?.onItemClick("search")
         }
 
-        txt_eanNo.setOnClickListener {
+        /*txt_eanNo.setOnClickListener {
             dismissAllowingStateLoss()
             mListener?.onItemClick("eanNo")
         }
@@ -45,7 +45,7 @@ class OptionsBottomSheetFragment : BottomSheetDialogFragment() {
         txt_productCode.setOnClickListener {
             dismissAllowingStateLoss()
             mListener?.onItemClick("productCode")
-        }
+        }*/
 
     }
 

@@ -19,4 +19,7 @@ object GlobalConstant {
     const val FULL_IMAGE_SIZE = 675f
     const val THUMBNAIL_SIZE = 150f
     const val TICK_TOCK_INTERVAL = 1000L
+
+    // Api call names constant values
+    const val GET_WIRING_DEVICES_FORM_API = "get_wiring_device_form_data"
 }

@@ -492,6 +492,12 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                 else -> binding.layoutProductInfo.radioButtonNo.isChecked = true
             }
 
+            // lock warranty selection
+            if (modelItem?.WarrantyUptoDate?.isNotEmpty() == true) {
+                binding.layoutProductInfo.radioButtonYes.isEnabled = false
+                binding.layoutProductInfo.radioButtonNo.isEnabled = false
+            }
+
 //            when (viewModel?.isEanNoAvailable) {
 //                true -> binding.layoutProductInfo.radioEanYes.isChecked = true
 //                else -> binding.layoutProductInfo.radioEanNo.isChecked = true
@@ -822,10 +828,13 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             QrCodeScanActivity.start(requireContext(), this,"replacement")
         }
 
-        binding.layoutComplainInfo.btnWiringForm.setOnClickListener {
-            context?.let { it1 -> WiringDeviceFormActivity.
-            start(it1) }
-        }
+        /*binding.layoutComplainInfo.btnWiringForm.setOnClickListener {
+            context?.let { it1 ->
+                modelItem?.TicketID?.let { ticketId ->
+                    WiringDeviceFormActivity.start(it1, ticketId)
+                }
+            }
+        }*/
 
 
         binding.layoutProductInfo.txtDOP.setOnClickListener {

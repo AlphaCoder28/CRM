@@ -29,7 +29,6 @@
         android:theme="@style/Theme.CRM">
         <activity
             android:name=".ui.ticket.WiringDeviceFormActivity"
-            android:exported="false"
             android:screenOrientation="portrait"
             android:parentActivityName=".ui.ticket.TicketInfoActivity"/>
         <activity

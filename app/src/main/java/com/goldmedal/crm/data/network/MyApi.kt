@@ -1,6 +1,8 @@
 package com.goldmedal.crm.data.network
 
 import com.goldmedal.crm.data.model.AddedInvoiceItemData
+import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
+import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.GlobalConstant.BASE_URL
 import com.goldmedal.crm.data.network.responses.*
 import com.goldmedal.crm.ui.dashboard.Manager.Data
@@ -565,6 +567,43 @@ interface MyApi {
         @Field("ClientSecret") clientSecret: String,
         @Field("Url") url: String
     ): Response<UpdateAppResponse>
+
+    // - - - - API to get parts requirement list - - - - -
+    @FormUrlEncoded
+    @POST("Ticket/get-wiring-division-form")
+    suspend fun getWiringDeviceFormData(
+        @Field("TicketID") ticketId: Int
+    ): Response<GetWiringDeviceFormData>
+
+    // - - - - API to get parts requirement list - - - - -
+    @FormUrlEncoded
+    @POST("Ticket/wiring-division-insert-update")
+    suspend fun updateWiringDeviceFormData(
+        @Field("TicketID") ticketId: Int,
+        @Field("UserId") userId: Int,
+        @Field("LogNo") logNo: Int,
+        @Field("PhaseItem") phaseItem: String,
+        @Field("SupplyItem") supplyItem: String,
+        @Field("VoltageItem") voltageItem: String,
+        @Field("FaultyChannelItem") faultyChannelItem: String,
+        @Field("LoadDescriptionItem") loadDescriptionItem: String,
+        @Field("TypeofLEDItem") typeLedItem: String,
+        @Field("PowerFactor") powerFactor: String,
+        @Field("BrandName") brandName: String,
+        @Field("ShortRemark") shortRemark: String,
+        @Field("L1_Wattage") l1Wattage: String,
+        @Field("L1_PF") l1PF: String,
+        @Field("L1_Current") l1Current: String,
+        @Field("L2_Wattage") l2Wattage: String,
+        @Field("L2_PF") l2PF: String,
+        @Field("L2_Current") l2Current: String,
+        @Field("L3_Wattage") l3Wattage: String,
+        @Field("L3_PF") l3PF: String,
+        @Field("L3_Current") l3Current: String,
+        @Field("L4_Wattage") l4Wattage: String,
+        @Field("L4_PF") l4PF: String,
+        @Field("L4_Current") l4Current: String
+    ): Response<WiringDeviceUpdateData>
 
 
     companion object {

@@ -98,7 +98,10 @@ class QrCodeScanActivity : AppCompatActivity() {
                         }
 
 
-                        else ->  alertDialog("Invalid Qr Code")
+                        else ->  {
+                            alertDialog("Invalid Qr Code")
+                            finish()
+                        }
                     }
 
                     Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
@@ -128,7 +131,10 @@ class QrCodeScanActivity : AppCompatActivity() {
                         }
 
 
-                        else ->  alertDialog("Invalid Qr Code")
+                        else ->  {
+                            alertDialog("Invalid Qr Code")
+                            finish()
+                        }
                     }
 
                     Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
