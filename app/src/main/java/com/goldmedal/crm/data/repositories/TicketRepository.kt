@@ -2,6 +2,8 @@ package com.goldmedal.crm.data.repositories
 
 import com.goldmedal.crm.data.db.AppDatabase
 import com.goldmedal.crm.data.db.entities.TicketHistoryData
+import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
+import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.MyApi
 import com.goldmedal.crm.data.network.SafeApiRequest
 import com.goldmedal.crm.data.network.responses.*
@@ -381,5 +383,66 @@ class TicketRepository(
         }
     }
 
+    /*  - - - - - - - - - - - - -   GET WIRING DEVICE FORM DATA - - - - - - - - - - - -  */
+
+    suspend fun getWiringDeviceFormData(ticketId: Int): GetWiringDeviceFormData {
+        return apiRequest { api.getWiringDeviceFormData(ticketId) }
+    }
+
+    suspend fun updateWiringDeviceFormData(
+        ticketId: Int,
+        userId: Int,
+        logNo: Int,
+        phaseItem: String,
+        supplyItem: String,
+        voltageItem: String,
+        faultyChannelItem: String,
+        loadDescriptionItem: String,
+        typeLedItem: String,
+        powerFactor: String,
+        brandName: String,
+        shortRemark: String,
+        l1Wattage: String,
+        l1PF: String,
+        l1Current: String,
+        l2Wattage: String,
+        l2PF: String,
+        l2Current: String,
+        l3Wattage: String,
+        l3PF: String,
+        l3Current: String,
+        l4Wattage: String,
+        l4PF: String,
+        l4Current: String
+    ): WiringDeviceUpdateData {
+        return apiRequest {
+            api.updateWiringDeviceFormData(
+                ticketId,
+                userId,
+                logNo,
+                phaseItem,
+                supplyItem,
+                voltageItem,
+                faultyChannelItem,
+                loadDescriptionItem,
+                typeLedItem,
+                powerFactor,
+                brandName,
+                shortRemark,
+                l1Wattage,
+                l1PF,
+                l1Current,
+                l2Wattage,
+                l2PF,
+                l2Current,
+                l3Wattage,
+                l3PF,
+                l3Current,
+                l4Wattage,
+                l4PF,
+                l4Current
+            )
+        }
+    }
 
 }

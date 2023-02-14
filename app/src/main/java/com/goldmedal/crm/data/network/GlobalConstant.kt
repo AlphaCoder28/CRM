@@ -22,4 +22,5 @@ object GlobalConstant {
 
     // Api call names constant values
     const val GET_WIRING_DEVICES_FORM_API = "get_wiring_device_form_data"
+    const val UPDATE_WIRING_DEVICES_FORM_API = "update_wiring_device_form_data"
 }
