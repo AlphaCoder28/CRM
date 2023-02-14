@@ -34,3 +34,7 @@
 #Gson
 -keep class com.google.gson.stream.** { *; }
 -keepclassmembers class com.goldmedal.crm.data** {<fields>;}
+
+#add proguard rules，for setScrollDuration
+-keep class androidx.recyclerview.widget.**{*;}
+-keep class androidx.viewpager2.widget.**{*;}

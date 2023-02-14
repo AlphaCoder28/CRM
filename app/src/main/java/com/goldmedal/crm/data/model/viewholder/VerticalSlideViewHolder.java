@@ -7,9 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.goldmedal.crm.R;
-import com.goldmedal.crm.common.CornerImageView;
 import com.goldmedal.crm.data.model.GetAllAssignedTicketsData;
 import com.goldmedal.crm.util.interfaces.AcceptRejectTicketsListener;
 import com.zhpan.bannerview.BaseViewHolder;
@@ -38,14 +36,14 @@ public class VerticalSlideViewHolder extends BaseViewHolder<GetAllAssignedTicket
     public void bindData(GetAllAssignedTicketsData data, int position, int pageSize) {
 //        CornerImageView imageView = findView(R.id.banner_image);
 
-        TextView txtTicketNo = findView(R.id.txt_ticket_no);
-        TextView txtTicketUrgent = findView(R.id.txt_ticket_urgent);
-        TextView txtTimeSlot = findView(R.id.txt_time_slot);
-        TextView txtCustName = findView(R.id.txt_cust_name);
-        TextView txtProductIssue = findView(R.id.txt_product_issue);
-        TextView txtCustAddress = findView(R.id.txt_cust_address);
-        ImageView imvAccept = findView(R.id.imv_accept);
-        ImageView imvDecline = findView(R.id.imv_decline);
+        TextView txtTicketNo = findViewById(R.id.txt_ticket_no);
+        TextView txtTicketUrgent = findViewById(R.id.txt_ticket_urgent);
+        TextView txtTimeSlot = findViewById(R.id.txt_time_slot);
+        TextView txtCustName = findViewById(R.id.txt_cust_name);
+        TextView txtProductIssue = findViewById(R.id.txt_product_issue);
+        TextView txtCustAddress = findViewById(R.id.txt_cust_address);
+        ImageView imvAccept = findViewById(R.id.imv_accept);
+        ImageView imvDecline = findViewById(R.id.imv_decline);
   //      TextView txtTicketReschedule = findView(R.id.txt_ticket_reschedule);
 //        TextView txtTicketClose = findView(R.id.txt_ticket_close);
 

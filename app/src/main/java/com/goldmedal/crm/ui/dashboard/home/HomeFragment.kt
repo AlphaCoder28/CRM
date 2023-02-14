@@ -74,7 +74,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private var strDate = ""
 
-    private lateinit var verticalAssignedTicketsBanner: BannerViewPager<GetAllAssignedTicketsData?, BaseViewHolder<GetAllAssignedTicketsData?>?>
+    private lateinit var verticalAssignedTicketsBanner: BannerViewPager<GetAllAssignedTicketsData?>
 
     private lateinit var mAppointmentAdapter: GroupAdapter<GroupieViewHolder>
 
@@ -349,7 +349,8 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
                 adapter = mContext?.resources?.let { it1 ->
                     VerticalBannerAdapter(
                         it1.getDimensionPixelOffset(R.dimen.dp_8),
-                        this@HomeFragment
+                        this@HomeFragment,
+                        mContext
                     )
                 }
                 setPageStyle(PageStyle.MULTI_PAGE_SCALE)

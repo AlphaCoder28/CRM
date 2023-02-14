@@ -1,6 +1,7 @@
 package com.goldmedal.crm.data.model.viewholder;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -16,7 +17,7 @@ public class NoDataBannerHolder extends BaseViewHolder<GetAllAssignedTicketsData
 
     public NoDataBannerHolder(@NonNull View itemView, int roundCorner) {
         super(itemView);
-      CornerImageView imageView = findView(R.id.banner_image);
+      CornerImageView imageView = findViewById(R.id.banner_image);
        imageView.setRoundCorner(roundCorner);
 
     }
@@ -26,7 +27,7 @@ public class NoDataBannerHolder extends BaseViewHolder<GetAllAssignedTicketsData
     public void bindData(GetAllAssignedTicketsData data, int position, int pageSize) {
 
 
-        AppCompatTextView txtInfo = findView(R.id.txtInfo);
+        TextView txtInfo = findViewById(R.id.txtInfo);
 
         txtInfo.setText("No Assigned Tickets");
 

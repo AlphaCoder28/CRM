@@ -27,9 +27,9 @@ private Context context;
 
     @Override
     public void bindData(CustomBean data, int position, int pageSize) {
-        ImageView imageStart = findView(R.id.iv_logo);
-        LottieAnimationView lottieView = findView(R.id.banner_image);
-        RelativeLayout backgroundView = findView(R.id.rl_background);
+        ImageView imageStart = findViewById(R.id.iv_logo);
+        LottieAnimationView lottieView = findViewById(R.id.banner_image);
+        RelativeLayout backgroundView = findViewById(R.id.rl_background);
 
 
         //backgroundView.setBackgroundResource(data.getImageRes());

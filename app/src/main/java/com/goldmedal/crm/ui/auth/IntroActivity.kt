@@ -16,7 +16,6 @@ import com.goldmedal.crm.common.transform.PageTransformerFactory
 import com.goldmedal.crm.common.transform.TransformerStyle
 import com.goldmedal.crm.data.adapters.IntroAdapter
 import com.goldmedal.crm.data.model.CustomBean
-import com.goldmedal.crm.data.model.viewholder.CustomPageViewHolder
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import kotlinx.android.synthetic.main.activity_intro.*
@@ -33,7 +32,7 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: LoginViewModelFactory by instance()
-    private lateinit var mViewPager: BannerViewPager<CustomBean, CustomPageViewHolder>
+    private lateinit var mViewPager: BannerViewPager<CustomBean>
 
     private val des = arrayOf("Goldmedal is synonymous with\nworld-class electrical brands", "Switch to the amazing\nto come across products of tomorrow", "We've been innovating since\ninception in 1979 \nIt's a legacy we are proud of and \nwhich will never change")
     private val introJson = arrayOf(R.raw.splash_1, R.raw.splash_2, R.raw.splash_3)

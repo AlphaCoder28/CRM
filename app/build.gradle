@@ -163,7 +163,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.1.0'
 
     //Banner
-    implementation 'com.github.zhpanvip:BannerViewPager:3.1.5'
+    implementation 'com.github.zhpanvip:BannerViewPager:3.5.10'
 
     implementation 'com.airbnb.android:lottie:3.4.1'
 
