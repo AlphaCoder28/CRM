@@ -349,8 +349,9 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_4"
+                android:minHeight="40dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -371,7 +372,7 @@
                     android:layout_marginLeft="@dimen/dp_4"
                     android:layout_marginRight="@dimen/dp_4"
                     android:textAlignment="textStart"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:text="@string/dash"
                    >
 
