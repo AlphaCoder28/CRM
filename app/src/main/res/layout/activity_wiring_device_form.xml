@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Voltage: "
+                android:text="@string/voltage_txt_ast"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="@id/viewVoltageAdd"
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Faulty Channel: "
+                android:text="@string/faulty_channel_txt_ast"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="@id/viewFaultyChannelAdd"
@@ -373,10 +373,12 @@
                     android:id="@+id/tietPowerFactor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_light_grey_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="top|start"
                     android:imeOptions="actionDone"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/rounded_light_grey_background"
                     android:lines="2"
                     android:maxLines="3"
                     android:minLines="2" />
@@ -403,7 +405,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Load Description: "
+                android:text="@string/load_description_txt_ast"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="@id/viewLoadDescriptionAdd"
@@ -504,7 +506,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
                 android:fontFamily="@font/roboto_bold"
-                android:text="Type of LED: "
+                android:text="@string/type_of_led_txt_ast"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="@id/viewTypeLedAdd"
@@ -627,10 +629,12 @@
                     android:id="@+id/tietDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_light_grey_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="top|start"
                     android:imeOptions="actionDone"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/rounded_light_grey_background"
                     android:lines="2"
                     android:maxLines="3"
                     android:minLines="2" />
@@ -680,6 +684,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_light_grey_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:gravity="top|start"
                     android:imeOptions="actionDone"
                     android:inputType="textMultiLine"
@@ -697,6 +703,8 @@
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_12"
                 android:layout_marginEnd="@dimen/dp_16"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilMake">
@@ -965,10 +973,10 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/roboto_regular"
                         android:maxLines="1"
+                        android:nextFocusDown="@id/btnSubmit"
                         android:padding="@dimen/dp_6"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_14"
-                        android:nextFocusDown="@id/btnSubmit"/>
+                        android:textSize="@dimen/sp_14" />
 
                 </TableRow>
 
@@ -996,8 +1004,8 @@
         android:id="@+id/progress_bar"
         android:layout_width="@dimen/medium_icon_width"
         android:layout_height="@dimen/medium_icon_height"
-        app:loading_width="@dimen/dp_2"
         android:layout_centerInParent="true"
-        app:loading_color="@color/darkBackground"/>
+        app:loading_color="@color/darkBackground"
+        app:loading_width="@dimen/dp_2" />
 
 </RelativeLayout>

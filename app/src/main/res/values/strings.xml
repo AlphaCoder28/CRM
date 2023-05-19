@@ -281,4 +281,10 @@
     <string name="str_joining_date">Joining Date</string>
     <string name="str_highest_qualification">Highest Qualification</string>
     <string name="service_manager">Service Manager</string>
+
+    <string name="wiring_devices_txt">Wiring Devices</string>
+    <string name="voltage_txt_ast">Voltage:<font color='#FF0000'>*</font></string>
+    <string name="faulty_channel_txt_ast">Faulty Channel:<font color='#FF0000'>*</font></string>
+    <string name="load_description_txt_ast">Load Description:<font color='#FF0000'>*</font></string>
+    <string name="type_of_led_txt_ast">Type of LED:<font color='#FF0000'>*</font></string>
 </resources>

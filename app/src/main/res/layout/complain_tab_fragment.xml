@@ -58,6 +58,11 @@
                     android:id="@+id/layout_complain_info"
                     layout="@layout/complain_info" />
 
+                <include
+                    android:id="@+id/layout_wiring_devices_header"
+                    layout="@layout/expandable_item"
+                    android:visibility="gone"/>
+
 
                 <include
                     android:id="@+id/layout_accounts_info_header"

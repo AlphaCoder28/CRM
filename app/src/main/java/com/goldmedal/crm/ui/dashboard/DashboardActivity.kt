@@ -186,12 +186,12 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
     private fun checkForUpdates() {
         val appUpdateManager : AppUpdateManager
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             appUpdateManager = FakeAppUpdateManager(baseContext)
             appUpdateManager.setUpdateAvailable(2)
-        } else {
+        } else {*/
             appUpdateManager = AppUpdateManagerFactory.create(baseContext)
-        }
+        //}
         val appUpdateInfo = appUpdateManager.appUpdateInfo
         appUpdateInfo.addOnSuccessListener {
             handleUpdate(appUpdateManager, appUpdateInfo)

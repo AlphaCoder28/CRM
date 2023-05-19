@@ -521,6 +521,12 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         binding.layoutComplainInfoHeader.itemExpandableHeaderTitle.setText(R.string.str_complain_info)
         binding.layoutAccountsInfoHeader.itemExpandableHeaderTitle.setText(R.string.str_accounts_info)
 
+        // show wiring device header based on division id (1 - WD)
+        if (modelItem?.DivisionID == 1) {
+            binding.layoutWiringDevicesHeader.itemExpandableHeaderRoot.visibility = View.VISIBLE
+            binding.layoutWiringDevicesHeader.itemExpandableHeaderTitle.text = getString(R.string.wiring_devices_txt)
+        }
+
 
         //Visit Status
         val visitStatus: MutableList<VisitStatusData> = ArrayList()
@@ -748,6 +754,13 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         }
         binding.layoutComplainInfoHeader.itemExpandableHeaderRoot.setOnClickListener {
             toggleComplainInfo()
+        }
+        binding.layoutWiringDevicesHeader.itemExpandableHeaderRoot.setOnClickListener {
+            context?.let { it1 ->
+                modelItem?.TicketID?.let { ticketId ->
+                    WiringDeviceFormActivity.start(it1, ticketId)
+                }
+            }
         }
         binding.layoutAccountsInfoHeader.itemExpandableHeaderRoot.setOnClickListener {
             toggleAccountsInfo()

@@ -4,6 +4,7 @@ import com.goldmedal.crm.data.model.AddedInvoiceItemData
 import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
 import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.GlobalConstant.BASE_URL
+import com.goldmedal.crm.data.network.GlobalConstant.UAT_BASE_URL
 import com.goldmedal.crm.data.network.responses.*
 import com.goldmedal.crm.ui.dashboard.Manager.Data
 import com.goldmedal.crm.ui.dashboard.Manager.ManagerMonthWiseData
@@ -623,7 +624,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                     .client(okkHttpclient)
-                    .baseUrl(BASE_URL)
+                    .baseUrl(UAT_BASE_URL)  // todo - change to base url for live
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(MyApi::class.java)

@@ -17,6 +17,7 @@ import com.goldmedal.crm.data.network.GlobalConstant
 import com.goldmedal.crm.databinding.ActivityWiringDeviceFormBinding
 import com.goldmedal.crm.databinding.WiringDevicePointDialogBinding
 import com.goldmedal.crm.util.snackbar
+import com.goldmedal.crm.util.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_wiring_device_multi_selection.view.*
@@ -45,12 +46,13 @@ const val TICKET_ID = "ticket_id"
 
 class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any> {
     override val kodein by kodein()
+    private val TAG = WiringDeviceFormActivity::class.java.simpleName
     private var _binding: ActivityWiringDeviceFormBinding? = null
     private val binding get() = _binding!!
     private val factory: TicketViewModelFactory by instance()
     private lateinit var viewModel: TicketViewModel
-    private var phaseList = mutableListOf<String>()
-    private var supplyList = mutableListOf<String>()
+    private var phaseList = ArrayList<Phase>()
+    private var supplyList = ArrayList<Supply>()
     private var voltageViewCount = 1
     private var channelViewCount = 1
     private var loadDescriptionViewCount = 1
@@ -101,25 +103,25 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
         binding.viewVoltageAdd.setOnClickListener {
             if (voltageList.isNotEmpty() && voltageViewCount < voltageList.size) {
+                addVoltageView(voltageList, true)
                 voltageViewCount++
-                addVoltageView(voltageList)
             }
         }
         binding.viewFaultyChannelAdd.setOnClickListener {
             if (faultyChannelList.isNotEmpty() && channelViewCount < faultyChannelList.size) {
-                addFaultyChannelView(faultyChannelList)
+                addFaultyChannelView(faultyChannelList, true)
                 channelViewCount++
             }
         }
         binding.viewLoadDescriptionAdd.setOnClickListener {
             if (loadDescriptionList.isNotEmpty() && loadDescriptionViewCount < loadDescriptionList.size) {
-                addLoadDescriptionView(loadDescriptionList)
+                addLoadDescriptionView(loadDescriptionList, true)
                 loadDescriptionViewCount++
             }
         }
         binding.viewTypeLedAdd.setOnClickListener {
             if (typeLedList.isNotEmpty() && typeLedViewCount < typeLedList.size) {
-                addTypeLedView(typeLedList)
+                addTypeLedView(typeLedList, true)
                 typeLedViewCount++
             }
         }
@@ -127,26 +129,23 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         binding.tvVoltageClearAll.setOnClickListener {
             voltageViewCount = 1
             binding.llVoltage.removeAllViews()
-            isClearAll = true
-            addVoltageView(voltageList)
+            addVoltageView(voltageList, true)
         }
         binding.tvFaultyChannelClearAll.setOnClickListener {
             channelViewCount = 1
             binding.llFaultyChannel.removeAllViews()
-            isClearAll = true
-            addFaultyChannelView(faultyChannelList)
+            addFaultyChannelView(faultyChannelList, true)
         }
         binding.tvLoadDescriptionClearAll.setOnClickListener {
             loadDescriptionViewCount = 1
             binding.llLoadDescription.removeAllViews()
             isClearAll = true
-            addLoadDescriptionView(loadDescriptionList)
+            addLoadDescriptionView(loadDescriptionList, true)
         }
         binding.tvTypeLedClearAll.setOnClickListener {
             typeLedViewCount = 1
             binding.llTypeLed.removeAllViews()
-            isClearAll = true
-            addTypeLedView(typeLedList)
+            addTypeLedView(typeLedList, true)
         }
         binding.btnSubmit.setOnClickListener {
             prepareDataAndCallApi()
@@ -154,30 +153,32 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
     }
 
     private fun prepareDataAndCallApi() {
-        val phaseList = mutableListOf<String>()
-        if (binding.cbPhaseSingle.isChecked) {
-            phaseList.add("Single")
+        val phaseListId = mutableListOf<String>()
+        if (binding.cbPhaseSingle.isChecked && phaseList.isNotEmpty()) {
+            phaseListId.add(phaseList[0].phaseID.toString())
         }
         if (binding.cbPhaseThree.isChecked) {
-            phaseList.add("Three Phase")
+            phaseListId.add(phaseList[1].phaseID.toString())
         }
-        Log.d("Arun", phaseList.joinToString { it })
+        val phaseIds = phaseListId.joinToString { it }
+        Log.d(TAG, phaseIds.filter { !it.isWhitespace() })
         if (phaseList.isEmpty()) {
             Toast.makeText(this, "Select Phase Item", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val supplyList = mutableListOf<String>()
-        if (binding.cbSupplyNormal.isChecked) {
-            supplyList.add("Normal")
+        val supplyListId = mutableListOf<String>()
+        if (binding.cbSupplyNormal.isChecked && supplyList.isNotEmpty()) {
+            supplyListId.add(supplyList[0].supplyID.toString())
         }
-        if (binding.cbSupplyInverter.isChecked) {
-            supplyList.add("Inverter")
+        if (binding.cbSupplyInverter.isChecked && supplyList.isNotEmpty()) {
+            supplyListId.add(supplyList[1].supplyID.toString())
         }
-        if (binding.cbSupplyGenerator.isChecked) {
-            supplyList.add("Generator")
+        if (binding.cbSupplyGenerator.isChecked && supplyList.isNotEmpty()) {
+            supplyListId.add(supplyList[2].supplyID.toString())
         }
-        Log.d("Arun", supplyList.joinToString { it })
+        val supplyIds = supplyListId.joinToString { it }
+        Log.d(TAG, supplyIds.filter { !it.isWhitespace() })
         if (supplyList.isEmpty()) {
             Toast.makeText(this, "Select Supply Item", Toast.LENGTH_SHORT).show()
             return
@@ -209,7 +210,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         val l4Wattage = binding.tvWattageL4.text.toString()
         val l4PF = binding.tvPfL4.text.toString()
         val l4Current = binding.tvCurrentL4.text.toString()
-        Log.d("Arun", faultyChannelDetailsJsonObject.toString())
+        Log.d(TAG, faultyChannelDetailsJsonObject.toString())
 
         viewModel.getLoggedInUser().observe(this) { user ->
             if (user != null) {
@@ -217,8 +218,8 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     mTicketId,
                     user.UserId ?: 0,
                     0,
-                    phaseList.joinToString { it },
-                    supplyList.joinToString { it },
+                    phaseIds.filter { !it.isWhitespace() },
+                    supplyIds.filter { !it.isWhitespace() },
                     voltageJsonArray.toString(),
                     channelJsonArray.toString(),
                     loadDescriptionJsonArray.toString(),
@@ -245,7 +246,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
     private fun getJsonArrayForVoltage(): JSONArray {
         val postList = ArrayList<Voltage>()
-        val jsonArray = JSONArray()
+        var jsonArray = JSONArray()
         binding.llVoltage.children.forEach {
             val jsonObject = JSONObject()
             val item = it.spinner.selectedItem as Voltage
@@ -257,18 +258,19 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                 item.voltageRemark = itemRemarks
             }
             postList.add(item)
-            jsonArray.put(jsonObject.toString())
+            jsonArray.put(jsonObject)
 
         }
-        val jsArray = Gson().toJson(postList)
-        Log.d("Arun", jsonArray.toString())
+        //val jsArray = Gson().toJson(postList)
+        //jsonArray = JSONArray(jsArray)
+        Log.d(TAG, jsonArray.toString())
         //return JSONArray(jsArray)
         return jsonArray
     }
 
     private fun getJsonArrayFaultyChannel(): JSONArray {
         val postList = ArrayList<FaultyChannel>()
-        val jsonArray = JSONArray()
+        var jsonArray = JSONArray()
         binding.llFaultyChannel.children.forEach {
             val jsonObject = JSONObject()
             val item = it.spinner.selectedItem as FaultyChannel
@@ -280,17 +282,18 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                 item.faultyChannelRemark = itemRemarks
             }
             postList.add(item)
-            jsonArray.put(jsonObject.toString())
+            jsonArray.put(jsonObject)
         }
-        val jsArray = Gson().toJson(postList)
-        Log.d("Arun", jsonArray.toString())
+        //val jsArray = Gson().toJson(postList)
+        //jsonArray = JSONArray(jsArray)
+        Log.d(TAG, jsonArray.toString())
         //return JSONArray(jsArray)
         return jsonArray
     }
 
     private fun getJsonArrayLoadDescription(): JSONArray {
         val postList = ArrayList<LoadDescription>()
-        val jsonArray = JSONArray()
+        var jsonArray = JSONArray()
         binding.llLoadDescription.children.forEach {
             val jsonObject = JSONObject()
             val item = it.spinner.selectedItem as LoadDescription
@@ -302,17 +305,18 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                 item.loadDescriptionRemark = itemRemarks
             }
             postList.add(item)
-            jsonArray.put(jsonObject.toString())
+            jsonArray.put(jsonObject)
         }
-        val jsArray = Gson().toJson(postList)
-        Log.d("Arun", jsonArray.toString())
+        //val jsArray = Gson().toJson(postList)
+        //jsonArray = JSONArray(jsArray)
+        Log.d(TAG, jsonArray.toString())
         //return JSONArray(jsArray)
         return jsonArray
     }
 
     private fun getJsonArrayTypeLed(): JSONArray {
         val postList = ArrayList<TypeLED>()
-        val jsonArray = JSONArray()
+        var jsonArray = JSONArray()
         binding.llTypeLed.children.forEach {
             val jsonObject = JSONObject()
             val item = it.spinner.selectedItem as TypeLED
@@ -324,10 +328,11 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                 item.typeofLEDRemark = itemRemarks
             }
             postList.add(item)
-            jsonArray.put(jsonObject.toString())
+            jsonArray.put(jsonObject)
         }
-        val jsArray = Gson().toJson(postList)
-        Log.d("Arun", jsonArray.toString())
+        //val jsArray = Gson().toJson(postList)
+        //jsonArray = JSONArray(jsArray)
+        Log.d(TAG, jsonArray.toString())
         //return JSONArray(jsArray)
         return jsonArray
     }
@@ -384,43 +389,54 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                 when (pointType) {
                     PointTableType.WATTAGE_L1 -> {
                         binding.tvWattageL1.text = pointValue
-                        binding.tvPfL1.requestFocus()
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.PF_L1 -> {
                         binding.tvPfL1.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.CURRENT_L1 -> {
                         binding.tvCurrentL1.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
 
                     PointTableType.WATTAGE_L2 -> {
                         binding.tvWattageL2.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.PF_L2 -> {
                         binding.tvPfL2.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.CURRENT_L2 -> {
                         binding.tvCurrentL2.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
 
                     PointTableType.WATTAGE_L3 -> {
                         binding.tvWattageL3.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.PF_L3 -> {
                         binding.tvPfL3.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.CURRENT_L3 -> {
                         binding.tvCurrentL3.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
 
                     PointTableType.WATTAGE_L4 -> {
                         binding.tvWattageL4.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.PF_L4 -> {
                         binding.tvPfL4.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                     PointTableType.CURRENT_L4 -> {
                         binding.tvCurrentL4.text = pointValue
+                        binding.tlPoints.requestFocus()
                     }
                 }
             }
@@ -428,11 +444,21 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         }
     }
 
-    private fun addVoltageView(list: ArrayList<Voltage>) {
-        // todo - need to test from api data
+    private fun addVoltageView(list: ArrayList<Voltage>, newView: Boolean) {
         if (list.isNotEmpty()) {
             // if form already submitted before
-            if (!isClearAll) {
+            if (newView) {
+                // if child count in voltage linear layout is less than list size than only add new view
+                if (binding.llVoltage.childCount < list.size) {
+                    val newVoltageView = MultiSelectionItemLayout(this, null)
+                    binding.llVoltage.addView(newVoltageView)
+                    newVoltageView.binding.spinner.attachDataSource(list)
+                    newVoltageView.ivCancel.setOnClickListener {
+                        binding.llVoltage.removeView(newVoltageView)
+                        voltageViewCount--
+                    }
+                }
+            } else {
                 list.forEachIndexed { index, voltage ->
                     if (voltage.voltageRemark.isNotEmpty()) {
                         val newVoltageView = MultiSelectionItemLayout(this, null)
@@ -448,26 +474,23 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     }
                 }
             }
-
-            isClearAll = false
-
-            // if child count in voltage linear layout is less than list size than only add new view
-            if (binding.llVoltage.childCount < list.size) {
-                val newVoltageView = MultiSelectionItemLayout(this, null)
-                binding.llVoltage.addView(newVoltageView)
-                newVoltageView.ivCancel.setOnClickListener {
-                    binding.llVoltage.removeView(newVoltageView)
-                    voltageViewCount--
-                }
-                newVoltageView.binding.spinner.attachDataSource(list)
-            }
         }
 
     }
 
-    private fun addTypeLedView(list: ArrayList<TypeLED>) {
+    private fun addTypeLedView(list: ArrayList<TypeLED>, newView: Boolean) {
         if (list.isNotEmpty()) {
-            if (!isClearAll) {
+            if (newView) {
+                if (binding.llTypeLed.childCount < list.size) {
+                    val newTypeLedView = MultiSelectionItemLayout(this, null)
+                    binding.llTypeLed.addView(newTypeLedView)
+                    newTypeLedView.ivCancel.setOnClickListener {
+                        binding.llTypeLed.removeView(newTypeLedView)
+                        typeLedViewCount--
+                    }
+                    newTypeLedView.binding.spinner.attachDataSource(list)
+                }
+            } else {
                 list.forEachIndexed { index, typeLED ->
                     if (typeLED.typeofLEDRemark.isNotEmpty()) {
                         val newTypeLedView = MultiSelectionItemLayout(this, null)
@@ -483,23 +506,22 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     }
                 }
             }
-            isClearAll = false
-
-            if (binding.llTypeLed.childCount < list.size) {
-                val newTypeLedView = MultiSelectionItemLayout(this, null)
-                binding.llTypeLed.addView(newTypeLedView)
-                newTypeLedView.ivCancel.setOnClickListener {
-                    binding.llTypeLed.removeView(newTypeLedView)
-                    typeLedViewCount--
-                }
-                newTypeLedView.binding.spinner.attachDataSource(list)
-            }
         }
     }
 
-    private fun addLoadDescriptionView(list: ArrayList<LoadDescription>) {
+    private fun addLoadDescriptionView(list: ArrayList<LoadDescription>, newView: Boolean) {
         if (list.isNotEmpty()) {
-            if (!isClearAll) {
+            if (newView) {
+                if (binding.llLoadDescription.childCount < list.size) {
+                    val newLoadDescriptionView = MultiSelectionItemLayout(this, null)
+                    binding.llLoadDescription.addView(newLoadDescriptionView)
+                    newLoadDescriptionView.ivCancel.setOnClickListener {
+                        binding.llLoadDescription.removeView(newLoadDescriptionView)
+                        loadDescriptionViewCount--
+                    }
+                    newLoadDescriptionView.binding.spinner.attachDataSource(list)
+                }
+            } else {
                 list.forEachIndexed { index, loadDescription ->
                     if (loadDescription.loadDescriptionRemark.isNotEmpty()) {
                         val newLoadDescriptionView = MultiSelectionItemLayout(this, null)
@@ -515,23 +537,22 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     }
                 }
             }
-            isClearAll = false
-
-            if (binding.llLoadDescription.childCount < list.size) {
-                val newLoadDescriptionView = MultiSelectionItemLayout(this, null)
-                binding.llLoadDescription.addView(newLoadDescriptionView)
-                newLoadDescriptionView.ivCancel.setOnClickListener {
-                    binding.llLoadDescription.removeView(newLoadDescriptionView)
-                    loadDescriptionViewCount--
-                }
-                newLoadDescriptionView.binding.spinner.attachDataSource(list)
-            }
         }
     }
 
-    private fun addFaultyChannelView(list: ArrayList<FaultyChannel>) {
+    private fun addFaultyChannelView(list: ArrayList<FaultyChannel>, newView: Boolean) {
         if (list.isNotEmpty()) {
-            if (!isClearAll) {
+            if (newView) {
+                if (binding.llFaultyChannel.childCount < list.size) {
+                    val newFaultyChannelView = MultiSelectionItemLayout(this, null)
+                    binding.llFaultyChannel.addView(newFaultyChannelView)
+                    newFaultyChannelView.ivCancel.setOnClickListener {
+                        binding.llFaultyChannel.removeView(newFaultyChannelView)
+                        channelViewCount--
+                    }
+                    newFaultyChannelView.binding.spinner.attachDataSource(list)
+                }
+            } else {
                 list.forEachIndexed { index, faultyChannel ->
                     if (faultyChannel.faultyChannelRemark.isNotEmpty()) {
                         val newFaultyChannelView = MultiSelectionItemLayout(this, null)
@@ -546,17 +567,6 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                         }
                     }
                 }
-            }
-            isClearAll = false
-
-            if (binding.llFaultyChannel.childCount < list.size) {
-                val newFaultyChannelView = MultiSelectionItemLayout(this, null)
-                binding.llFaultyChannel.addView(newFaultyChannelView)
-                newFaultyChannelView.ivCancel.setOnClickListener {
-                    binding.llFaultyChannel.removeView(newFaultyChannelView)
-                    channelViewCount--
-                }
-                newFaultyChannelView.binding.spinner.attachDataSource(list)
             }
         }
     }
@@ -573,6 +583,9 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
             setFormDataFromApi(wiringDeviceData)
         } else if (callFrom == GlobalConstant.UPDATE_WIRING_DEVICES_FORM_API) {
             val wiringDeviceResponse = _object as List<WiringDeviceUpdateDataItem>
+            val message = wiringDeviceResponse[0].statusMessage
+            toast(message)
+            finish()
         }
     }
 
@@ -587,20 +600,66 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
     private fun setFormDataFromApi(wiringDeviceData: List<WiringDeviceData>) {
         if (wiringDeviceData.isNotEmpty()) {
+            phaseList = wiringDeviceData[0].phaseList as ArrayList<Phase>
+            setPhaseData()
+
+            supplyList = wiringDeviceData[0].supplyList as ArrayList<Supply>
+            setSupplyData()
+
             voltageList = wiringDeviceData[0].voltageList as ArrayList<Voltage>
-            addVoltageView(voltageList)
+            addVoltageView(voltageList, false)
 
             faultyChannelList = wiringDeviceData[0].faultyChannelList as ArrayList<FaultyChannel>
-            addFaultyChannelView(faultyChannelList)
+            addFaultyChannelView(faultyChannelList, false)
 
-            loadDescriptionList =
-                wiringDeviceData[0].loadDescriptionList as ArrayList<LoadDescription>
-            addLoadDescriptionView(loadDescriptionList)
+            loadDescriptionList = wiringDeviceData[0].loadDescriptionList as ArrayList<LoadDescription>
+            addLoadDescriptionView(loadDescriptionList, false)
 
             typeLedList = wiringDeviceData[0].typeofLEDList as ArrayList<TypeLED>
-            addTypeLedView(typeLedList)
-        }
+            addTypeLedView(typeLedList, false)
 
+            binding.tietPowerFactor.setText(wiringDeviceData[0].powerFactor)
+            binding.tietDetails.setText(wiringDeviceData[0].shortRemark)
+            binding.tietMake.setText(wiringDeviceData[0].brandName)
+
+            binding.tvWattageL1.text = wiringDeviceData[0].faultyChannelDetails.l1Wattage
+            binding.tvWattageL2.text = wiringDeviceData[0].faultyChannelDetails.l2Wattage
+            binding.tvWattageL3.text = wiringDeviceData[0].faultyChannelDetails.l3Wattage
+            binding.tvWattageL4.text = wiringDeviceData[0].faultyChannelDetails.l4Wattage
+
+            binding.tvPfL1.text = wiringDeviceData[0].faultyChannelDetails.l1PF
+            binding.tvPfL2.text = wiringDeviceData[0].faultyChannelDetails.l2PF
+            binding.tvPfL3.text = wiringDeviceData[0].faultyChannelDetails.l3PF
+            binding.tvPfL4.text = wiringDeviceData[0].faultyChannelDetails.l4PF
+
+            binding.tvCurrentL1.text = wiringDeviceData[0].faultyChannelDetails.l1Current
+            binding.tvCurrentL2.text = wiringDeviceData[0].faultyChannelDetails.l2Current
+            binding.tvCurrentL3.text = wiringDeviceData[0].faultyChannelDetails.l3Current
+            binding.tvCurrentL4.text = wiringDeviceData[0].faultyChannelDetails.l4Current
+        }
+    }
+
+    private fun setPhaseData() {
+        try {
+            if (phaseList.size > 0) {
+                binding.cbPhaseSingle.text = phaseList[0].phaseName
+                binding.cbPhaseThree.text = phaseList[1].phaseName
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun setSupplyData() {
+        try {
+            if (supplyList.size > 0) {
+                binding.cbSupplyNormal.text = supplyList[0].supplyName
+                binding.cbSupplyInverter.text = supplyList[1].supplyName
+                binding.cbSupplyGenerator.text = supplyList[2].supplyName
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     companion object {

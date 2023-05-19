@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class WiringDeviceData(
     @SerializedName("BrandName")
-    val brandName: Any,
+    val brandName: String,
     @SerializedName("FaultyChannelDetails")
     val faultyChannelDetails: FaultyChannelDetails,
     @SerializedName("FaultyChannelList")
@@ -15,9 +15,9 @@ data class WiringDeviceData(
     @SerializedName("PhaseList")
     val phaseList: List<Phase>,
     @SerializedName("PowerFactor")
-    val powerFactor: Any,
+    val powerFactor: String,
     @SerializedName("ShortRemark")
-    val shortRemark: Any,
+    val shortRemark: String,
     @SerializedName("SupplyList")
     val supplyList: List<Supply>,
     @SerializedName("TypeofLEDList")

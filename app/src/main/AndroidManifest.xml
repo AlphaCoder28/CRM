@@ -26,11 +26,13 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CRM">
+        android:theme="@style/Theme.CRM"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.ticket.WiringDeviceFormActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.ticket.TicketInfoActivity"/>
+            android:parentActivityName=".ui.ticket.TicketInfoActivity"
+            android:label="@string/wiring_devices_txt"/>
         <activity
             android:name=".ui.ticket.TicketViewDetailsActivity"
             android:screenOrientation="portrait" />
