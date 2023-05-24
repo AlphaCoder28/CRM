@@ -624,7 +624,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                     .client(okkHttpclient)
-                    .baseUrl(UAT_BASE_URL)  // todo - change to base url for live
+                    .baseUrl(BASE_URL)  // Done - change to base url for live
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(MyApi::class.java)

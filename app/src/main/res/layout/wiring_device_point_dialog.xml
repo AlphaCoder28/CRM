@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_4"
             android:background="@drawable/rounded_light_grey_background"
-            tools:text="00"
+            tools:text="0"
             android:inputType="number"
             android:gravity="center"
             android:padding="5dp" />

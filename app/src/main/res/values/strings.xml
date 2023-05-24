@@ -287,4 +287,5 @@
     <string name="faulty_channel_txt_ast">Faulty Channel:<font color='#FF0000'>*</font></string>
     <string name="load_description_txt_ast">Load Description:<font color='#FF0000'>*</font></string>
     <string name="type_of_led_txt_ast">Type of LED:<font color='#FF0000'>*</font></string>
+    <string name="make_with_ast">Make:<font color='#FF0000'>*</font></string>
 </resources>
