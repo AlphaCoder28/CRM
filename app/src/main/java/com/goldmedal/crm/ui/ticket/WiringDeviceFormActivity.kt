@@ -515,9 +515,10 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                                 voltageViewCount--
                             }
                         }
-                    } else if (binding.llVoltage.childCount == 0) {
-                        addVoltageView(list, true)
                     }
+                }
+                if (binding.llVoltage.childCount == 0) {
+                    addVoltageView(list, true)
                 }
             }
         }
@@ -555,9 +556,10 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                                 typeLedViewCount--
                             }
                         }
-                    } else if (binding.llTypeLed.childCount == 0) {
-                        addTypeLedView(list, true)
                     }
+                }
+                if (binding.llTypeLed.childCount == 0) {
+                    addTypeLedView(list, true)
                 }
             }
         }
@@ -593,9 +595,10 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                                 loadDescriptionViewCount--
                             }
                         }
-                    } else if (binding.llLoadDescription.childCount == 0) {
-                        addLoadDescriptionView(list, true)
                     }
+                }
+                if (binding.llLoadDescription.childCount == 0) {
+                    addLoadDescriptionView(list, true)
                 }
             }
         }
@@ -631,9 +634,11 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                                 channelViewCount--
                             }
                         }
-                    } else if (binding.llFaultyChannel.childCount == 0) {
-                        addFaultyChannelView(list, true)
                     }
+                }
+                //If no data from api, add new view
+                if (binding.llFaultyChannel.childCount == 0) {
+                    addFaultyChannelView(list, true)
                 }
             }
         }
