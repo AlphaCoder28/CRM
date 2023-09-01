@@ -579,6 +579,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         callCloseWith.add(VisitStatusData("Select", -1))
         callCloseWith.add(VisitStatusData("With Consumption", 1))
         callCloseWith.add(VisitStatusData("Without Consumption", 2))
+        callCloseWith.add(VisitStatusData("Replacement", 3))
 
         val textFormatter1 =
             SpinnerTextFormatter<VisitStatusData> { obj ->
