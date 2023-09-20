@@ -420,7 +420,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
         val geocoder = Geocoder(this@CheckInActivity)
         var list: List<Address> = ArrayList()
         try {
-            list = geocoder.getFromLocationName(searchString, 1)
+            list = geocoder.getFromLocationName(searchString, 1) as List<Address>
         } catch (e: IOException) {
             Log.e(TAG, "geoLocate: IOException: " + e.localizedMessage)
         }

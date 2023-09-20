@@ -74,26 +74,48 @@ class QrCodeScanActivity : AppCompatActivity() {
                         ParsedResultType.URI -> {
                             val parsedUri = parsedResult as URIParsedResult
                             Log.d(TAG, "uri: "+ parsedResult)
+                            if (parsedUri.uri.contains("gmqr")) {
+                                try {
+                                    val split1 = parsedUri.uri.split("q=")
+                                    val split2 = split1[1].split("&k=")
 
-                            val key =
-                                Uri.parse(parsedUri.uri).getQueryParameter("key") ?: Uri.parse(
-                                    parsedUri.uri
-                                ).getQueryParameter("k")
-                            val qrCode =
-                                Uri.parse(parsedUri.uri).getQueryParameter("qrcode") ?: Uri.parse(
-                                    parsedUri.uri
-                                ).getQueryParameter("q")
-                            val master =
-                                Uri.parse(parsedUri.uri).getBooleanQueryParameter("master", false)
+                                    val qrCode = split2[0]
+                                    val split3 = split2[1].split("&r=")
 
-                            val returnIntent = Intent()
-                            returnIntent.putExtra("key", key)
-                            returnIntent.putExtra("qr_code", qrCode)
-                            returnIntent.putExtra("master", master)
-                            returnIntent.putExtra("callFrom", callFrom)
-                            setResult(Activity.RESULT_OK, returnIntent)
-                            finish()
+                                    val key = split3[0]
+                                    val master = split3[1] != "0"
 
+                                    val returnIntent = Intent()
+                                    returnIntent.putExtra("key", key)
+                                    returnIntent.putExtra("qr_code", qrCode)
+                                    returnIntent.putExtra("master", master)
+                                    returnIntent.putExtra("callFrom", callFrom)
+                                    setResult(Activity.RESULT_OK, returnIntent)
+                                    finish()
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+
+                            } else {
+                                val key =
+                                    Uri.parse(parsedUri.uri).getQueryParameter("key") ?: Uri.parse(
+                                        parsedUri.uri
+                                    ).getQueryParameter("k")
+                                val qrCode =
+                                    Uri.parse(parsedUri.uri).getQueryParameter("qrcode") ?: Uri.parse(
+                                        parsedUri.uri
+                                    ).getQueryParameter("q")
+                                val master =
+                                    Uri.parse(parsedUri.uri).getBooleanQueryParameter("master", false)
+
+                                val returnIntent = Intent()
+                                returnIntent.putExtra("key", key)
+                                returnIntent.putExtra("qr_code", qrCode)
+                                returnIntent.putExtra("master", master)
+                                returnIntent.putExtra("callFrom", callFrom)
+                                setResult(Activity.RESULT_OK, returnIntent)
+                                finish()
+                            }
 
                         }
 

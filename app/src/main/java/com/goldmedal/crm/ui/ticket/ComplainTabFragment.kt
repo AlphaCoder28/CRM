@@ -10,6 +10,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputType
@@ -1294,29 +1295,54 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
     @AfterPermissionGranted(RC_STORAGE_PERM)
     private fun onClickRequestPermissionStorageButton() {
-        if (EasyPermissions.hasPermissions(
-                context,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-        ) {
-            // Have permission, do the thing!
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            intent.type = "*/*"
-            val mimetypes = arrayOf("image/*", "application/pdf")
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
-            startActivityForResult(intent, RC_STORAGE_PERM)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            if (EasyPermissions.hasPermissions(
+                    context,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                // Have permission, do the thing!
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                intent.type = "*/*"
+                val mimetypes = arrayOf("image/*"/*, "application/pdf"*/)
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+                startActivityForResult(intent, RC_STORAGE_PERM)
+            } else {
+                // Request one permission
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.permission_storage_rationale_message),
+                    RC_STORAGE_PERM,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            }
         } else {
-            // Request one permission
-            EasyPermissions.requestPermissions(
-                this,
-                getString(R.string.permission_storage_rationale_message),
-                RC_STORAGE_PERM,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
+            if (EasyPermissions.hasPermissions(
+                    context,
+                    Manifest.permission.READ_MEDIA_IMAGES
+                )
+            ) {
+                // Have permission, do the thing!
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+                intent.addCategory(Intent.CATEGORY_OPENABLE)
+                intent.type = "*/*"
+                val mimetypes = arrayOf("image/*"/*, "application/pdf"*/)
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+                startActivityForResult(intent, RC_STORAGE_PERM)
+            } else {
+                // Request one permission
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.permission_storage_rationale_message),
+                    RC_STORAGE_PERM,
+                    Manifest.permission.READ_MEDIA_IMAGES
+                )
+            }
         }
+
     }
 
 
