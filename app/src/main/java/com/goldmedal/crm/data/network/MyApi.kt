@@ -1,6 +1,6 @@
 package com.goldmedal.crm.data.network
 
-import com.goldmedal.crm.data.model.AddedInvoiceItemData
+import com.goldmedal.crm.data.model.*
 import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
 import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.GlobalConstant.BASE_URL
@@ -400,7 +400,12 @@ interface MyApi {
         @Field("IsNoRepair") isNoRepair: Boolean,
         @Field("IsProductReplaced") isProductReplaced: Boolean,
         @Field("ReplacementQRCode") replacementQRCode: String,
-        @Field("CallClosedTypeID") callClosedTypeID: Int
+        @Field("CallClosedTypeID") callClosedTypeID: Int,
+        @Field("ReplacementReasonID") replacementReasonID: Int,
+        @Field("SymptomID") symptomID: Int,
+        @Field("DefectReasonID") defectReasonID: Int,
+        @Field("RepairActionTypeID") repairActionTypeID: Int,
+        @Field("RepairTypeID") repairTypeID: Int
 
     ): Response<UpdateVisitStatusResponse>
 
@@ -605,6 +610,42 @@ interface MyApi {
         @Field("L4_PF") l4PF: String,
         @Field("L4_Current") l4Current: String
     ): Response<WiringDeviceUpdateData>
+
+    @FormUrlEncoded
+    @POST("Ticket/get-symptoms-list")
+    suspend fun getNewProductSymptomsList(
+        @Field("DivisionID") divisionID: Int,
+        @Field("CategoryID") categoryId: Int
+    ): Response<ProductSymptomsNewResponse>
+
+    @FormUrlEncoded
+    @POST("Ticket/get-defect-reason-list")
+    suspend fun getDefectReasonsList(
+        @Field("DivisionID") divisionID: Int,
+        @Field("CategoryID") categoryId: Int,
+        @Field("SymptomID") symptomId: Int
+    ): Response<DefectReasonsResponse>
+
+    @FormUrlEncoded
+    @POST("Ticket/get-repair-action-details")
+    suspend fun getRepairActionDetailsList(
+        @Field("DivisionID") divisionID: Int,
+        @Field("CategoryID") categoryId: Int,
+        @Field("SymptomID") symptomId: Int,
+        @Field("DefectReasonID") defectActionId: Int
+    ): Response<RepairActionsDetailResponse>
+
+    @FormUrlEncoded
+    @POST("Ticket/get-repair-type-list")
+    suspend fun getRepairTypeList(
+        @Field("TicketID") ticketID: Int
+    ): Response<RepairTypeResponse>
+
+    @FormUrlEncoded
+    @POST("Ticket/get-replacement-reason-list")
+    suspend fun getReplacementReasonList(
+        @Field("TicketID") ticketID: Int
+    ): Response<ReplacementReasonsResponse>
 
 
     companion object {

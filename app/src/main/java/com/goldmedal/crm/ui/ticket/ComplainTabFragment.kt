@@ -38,6 +38,7 @@ import com.goldmedal.crm.common.LocationManager.Workable
 import com.goldmedal.crm.data.model.*
 import com.goldmedal.crm.data.network.GlobalConstant.FULL_IMAGE_SIZE
 import com.goldmedal.crm.data.network.GlobalConstant.THUMBNAIL_SIZE
+import com.goldmedal.crm.data.network.responses.ReplacementReasonItem
 import com.goldmedal.crm.databinding.ComplainTabFragmentBinding
 import com.goldmedal.crm.ui.auth.WebActivity
 import com.goldmedal.crm.ui.invoice.GenerateInvoiceActivity
@@ -261,6 +262,36 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                 binding.rootLayout.snackbar("Please Generate Invoice first before closing the Ticket")
             }
 
+        }
+
+        if (callFrom == GET_REPLACEMENT_REASONS_LIST) {
+            val replacementData = _object as MutableList<ReplacementReasonItem?>?
+            replacementData?.add(0, ReplacementReasonItem("Select", -1))
+            bindReplacementReasons(replacementData)
+        }
+
+        if (callFrom == GET_SYMPTOMS_LIST_NEW) {
+            val symptomsData = _object as MutableList<ProductSymptomsItem?>?
+            symptomsData?.add(0, ProductSymptomsItem("Select", -1))
+            bindSymptomsSpinner(symptomsData)
+        }
+
+        if (callFrom == GET_DEFECT_REASON_LIST) {
+            val defectReasonData = _object as MutableList<DefectReasonItem?>?
+            defectReasonData?.add(0, DefectReasonItem("Select", -1))
+            bindDefectReasonSpinner(defectReasonData)
+        }
+
+        if (callFrom == GET_REPAIR_ACTION_DETAILS) {
+            val repairActionData = _object as MutableList<RepairActionDetailItem?>?
+            repairActionData?.add(0, RepairActionDetailItem("Select", -1))
+            bindRepairActionDetailSpinner(repairActionData)
+        }
+
+        if (callFrom == GET_REPAIR_TYPE_LIST) {
+            val repairTypeData = _object as MutableList<RepairTypeItem?>?
+            repairTypeData?.add(0, RepairTypeItem("Select", -1))
+            bindRepairTypeSpinner(repairTypeData)
         }
     }
 
@@ -513,7 +544,15 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             binding.layoutComplainInfo.textViewComplainSubtitle.text = modelItem?.ProductIssueDesc
             binding.layoutComplainInfo.textViewInstructionsSubtitle.text =
                 modelItem?.EngineerInstructions
-            viewModel.getSymptomsList(modelItem?.CategoryID)
+
+            viewModel.isNewSymptomsBind = modelItem?.IsNewSymptomsBind ?: false
+            if (modelItem?.IsNewSymptomsBind == true) {
+                viewModel.getNewSymptomsList(modelItem?.CategoryID, modelItem?.DivisionID)
+                binding.layoutComplainInfo.spinnerSymptoms.visibility = View.VISIBLE
+            } else {
+                viewModel.getSymptomsList(modelItem?.CategoryID)
+            }
+
 
         }
         //headers
@@ -554,15 +593,17 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.GONE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.GONE
                     binding.llCloseType.visibility = View.GONE
-
+                    binding.llReplacementReason.visibility = View.GONE
                 } else if (item.ActionId == 1) {
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.VISIBLE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.GONE
                     binding.llCloseType.visibility = View.GONE
+                    binding.llReplacementReason.visibility = View.GONE
                 } else if (item.ActionId == 2) {
                     binding.layoutEngineerRemark.remarksRoot.visibility = View.VISIBLE
                     binding.layoutReschedule.rescheduleRoot.visibility = View.VISIBLE
                     binding.llCloseType.visibility = View.GONE
+                    binding.llReplacementReason.visibility = View.GONE
                     viewModel.getTimeSlots()
 
                 } else {
@@ -595,6 +636,20 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             OnSpinnerItemSelectedListener { parent, view, position, id ->
                 val item = binding.spinnerCallClose.selectedItem as VisitStatusData
                 viewModel.callCloseTypeId = item.ActionId ?: -1
+                when (item.ActionId) {
+                    1 -> {
+                        binding.llReplacementReason.visibility = View.GONE
+                        viewModel.replacementReasonId = 0
+                    }
+                    2 -> {
+                        binding.llReplacementReason.visibility = View.GONE
+                        viewModel.replacementReasonId = 0
+                    }
+                    3 -> {
+                        modelItem?.TicketID?.let { viewModel.getReplacementReasonsList(it) }
+                        binding.llReplacementReason.visibility = View.VISIBLE
+                    }
+                }
             }
         binding.spinnerCallClose.attachDataSource(callCloseWith)
     }
@@ -647,7 +702,13 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
             openProductInfo()
 
-            viewModel.getSymptomsList(categoryId = list[0]?.categoryid)
+            if (modelItem?.IsNewSymptomsBind == true) {
+                viewModel.getNewSymptomsList(modelItem?.CategoryID, modelItem?.DivisionID)
+                binding.layoutComplainInfo.spinnerSymptoms.visibility = View.VISIBLE
+            } else {
+                viewModel.getSymptomsList(categoryId = list[0]?.categoryid)
+            }
+
         }
 
     }
@@ -681,6 +742,140 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                 }
 
             binding.layoutReschedule.spinnerTimeSlot.attachDataSource(list)
+        }
+
+    }
+
+    private fun bindReplacementReasons(replacementData: MutableList<ReplacementReasonItem?>?) {
+
+        replacementData?.let {
+            val textFormatter1 =
+                SpinnerTextFormatter<ReplacementReasonItem> { obj ->
+                    SpannableString(
+                        obj.replacementReason
+                    )
+                }
+            binding.spinnerReplacementReason.setSpinnerTextFormatter(textFormatter1)
+            binding.spinnerReplacementReason.setSelectedTextFormatter(textFormatter1)
+
+            binding.spinnerReplacementReason.onSpinnerItemSelectedListener =
+                OnSpinnerItemSelectedListener { parent, view, position, id ->
+                    val item = binding.spinnerReplacementReason.selectedItem as ReplacementReasonItem
+                    viewModel.replacementReasonId = item.replacementReasonID
+
+                }
+            binding.spinnerReplacementReason.attachDataSource(replacementData)
+        }
+
+    }
+
+    private fun bindSymptomsSpinner(replacementData: MutableList<ProductSymptomsItem?>?) {
+
+        replacementData?.let {
+            val textFormatter1 =
+                SpinnerTextFormatter<ProductSymptomsItem> { obj ->
+                    SpannableString(
+                        obj.symptoms
+                    )
+                }
+            binding.layoutComplainInfo.spinnerSymptoms.setSpinnerTextFormatter(textFormatter1)
+            binding.layoutComplainInfo.spinnerSymptoms.setSelectedTextFormatter(textFormatter1)
+
+            binding.layoutComplainInfo.spinnerSymptoms.onSpinnerItemSelectedListener =
+                OnSpinnerItemSelectedListener { parent, view, position, id ->
+                    val item = binding.layoutComplainInfo.spinnerSymptoms.selectedItem as ProductSymptomsItem
+                    viewModel.symptomsId = item.symptomID
+                    binding.layoutComplainInfo.llDefectReason.visibility = View.VISIBLE
+                    binding.layoutComplainInfo.llRepairActions.visibility = View.GONE
+                    binding.layoutComplainInfo.llRepairType.visibility = View.GONE
+
+                    viewModel.defectReasonId = 0
+                    viewModel.repairActionId = 0
+                    viewModel.repairTypeId = 0
+
+                    viewModel.getDefectReasonList(modelItem?.DivisionID, modelItem?.CategoryID, viewModel.symptomsId)
+                }
+            binding.layoutComplainInfo.spinnerSymptoms.attachDataSource(replacementData)
+        }
+
+    }
+
+    private fun bindDefectReasonSpinner(defectReasonData: MutableList<DefectReasonItem?>?) {
+
+        defectReasonData?.let {
+            val textFormatter1 =
+                SpinnerTextFormatter<DefectReasonItem> { obj ->
+                    SpannableString(
+                        obj.defectReason
+                    )
+                }
+            binding.layoutComplainInfo.spinnerDefectReasons.setSpinnerTextFormatter(textFormatter1)
+            binding.layoutComplainInfo.spinnerDefectReasons.setSelectedTextFormatter(textFormatter1)
+
+            binding.layoutComplainInfo.spinnerDefectReasons.onSpinnerItemSelectedListener =
+                OnSpinnerItemSelectedListener { parent, view, position, id ->
+                    val item = binding.layoutComplainInfo.spinnerDefectReasons.selectedItem as DefectReasonItem
+                    viewModel.defectReasonId = item.defectReasonID
+
+                    binding.layoutComplainInfo.llRepairActions.visibility = View.VISIBLE
+                    binding.layoutComplainInfo.llRepairType.visibility = View.GONE
+
+                    viewModel.repairActionId = 0
+                    viewModel.repairTypeId = 0
+
+                    viewModel.getRepairActionDetailsList(modelItem?.DivisionID, modelItem?.CategoryID, viewModel.symptomsId, viewModel.defectReasonId)
+                }
+            binding.layoutComplainInfo.spinnerDefectReasons.attachDataSource(defectReasonData)
+        }
+
+    }
+
+    private fun bindRepairActionDetailSpinner(repairActionData: MutableList<RepairActionDetailItem?>?) {
+
+        repairActionData?.let {
+            val textFormatter1 =
+                SpinnerTextFormatter<RepairActionDetailItem> { obj ->
+                    SpannableString(
+                        obj.repairAction
+                    )
+                }
+            binding.layoutComplainInfo.spinnerRepairAction.setSpinnerTextFormatter(textFormatter1)
+            binding.layoutComplainInfo.spinnerRepairAction.setSelectedTextFormatter(textFormatter1)
+
+            binding.layoutComplainInfo.spinnerRepairAction.onSpinnerItemSelectedListener =
+                OnSpinnerItemSelectedListener { parent, view, position, id ->
+                    val item = binding.layoutComplainInfo.spinnerRepairAction.selectedItem as RepairActionDetailItem
+                    viewModel.repairActionId = item.repairActionID
+
+                    binding.layoutComplainInfo.llRepairType.visibility = View.VISIBLE
+                    viewModel.repairTypeId = 0
+
+                    viewModel.getRepairTypeList(modelItem?.TicketID)
+                }
+            binding.layoutComplainInfo.spinnerRepairAction.attachDataSource(repairActionData)
+        }
+
+    }
+
+    private fun bindRepairTypeSpinner(repairTypeData: MutableList<RepairTypeItem?>?) {
+
+        repairTypeData?.let {
+            val textFormatter1 =
+                SpinnerTextFormatter<RepairTypeItem> { obj ->
+                    SpannableString(
+                        obj.repairType
+                    )
+                }
+            binding.layoutComplainInfo.spinnerRepairType.setSpinnerTextFormatter(textFormatter1)
+            binding.layoutComplainInfo.spinnerRepairType.setSelectedTextFormatter(textFormatter1)
+
+            binding.layoutComplainInfo.spinnerRepairType.onSpinnerItemSelectedListener =
+                OnSpinnerItemSelectedListener { parent, view, position, id ->
+                    val item = binding.layoutComplainInfo.spinnerRepairType.selectedItem as RepairTypeItem
+                    viewModel.repairTypeId = item.repairTypeID
+
+                }
+            binding.layoutComplainInfo.spinnerRepairType.attachDataSource(repairTypeData)
         }
 
     }
@@ -1150,6 +1345,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         categorys?.let {
 
             binding.layoutComplainInfo.chipGrp.removeAllViews()
+            binding.layoutComplainInfo.chipGrp.visibility = View.VISIBLE
             for (category in categorys) {
                 val mChip =
                     this.layoutInflater.inflate(R.layout.item_chip_symptoms, null, false) as Chip

@@ -35,11 +35,17 @@ class TicketViewModel(
     var isSlNoAvailable: Boolean? = true
     var actionId: Int = -1
     var callCloseTypeId: Int = -1
+    var replacementReasonId: Int = 0
+    var symptomsId: Int = 0
+    var defectReasonId: Int = 0
+    var repairActionId: Int = 0
+    var repairTypeId: Int = 0
     var divisionId: Int? = null
     var categoryId: Int? = null
     var productId: Int? = null
     var serviceCharge: Int? = 0
     var serviceOTP: String? = "-"
+    var isNewSymptomsBind = false
 
     //F011120381000005
     fun getLoggedInUser() = repository.getLoggedInUser()
@@ -645,10 +651,18 @@ class TicketViewModel(
 
                 if (!isNoRepair) {
 
-                    if (strProductSymptoms.isNullOrEmpty()) {
-                        apiListener?.onValidationError("Select Product Symptoms", "close_otp")
-                        return
+                    if (isNewSymptomsBind) {
+                        if (symptomsId == 0) {
+                            apiListener?.onValidationError("Select Product Symptoms", "close_otp")
+                            return
+                        }
+                    } else {
+                        if (strProductSymptoms.isNullOrEmpty()) {
+                            apiListener?.onValidationError("Select Product Symptoms", "close_otp")
+                            return
+                        }
                     }
+
 
                     if (isSlNoAvailable ?: true) {
 
@@ -817,7 +831,12 @@ class TicketViewModel(
                     isNoRepair,
                     isProductReplaced ?: false,
                     strReplacementImage ?: "-",
-                    callCloseTypeId
+                    callCloseTypeId,
+                    replacementReasonId,
+                    symptomsId,
+                    defectReasonId,
+                    repairActionId,
+                    repairTypeId
                 )
 
                 if (!updateStatusResponse.updateStatus?.isNullOrEmpty()!!) {
@@ -1319,6 +1338,234 @@ class TicketViewModel(
                 apiListener?.onError(e.message!!, GlobalConstant.UPDATE_WIRING_DEVICES_FORM_API, true)
             }
         }
+    }
+
+    fun getNewSymptomsList(categoryId: Int?, divisionId: Int?) {
+//        if (userId == null) {
+//            apiListener?.onValidationError("User id cannot be nil", "ticket_details")
+//            return
+//        }
+        if (categoryId == null) {
+            apiListener?.onValidationError("category cannot be nil", GET_SYMPTOMS_LIST_NEW)
+            return
+        }
+
+        if (divisionId == null) {
+            apiListener?.onValidationError("division cannot be nil", GET_SYMPTOMS_LIST_NEW)
+            return
+        }
+
+
+        apiListener?.onStarted(GET_SYMPTOMS_LIST_NEW)
+
+        Coroutines.main {
+            try {
+
+                val productSymptomsResponse = repository.getNewProductSymptomsList(divisionId, categoryId)
+
+                if (productSymptomsResponse.productSymptomsList.isNotEmpty()) {
+                    productSymptomsResponse.productSymptomsList.let {
+                        apiListener?.onSuccess(it, GET_SYMPTOMS_LIST_NEW)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = productSymptomsResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+                            apiListener?.onError(it, GET_SYMPTOMS_LIST_NEW, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_SYMPTOMS_LIST_NEW, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_SYMPTOMS_LIST_NEW, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_SYMPTOMS_LIST_NEW, true)
+
+
+            }
+        }
+
+    }
+
+    fun getDefectReasonList(divisionId: Int?, categoryId: Int?, symptomId: Int?) {
+        if (categoryId == null) {
+            apiListener?.onValidationError("category cannot be nil", GET_DEFECT_REASON_LIST)
+            return
+        }
+
+        if (divisionId == null) {
+            apiListener?.onValidationError("division cannot be nil", GET_DEFECT_REASON_LIST)
+            return
+        }
+
+        if (symptomId == null) {
+            apiListener?.onValidationError("symptom cannot be nil", GET_DEFECT_REASON_LIST)
+            return
+        }
+
+        apiListener?.onStarted(GET_DEFECT_REASON_LIST)
+
+        Coroutines.main {
+            try {
+
+                val defectReasonsResponse = repository.getDefectReasonsList(divisionId, categoryId, symptomId)
+
+                if (defectReasonsResponse.defectReasonsList.isNotEmpty()) {
+                    defectReasonsResponse.defectReasonsList.let {
+                        apiListener?.onSuccess(it, GET_DEFECT_REASON_LIST)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = defectReasonsResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+
+
+                            apiListener?.onError(it, GET_DEFECT_REASON_LIST, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_DEFECT_REASON_LIST, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_DEFECT_REASON_LIST, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_DEFECT_REASON_LIST, true)
+            }
+        }
+
+    }
+
+    fun getRepairActionDetailsList(divisionId: Int?, categoryId: Int?, symptomId: Int, defectReasonId: Int) {
+        if (categoryId == null) {
+            apiListener?.onValidationError("category cannot be nil", GET_REPAIR_ACTION_DETAILS)
+            return
+        }
+
+        if (divisionId == null) {
+            apiListener?.onValidationError("division cannot be nil", GET_REPAIR_ACTION_DETAILS)
+            return
+        }
+
+        apiListener?.onStarted(GET_REPAIR_ACTION_DETAILS)
+
+        Coroutines.main {
+            try {
+
+                val repairActionDetailResponse = repository.getRepairActionDetailsList(divisionId, categoryId, symptomId, defectReasonId)
+
+                if (repairActionDetailResponse.repairActionDetailList.isNotEmpty()) {
+                    repairActionDetailResponse.repairActionDetailList.let {
+                        apiListener?.onSuccess(it, GET_REPAIR_ACTION_DETAILS)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = repairActionDetailResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+
+
+                            apiListener?.onError(it, GET_REPAIR_ACTION_DETAILS, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_ACTION_DETAILS, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_ACTION_DETAILS, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_ACTION_DETAILS, true)
+
+
+            }
+        }
+
+    }
+
+    fun getRepairTypeList(ticketId: Int?) {
+
+        if (ticketId == null) {
+            apiListener?.onValidationError("ticket cannot be nil", GET_REPAIR_TYPE_LIST)
+            return
+        }
+
+        apiListener?.onStarted(GET_REPAIR_TYPE_LIST)
+
+        Coroutines.main {
+            try {
+
+                val repairTypeResponse = repository.getRepairTypeList(ticketId)
+
+                if (repairTypeResponse.repairTypeList.isNotEmpty()) {
+                    repairTypeResponse.repairTypeList.let {
+                        apiListener?.onSuccess(it, GET_REPAIR_TYPE_LIST)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = repairTypeResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+
+
+                            apiListener?.onError(it, GET_REPAIR_TYPE_LIST, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_TYPE_LIST, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_TYPE_LIST, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_REPAIR_TYPE_LIST, true)
+
+
+            }
+        }
+
+    }
+
+    fun getReplacementReasonsList(ticketId: Int) {
+
+        apiListener?.onStarted(GET_REPLACEMENT_REASONS_LIST)
+
+        Coroutines.main {
+            try {
+
+                val replacementReasonResponse = repository.getReplacementReasonsList(ticketId)
+
+                if (replacementReasonResponse.replacementReasonsList.isNotEmpty()) {
+                    replacementReasonResponse.replacementReasonsList.let {
+                        apiListener?.onSuccess(it, GET_REPLACEMENT_REASONS_LIST)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = replacementReasonResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+
+
+                            apiListener?.onError(it, GET_REPLACEMENT_REASONS_LIST, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_REPLACEMENT_REASONS_LIST, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_REPLACEMENT_REASONS_LIST, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_REPLACEMENT_REASONS_LIST, true)
+
+
+            }
+        }
+
     }
 
 

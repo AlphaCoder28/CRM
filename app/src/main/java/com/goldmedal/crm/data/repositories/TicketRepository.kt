@@ -2,6 +2,10 @@ package com.goldmedal.crm.data.repositories
 
 import com.goldmedal.crm.data.db.AppDatabase
 import com.goldmedal.crm.data.db.entities.TicketHistoryData
+import com.goldmedal.crm.data.model.DefectReasonsResponse
+import com.goldmedal.crm.data.model.ProductSymptomsNewResponse
+import com.goldmedal.crm.data.model.RepairActionsDetailResponse
+import com.goldmedal.crm.data.model.RepairTypeResponse
 import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
 import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.MyApi
@@ -172,7 +176,12 @@ class TicketRepository(
         isNorepair: Boolean,
         isProductReplaced: Boolean,
         replacementQRCode: String,
-        callClosedTypeId: Int
+        callClosedTypeId: Int,
+        replacementReasonID: Int,
+        symptomID: Int,
+        defectReasonID: Int,
+        repairActionTypeID: Int,
+        repairTypeID: Int
     ): UpdateVisitStatusResponse {
         return apiRequest {
             api.updateVisitStatus(
@@ -207,7 +216,12 @@ class TicketRepository(
                 isNoRepair = isNorepair,
                 isProductReplaced = isProductReplaced,
                 replacementQRCode = replacementQRCode,
-                callClosedTypeID = callClosedTypeId
+                callClosedTypeID = callClosedTypeId,
+                replacementReasonID = replacementReasonID,
+                symptomID = symptomID,
+                defectReasonID = defectReasonID,
+                repairActionTypeID = repairActionTypeID,
+                repairTypeID = repairTypeID
             )
         }
     }
@@ -443,6 +457,26 @@ class TicketRepository(
                 l4Current
             )
         }
+    }
+
+    suspend fun getNewProductSymptomsList(divisionId: Int, categoryId: Int): ProductSymptomsNewResponse {
+        return apiRequest { api.getNewProductSymptomsList(divisionId, categoryId) }
+    }
+
+    suspend fun getDefectReasonsList(divisionId: Int, categoryId: Int, symptomId: Int): DefectReasonsResponse {
+        return apiRequest { api.getDefectReasonsList(divisionId, categoryId, symptomId) }
+    }
+
+    suspend fun getRepairActionDetailsList(divisionId: Int, categoryId: Int, symptomId: Int, defectReasonId: Int): RepairActionsDetailResponse {
+        return apiRequest { api.getRepairActionDetailsList(divisionId, categoryId, symptomId, defectReasonId) }
+    }
+
+    suspend fun getRepairTypeList(ticketId: Int): RepairTypeResponse {
+        return apiRequest { api.getRepairTypeList(ticketId) }
+    }
+
+    suspend fun getReplacementReasonsList(ticketId: Int): ReplacementReasonsResponse {
+        return apiRequest { api.getReplacementReasonList(ticketId) }
     }
 
 }

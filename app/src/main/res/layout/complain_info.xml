@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:visibility="gone"
     android:background="@color/appBg"
-    tools:visibility="gone"
+    tools:visibility="visible"
     android:orientation="vertical">
     <!--added by akshay-->
 
@@ -188,6 +188,7 @@
             android:id="@+id/chipGrp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_150"
+            android:visibility="gone"
             android:layout_below="@id/text_view_symptoms"
             android:layout_marginStart="@dimen/dp_6"
             android:layout_marginTop="@dimen/dp_4"
@@ -195,6 +196,86 @@
             app:singleSelection="false">
 
         </com.google.android.material.chip.ChipGroup>
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinner_symptoms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@id/text_view_symptoms"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/llDefectReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spinner_symptoms"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="Defect Reasons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinner_defect_reasons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRepairActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llDefectReason"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="Repair Action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinner_repair_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRepairType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llRepairActions"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                android:text="Repair Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinner_repair_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

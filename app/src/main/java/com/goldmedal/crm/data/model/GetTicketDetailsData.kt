@@ -59,7 +59,8 @@ data class GetTicketDetailsData(
     val InvoicePDF: String?,
     val IsDealerCall: Boolean,
     val Type: Int?,
-    val IsNoRepair:Boolean
+    val IsNoRepair:Boolean,
+    val IsNewSymptomsBind: Boolean
 
 ) : Parcelable
 
