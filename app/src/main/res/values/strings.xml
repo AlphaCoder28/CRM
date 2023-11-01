@@ -112,7 +112,7 @@
 
     <string name="str_employee_attendance">Employee Attendance</string>
     <string name="str_emailid">Email Id</string>
-    <string name="str_phone">Phone no</string>
+    <string name="str_phone">Phone No.</string>
     <string name="str_captcha">Enter captcha</string>
     <string name="str_req_no">Req No</string>
     <string name="str_enter_otp">Enter OTP</string>
