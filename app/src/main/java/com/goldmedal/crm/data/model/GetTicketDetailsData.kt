@@ -60,7 +60,12 @@ data class GetTicketDetailsData(
     val IsDealerCall: Boolean,
     val Type: Int?,
     val IsNoRepair:Boolean,
-    val IsNewSymptomsBind: Boolean
+    val IsNewSymptomsBind: Boolean,
+    val ReplacementReason: String,
+    val DefectReason: String,
+    val RepairActionType: String,
+    val Symptoms: String,
+    val RepairType: String
 
 ) : Parcelable
 

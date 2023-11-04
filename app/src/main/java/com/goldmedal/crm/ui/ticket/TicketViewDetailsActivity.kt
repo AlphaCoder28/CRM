@@ -60,60 +60,65 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
     private fun bindUI(modelItem: GetTicketDetailsData?) = Coroutines.main {
         modelItem?.let {
 
-            txt_tktNo.text = modelItem?.TicketNo
-            txt_div_name.text = modelItem?.DivisionName
-            txt_priority.text = modelItem?.TicketPriority
-            txt_date.text = modelItem?.TicketDate
-            txt_cust_name.text = modelItem?.CustName
-            txt_reschedule_date.text = modelItem?.ReScheduleDate+ "  " + modelItem?.ReScheduledByName
-            txt_reschedule_remark.text = modelItem?.ReScheduleRemark
-            txt_contact_no.text = modelItem?.CustContactNo
-            txt_cust_address.text = modelItem?.CustAddress + ", " + modelItem?.City + ", " + modelItem?.Distrctnm + ", " + modelItem?.statenm + ", " + modelItem?.Pincode
-            txt_cust_emailId.text = modelItem?.EmailID
-            txt_item_name.text = modelItem?.ProductName
-            txt_manufacture_date.text = modelItem?.ManufactureDate
-            txt_time_slot.text = modelItem?.TimeSlot
-            txt_prod_warranty.text = modelItem?.WarrantyUptoDate
-            txt_item_qr_code.text = modelItem?.ItemQRCode
-            txt_item_ean_no.text = modelItem?.ItemEANNo
+            txt_tktNo.text = modelItem.TicketNo
+            txt_div_name.text = modelItem.DivisionName
+            txt_priority.text = modelItem.TicketPriority
+            txt_date.text = modelItem.TicketDate
+            txt_cust_name.text = modelItem.CustName
+            txt_reschedule_date.text = modelItem.ReScheduleDate + "  " + modelItem.ReScheduledByName
+            txt_reschedule_remark.text = modelItem.ReScheduleRemark
+            txt_contact_no.text = modelItem.CustContactNo
+            txt_cust_address.text = modelItem.CustAddress + ", " + modelItem.City + ", " + modelItem.Distrctnm + ", " + modelItem.statenm + ", " + modelItem.Pincode
+            txt_cust_emailId.text = modelItem.EmailID
+            txt_item_name.text = modelItem.ProductName
+            txt_manufacture_date.text = modelItem.ManufactureDate
+            txt_time_slot.text = modelItem.TimeSlot
+            txt_prod_warranty.text = modelItem.WarrantyUptoDate
+            txt_item_qr_code.text = modelItem.ItemQRCode
+            txt_item_ean_no.text = modelItem.ItemEANNo
             txt_item_product_code.text = ""
-            txt_item_purchase_date.text = modelItem?.PurchaseDt
-            txt_item_issues.text = modelItem?.ProductIssues
-            txt_item_descr.text = modelItem?.ProductIssueDesc
-            txt_party_name.text = modelItem?.PartyName + "  " + modelItem?.PartyTypeName
+            txt_item_purchase_date.text = modelItem.PurchaseDt
+            txt_item_issues.text = modelItem.ProductIssues
+            txt_item_descr.text = modelItem.ProductIssueDesc
+            txt_party_name.text = modelItem.PartyName + "  " + modelItem.PartyTypeName
           //  txt_remarks.text = modelItem?.AssignRemark
-            txt_party_address.text = modelItem?.PartyAddress
+            txt_party_address.text = modelItem.PartyAddress
+            txtSymptoms.text = modelItem.Symptoms.ifEmpty { "-" }
+            txtDefectReason.text = modelItem.DefectReason.ifEmpty { "-" }
+            txtRepairActionType.text = modelItem.RepairActionType.ifEmpty { "-" }
+            txtRepairType.text = modelItem.RepairType.ifEmpty { "-" }
+            txtReplacementReason.text = modelItem.ReplacementReason.ifEmpty { "-" }
 
-            if(modelItem?.IsCheckedIn == 1){
+            if(modelItem.IsCheckedIn == 1){
                 txt_checkedIn.text = "YES"
             }else{
                 txt_checkedIn.text = "NO"
             }
 
-            if(modelItem?.IsDealerCall){
+            if(modelItem.IsDealerCall){
                 txt_dealer_call.text = "YES"
             }else{
                 txt_dealer_call.text = "NO"
             }
 
-            if(!modelItem?.IsNoRepair){
+            if(!modelItem.IsNoRepair){
                 txt_dealer_isNoRepair.text = "YES"
             }else{
                 txt_dealer_isNoRepair.text = "NO"
             }
 
-            if(!modelItem?.IsInvoiceGenrated){
+            if(!modelItem.IsInvoiceGenrated){
                 txt_dealer_isNoRepair.text = "-"
             }
 
-            if(modelItem?.TicketStatus?.toLowerCase().equals("closed")){
+            if(modelItem.TicketStatus?.toLowerCase().equals("closed")){
                 llImgMain.visibility = View.VISIBLE
             }else{
                 llImgMain.visibility = View.GONE
             }
 
 
-            val tktStatus= modelItem?.TicketStatus
+            val tktStatus= modelItem.TicketStatus
 
             when (tktStatus?.toLowerCase()) {
 
@@ -169,20 +174,20 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
 //            txt_warranty_uptoDate.text = modelItem?.WarrantyUptoDate
 //            txt_due_by_date.text = modelItem?.DueByDate
 
-            if(modelItem?.InWarranty == true){
+            if(modelItem.InWarranty == true){
                 txt_in_warranty.text = "YES"
             }else{
                 txt_in_warranty.text = "NO"
             }
 
-            txt_engg_instruction.text = modelItem?.EngineerInstructions
+            txt_engg_instruction.text = modelItem.EngineerInstructions
 
-            if(modelItem?.IsSCAddressverified == true){
+            if(modelItem.IsSCAddressverified == true){
                 txt_sc_address_verified.text = "YES"
             }else{
                 txt_sc_address_verified.text = "NO"
             }
-            txt_appointment_date.text = modelItem?.AppointmentDate
+            txt_appointment_date.text = modelItem.AppointmentDate
         }
 
         Glide.with(this)
@@ -222,7 +227,7 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
 
         val data = _object as List<GetTicketDetailsData?>
 
-        if(data.count()>0){
+        if(data.isNotEmpty()){
             bindUI(data[0])
             clickListener(data[0])
         }

@@ -185,7 +185,8 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
                 "","","","","","","","","","",0,
             "","","","","",false,"",0,0,0,"",
             false,"","","","","","","","","",
-                "",0,false,"",false,0,false, false))
+                "",0,false,"",false,0,false, false, "", "", "",
+            "", ""))
         }
 
         layout_availableParts?.setOnClickListener {

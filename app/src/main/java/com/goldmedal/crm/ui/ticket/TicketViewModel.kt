@@ -656,11 +656,34 @@ class TicketViewModel(
                             apiListener?.onValidationError("Select Product Symptoms", "close_otp")
                             return
                         }
+
+                        if (defectReasonId == 0) {
+                            apiListener?.onValidationError("Select Defect Reason", "close_otp")
+                            return
+                        }
+
+                        if (repairActionId == 0) {
+                            apiListener?.onValidationError("Select Repair Action", "close_otp")
+                            return
+                        }
+
+                        if (repairTypeId == 0) {
+                            apiListener?.onValidationError("Select Repair Type", "close_otp")
+                            return
+                        }
                     } else {
                         if (strProductSymptoms.isNullOrEmpty()) {
                             apiListener?.onValidationError("Select Product Symptoms", "close_otp")
                             return
                         }
+                    }
+
+                    if (callCloseTypeId == 3 && replacementReasonId == 0) {
+                        apiListener?.onValidationError(
+                            "Select Replacement Reason",
+                            "update_ticket_status"
+                        )
+                        return
                     }
 
 
@@ -784,6 +807,28 @@ class TicketViewModel(
             }
         }
 
+        if (isNewSymptomsBind) {
+            if (symptomsId == 0) {
+                apiListener?.onValidationError("Select Product Symptoms", "close_otp")
+                return
+            }
+
+            if (defectReasonId == 0) {
+                apiListener?.onValidationError("Select Defect Reason", "close_otp")
+                return
+            }
+
+            if (repairActionId == 0) {
+                apiListener?.onValidationError("Select Repair Action", "close_otp")
+                return
+            }
+
+            if (repairTypeId == 0) {
+                apiListener?.onValidationError("Select Repair Type", "close_otp")
+                return
+            }
+        }
+
         if (strProductSymptoms.isNullOrEmpty()) {
             strProductSymptoms = "0"
         }
@@ -791,6 +836,11 @@ class TicketViewModel(
 
         if(strDateOfPurchase?.contains("/") == true) {
             strDateOfPurchase = strDateOfPurchase?.let { formatDateString(it, "dd/MM/YYYY", "MM-dd-YYYY") }
+        }
+
+        if (callCloseTypeId == 3 && replacementReasonId == 0) {
+            apiListener?.onValidationError("Select Replacement Reason", "update_ticket_status")
+            return
         }
 
 

@@ -266,31 +266,31 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
         if (callFrom == GET_REPLACEMENT_REASONS_LIST) {
             val replacementData = _object as MutableList<ReplacementReasonItem?>?
-            replacementData?.add(0, ReplacementReasonItem("Select", -1))
+            replacementData?.add(0, ReplacementReasonItem("Select", 0))
             bindReplacementReasons(replacementData)
         }
 
         if (callFrom == GET_SYMPTOMS_LIST_NEW) {
             val symptomsData = _object as MutableList<ProductSymptomsItem?>?
-            symptomsData?.add(0, ProductSymptomsItem("Select", -1))
+            symptomsData?.add(0, ProductSymptomsItem("Select", 0))
             bindSymptomsSpinner(symptomsData)
         }
 
         if (callFrom == GET_DEFECT_REASON_LIST) {
             val defectReasonData = _object as MutableList<DefectReasonItem?>?
-            defectReasonData?.add(0, DefectReasonItem("Select", -1))
+            defectReasonData?.add(0, DefectReasonItem("Select", 0))
             bindDefectReasonSpinner(defectReasonData)
         }
 
         if (callFrom == GET_REPAIR_ACTION_DETAILS) {
             val repairActionData = _object as MutableList<RepairActionDetailItem?>?
-            repairActionData?.add(0, RepairActionDetailItem("Select", -1))
+            repairActionData?.add(0, RepairActionDetailItem("Select", 0))
             bindRepairActionDetailSpinner(repairActionData)
         }
 
         if (callFrom == GET_REPAIR_TYPE_LIST) {
             val repairTypeData = _object as MutableList<RepairTypeItem?>?
-            repairTypeData?.add(0, RepairTypeItem("Select", -1))
+            repairTypeData?.add(0, RepairTypeItem("Select", 0))
             bindRepairTypeSpinner(repairTypeData)
         }
     }

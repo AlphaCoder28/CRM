@@ -428,6 +428,151 @@
                 android:layout_width="@dimen/dp_120"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_2"
+                android:text="Symptoms"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtSymptoms"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Defect Reasons"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtDefectReason"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Repair Action Type"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtRepairActionType"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Repair Type"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtRepairType"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="Replacement Reason"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtReplacementReason"
+                style="@style/header_txt_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:text="@string/dash"
+                android:textAlignment="textStart">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_2"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/large_txt_dark"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
                 android:text="Is Repair Done"
                 android:textAlignment="textStart">
 
