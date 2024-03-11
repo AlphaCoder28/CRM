@@ -4,9 +4,9 @@ package com.goldmedal.crm.data.network
 object GlobalConstant {
 
     const val TYPE_NO_DATA = 10000
-    const val BASE_URL = "https://goldapi.goldmedalindia.in/api/crm/v1.0/"
+    const val BASE_URL = "https://goldapi.goldmedalindia.in/api/"
     const val TEST_BASE_URL = "https://test2.goldmedalindia.in/api/"
-    const val UAT_BASE_URL = "http://192.168.100.193:81/api/crm/v1.0/"
+    const val UAT_BASE_URL = "http://192.168.100.123/CRMAPI/api/"
     const val SUCCESS_CODE = "200"
     const val NO_DATA_CODE = "2002"
     const val DEFAULT_DATE = "01-01-1900"

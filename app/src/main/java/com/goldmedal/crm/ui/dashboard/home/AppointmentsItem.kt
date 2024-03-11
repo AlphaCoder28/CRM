@@ -2,6 +2,7 @@ package com.goldmedal.crm.ui.dashboard.home
 
 import android.content.Context
 import android.location.Location
+import android.os.Handler
 import android.view.View
 import com.goldmedal.crm.R
 import com.goldmedal.crm.data.model.GetAppointmentsData
@@ -12,6 +13,10 @@ import com.goldmedal.crm.util.interfaces.IStatusListener
 import com.goldmedal.crm.util.toast
 import com.google.android.gms.maps.model.LatLng
 import com.xwray.groupie.viewbinding.BindableItem
+import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.schedule
 
 class AppointmentsItem(
     private val ticketAppointment: GetAppointmentsData?,
@@ -74,11 +79,21 @@ class AppointmentsItem(
             }
 
             rootLayout.setOnClickListener {
-                if (ticketAppointment?.isTicketAccepted == true) {
-                    callBackListener?.observeCheckInStatus(ticketAppointment.TicketID)
-                }else{
-                    context.toast("Please accept ticket no ${ticketAppointment?.Tktno} before visit")
+                try {
+                    it.isClickable = false
+                    Executors.newSingleThreadScheduledExecutor().schedule({
+                        it.isClickable = true
+                    }, 2, TimeUnit.SECONDS)
+
+                    if (ticketAppointment?.isTicketAccepted == true) {
+                        callBackListener?.observeCheckInStatus(ticketAppointment.TicketID)
+                    }else{
+                        context.toast("Please accept ticket no ${ticketAppointment?.Tktno} before visit")
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
+
             }
 
 
