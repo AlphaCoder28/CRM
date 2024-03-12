@@ -30,7 +30,7 @@ interface MyApi {
 //}
 
     @FormUrlEncoded
-    @POST("Profile/GetTicketCountForServiceCenterManagerDashboard")
+    @POST("crm/v1.0/Profile/GetTicketCountForServiceCenterManagerDashboard")
     suspend fun getManagerTicketCount(
         @Field("UserID") intUserID: Int,
         @Field("ServiceCenterID") intServiceCenterID: Int
@@ -38,7 +38,7 @@ interface MyApi {
 
 
     @FormUrlEncoded
-    @POST("Profile/GetTicketCountMonthWiseForDashBoardServiceManagerDashboard")
+    @POST("crm/v1.0/Profile/GetTicketCountMonthWiseForDashBoardServiceManagerDashboard")
     suspend fun getManagerDashboard(
         @Field("UserID") intUserID: Int,
         @Field("ServiceCenterID") intServiceCenterID: Int
@@ -59,7 +59,7 @@ interface MyApi {
 
     
     @FormUrlEncoded
-    @POST("Login/authenticateLoginID")
+    @POST("crm/v1.0/Login/authenticateLoginID")
     suspend fun authenticateLogin(
             @Field("UserName") strCin: String,
             @Field("deviceid") strDeviceId: String,
@@ -72,7 +72,7 @@ interface MyApi {
 
       // - - - - - GET OTP API - - - - - -
      @FormUrlEncoded
-    @POST("Login/authenticateLoginID")
+    @POST("crm/v1.0/Login/authenticateLoginID")
     suspend fun getOtp(
             @Field("UserName") strCin: String,
             @Field("deviceid") strDeviceId: String,
@@ -85,7 +85,7 @@ interface MyApi {
 
     // - - - - - Authenticate password API - - - - - -
     @FormUrlEncoded
-    @POST("Login/authenticatePassword")
+    @POST("crm/v1.0/Login/authenticatePassword")
     suspend fun authenticatePassword(
             @Field("LogNo") logNo: Int,
             @Field("SessionId") strSessionId: String,
@@ -97,7 +97,7 @@ interface MyApi {
 
 // - - - - - verify otp API - - - - - -
     @FormUrlEncoded
-    @POST("Login/verifyOtp")
+    @POST("crm/v1.0/Login/verifyOtp")
     suspend fun verifyOtp(
             @Field("MobileNo") strMobileNo: String,
             @Field("Otp") strOtp: String,
@@ -111,14 +111,14 @@ interface MyApi {
 
     // - - - - -  API to get profile details  - - - - - - - -
     @FormUrlEncoded
-    @POST("Profile/getProfileDetails")
+    @POST("crm/v1.0/Profile/getProfileDetails")
     suspend fun profileDetail(
         @Field("Userid") userId: Int
     ): Response<ProfileDetailResponse>
 
     // - - - - -  API to get tickets count for service engineer  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getTicketCountForServiceEngineer")
+    @POST("crm/v2.0/Ticket/getTicketCountForServiceEngineer")
     suspend fun getTicketsCount(
             @Field("Userid") userId: Int,
             @Field("Fromdate") fromDate: String,
@@ -128,7 +128,7 @@ interface MyApi {
 
     // - - - - -  API to get today's appointment for service engineer  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getTodaysAppointmentofServiceEngineer")
+    @POST("crm/v2.0/Ticket/getTodaysAppointmentofServiceEngineer")
     suspend fun getAppointments(
             @Field("Userid") userId: Int,
             @Field("Fromdate") fromDate: String,
@@ -138,7 +138,7 @@ interface MyApi {
 
     // - - - - -  API to get ticket details for service engineer  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getTicketDetailsForServiceEngineer")
+    @POST("crm/v2.0/Ticket/getTicketDetailsForServiceEngineer")
     suspend fun getTicketDetailsForEngineer(
             @Field("Userid") userId: Int,
             @Field("Fromdate") fromDate: String,
@@ -150,7 +150,7 @@ interface MyApi {
 
     // - - - - -  API to get ticket history  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getMonthlyTotalClosedTickets")
+    @POST("crm/v1.0/Ticket/getMonthlyTotalClosedTickets")
     suspend fun getTicketHistory(
         @Field("Userid") userId: Int
     ): Response<TicketHistoryResponse>
@@ -160,7 +160,7 @@ interface MyApi {
 
     // - - - - -  API to get customer contacts  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getCustomerContacts")
+    @POST("crm/v1.0/Ticket/getCustomerContacts")
     suspend fun getCustomerContacts(
             @Field("Userid") userId: Int,
             @Field("SearchBy") searchBy: String
@@ -169,7 +169,7 @@ interface MyApi {
 
     // - - - - -  API to get customer products  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getCustomerProducts")
+    @POST("crm/v1.0/Ticket/getCustomerProducts")
     suspend fun getCustomerProducts(
         @Field("CustId") customerId: Int,
         @Field("SearchBy") searchBy: String
@@ -179,7 +179,7 @@ interface MyApi {
 
     // - - - - -  API to get tickets by products  - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getTicketsByProducts")
+    @POST("crm/v1.0/Ticket/getTicketsByProducts")
     suspend fun getTicketsByProducts(
         @Field("CustId") customerId: Int,
         @Field("ProductId") productId: Int
@@ -191,7 +191,7 @@ interface MyApi {
 
     // - - - - -  API to get dashboard details  - - - - - - - -
     @FormUrlEncoded
-    @POST("Profile/getTicketsCountsForDashboard")
+    @POST("crm/v2.0/Profile/getTicketsCountsForDashboard")
     suspend fun dashboardDetail(
         @Field("Userid") userId: Int
     ): Response<DashboardResponse>
@@ -199,7 +199,7 @@ interface MyApi {
 
     // - - - - - - API to get all assigned tickets list - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getAllAssignedTicket")
+    @POST("crm/v2.0/Ticket/getAllAssignedTicket")
     suspend fun getAllAssignedTickets(
         @Field("Userid") userId: Int
     ): Response<GetAssignedTicketResponse>
@@ -207,7 +207,7 @@ interface MyApi {
 
     // - - - - - -- - API to accept/reject ticket  - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/acceptTicket")
+    @POST("crm/v1.0/Ticket/acceptTicket")
     suspend fun acceptTicket(
         @Field("Userid") userid: Int,
         @Field("TicketID") ticketID: Int,
@@ -218,7 +218,7 @@ interface MyApi {
 
 
     @FormUrlEncoded
-    @POST("Ticket/rejectTicket")
+    @POST("crm/v1.0/Ticket/rejectTicket")
     suspend fun rejectTicket(
         @Field("Userid") userid: Int,
         @Field("TicketID") ticketID: Int,
@@ -239,7 +239,7 @@ interface MyApi {
 
     // - - - - - -- - API to state & district from pincode  (Ticket Unacceptance Dialog)- - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getPincodewiseStateAndDistrict")
+    @POST("crm/v1.0/Ticket/getPincodewiseStateAndDistrict")
     suspend fun getPincodeWiseStateDistrict(
         @Field("Userid") userid: Int,
         @Field("Pincode") strPincode: String
@@ -248,7 +248,7 @@ interface MyApi {
 
     // - - - - - - API to get accepted ticket list  - -- - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getAllTickets")
+    @POST("crm/v2.0/Ticket/getAllTickets")
     suspend fun getAcceptedTicketList(
         @Field("Userid") userId: Int,
         @Field("Fromdate") fromDate: String,
@@ -259,7 +259,7 @@ interface MyApi {
 
     //  - - -- - - - API to get accepted ticket detail - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getTicketDetails")
+    @POST("crm/v1.0/Ticket/getTicketDetails")
     suspend fun getTicketDetails(
         @Field("Userid") userId: Int,
         @Field("TicketID") ticketID: Int
@@ -268,7 +268,7 @@ interface MyApi {
 
     //  - - -- - - - API to check-in - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/checkIn")
+    @POST("crm/v1.0/Ticket/checkIn")
     suspend fun checkIn(
         @Field("Userid") userId: Int,
         @Field("TicketID") ticketID: Int,
@@ -282,7 +282,7 @@ interface MyApi {
 
     // - - - - - - API to scan QR code  - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/GetProductDetailsByScanQRCode")
+    @POST("crm/v1.0/Ticket/GetProductDetailsByScanQRCode")
     suspend fun scanQrCode(
         @Field("Slno") slNo: String,
         @Field("Qrcode") strQrCode: String,
@@ -292,7 +292,7 @@ interface MyApi {
 
     // - - - - - - API to search QR code  - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getProductDetailsFromQRCode")
+    @POST("crm/v1.0/Ticket/getProductDetailsFromQRCode")
     suspend fun searchQrCode(
             @Field("Qrcode") strQrCode: String,
             @Field("CustomerID") custId: Int,
@@ -325,7 +325,7 @@ interface MyApi {
 
     // - - - - - - API to get product symptoms list  - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getSymptomsList")
+    @POST("crm/v1.0/Ticket/getSymptomsList")
     suspend fun getProductSymptomsList(
         @Field("CategoryID") categoryId: Int
     ): Response<ProductSymptomsResponse>
@@ -334,7 +334,7 @@ interface MyApi {
 
     // - - - - - - API to get Time-Slot list  - - - - - -
 
-    @POST("Ticket/getTimeSlot")
+    @POST("crm/v1.0/Ticket/getTimeSlot")
     suspend fun getTimeSlot(
     ): Response<TimeSlotResponse>
 
@@ -352,7 +352,7 @@ interface MyApi {
 
     // - - - - - - API to get closed otp request  - - - - - -
     @FormUrlEncoded
-    @POST("Login/sendClosedOtpCopy")
+    @POST("crm/v2.0/Login/sendClosedOtpCopy")
     suspend fun sendClosedOtp(
         @Field("MobileNo") strMobileNo: String,
         @Field("TicketID") intTicketId: Int,
@@ -367,7 +367,7 @@ interface MyApi {
     //  -- - - - -- API to update visit status  - - - - - - - -
     @FormUrlEncoded
    // @POST("Ticket/updateTicketStatus")
-    @POST("Ticket/updateTicketStatus")
+    @POST("crm/v1.0/Ticket/updateTicketStatus")
     suspend fun updateVisitStatus(
         @Field("UserID") userID: Int,
         @Field("TicketID") ticketID: Int,
@@ -412,7 +412,7 @@ interface MyApi {
     // - - - - - -  API for Ticket Activity - - - - - - - - - - -
 
     @FormUrlEncoded
-    @POST("Ticket/getTicketActivityDetails")
+    @POST("crm/v1.0/Ticket/getTicketActivityDetails")
     suspend fun getTicketActivity(
         @Field("TicketID") userId: Int
 
@@ -421,7 +421,7 @@ interface MyApi {
 
     // - - - - - -  API for update profile photo - - - - - - - - - - -
     @FormUrlEncoded
-    @POST("Login/profilePictureUpdate")
+    @POST("crm/v1.0/Login/profilePictureUpdate")
     suspend fun updateProfilePhoto(
         @Field("ProfilePhotoLink") profilePhotoLink: String,
         @Field("UserId") userId: Int
@@ -430,7 +430,7 @@ interface MyApi {
 
     // - - - - - -  API for Notification Feeds - - - - - - - - - - -
     @FormUrlEncoded
-    @POST("events/getNotification")
+    @POST("crm/v1.0/events/getNotification")
     suspend fun fetchNotifications(
             @Field("UserID") userId: Int,
             @Field("ClientID") strClientid: String,
@@ -440,7 +440,7 @@ interface MyApi {
 
     //  - - -- - - - API to get used item and part detail - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/itemAndPartWiseData")
+    @POST("crm/v1.0/Ticket/itemAndPartWiseData")
     suspend fun getItemAndPartDetails(
             @Field("ItemSlno") itemSlno: Int,
             @Field("SearchBy") searchBy: String
@@ -448,7 +448,7 @@ interface MyApi {
 
     //  - - -- - - - API to get used part and item detail - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/PartAndItemWiseData")
+    @POST("crm/v1.0/Ticket/PartAndItemWiseData")
     suspend fun getPartAndItemDetails(
             @Field("PartSlno") partSlno: Int,
             @Field("SearchBy") searchBy: String
@@ -456,7 +456,7 @@ interface MyApi {
 
     //  - - -- - - - API to get invoice item detail - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getItemForInvoice")
+    @POST("crm/v1.0/Ticket/getItemForInvoice")
     suspend fun getInvoiceItemDetail(
         @Field("SearchBy") searchBy: String,
         @Field("UserID") userID: Int,
@@ -469,7 +469,7 @@ interface MyApi {
 
     //  - - -- - - - API to generate invoice for items selected - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/addUpdateItemInvoice")
+    @POST("crm/v1.0/Ticket/addUpdateItemInvoice")
     suspend fun generateInvoiceForItems(
         @Field("Slno") slno: Int,
         @Field("CustomerID") custId: Int,
@@ -493,7 +493,7 @@ interface MyApi {
 
     //  - - -- - - - API to get invoice history list - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getInvoiceList")
+    @POST("crm/v1.0/Ticket/getInvoiceList")
     suspend fun getInvoiceList(
         @Field("Userid") userID: Int,
         @Field("SearchBy") searchBy: String
@@ -502,7 +502,7 @@ interface MyApi {
 
     //  - - -- - - - API to get edit invoice list - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getEditInvoiceData")
+    @POST("crm/v1.0/Ticket/getEditInvoiceData")
     suspend fun getEditInvoiceData(
         @Field("InvoiceID") invoiceID: Int
     ): Response<EditInvoiceResponse>
@@ -510,7 +510,7 @@ interface MyApi {
 
     //  - - -- - - - API to update invoice - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/UpdateInvoiceData")
+    @POST("crm/v1.0/Ticket/UpdateInvoiceData")
     suspend fun updateInvoiceData(
         @Field("Slno") slNo: Int,
         @Field("PaymentMethod") paymentMethod: String,
@@ -521,7 +521,7 @@ interface MyApi {
 
     //  - - -- - - - API to get parts requirement (pass only ticketID for details else 0 , pass only custid for ticket list else 0, pass only user id for cust list else 0) - - - - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getCustomerTicketData")
+    @POST("crm/v1.0/Ticket/getCustomerTicketData")
     suspend fun getPartRequirementData(
         @Field("Userid") userID: Int,
         @Field("CustomerID") custId: Int,
@@ -531,7 +531,7 @@ interface MyApi {
 
 // - - - - parts list - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getItemStock")
+    @POST("crm/v1.0/Ticket/getItemStock")
     suspend fun getItemStockParts(
         @Field("Userid") userID: Int,
         @Field("RequestNO") requestNo: String,
@@ -541,14 +541,14 @@ interface MyApi {
 
     // - - - - parts list by user - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getRequestedItemByUser")
+    @POST("crm/v1.0/Ticket/getRequestedItemByUser")
     suspend fun getPartsRequirementByUser(
         @Field("RequestNO") requestNo: String
     ): Response<SelectPartListResponse>
 
     // - - - - submit parts requirement list - - - - -
     @FormUrlEncoded
-    @POST("Ticket/requestForPart")
+    @POST("crm/v1.0/Ticket/requestForPart")
     suspend fun submitPartsRequest(
         @Field("Userid") userID: Int,
         @Field("TicketID") tktId: Int,
@@ -559,7 +559,7 @@ interface MyApi {
 
     // - - - - API to get parts requirement list - - - - -
     @FormUrlEncoded
-    @POST("Ticket/getRequestPartData")
+    @POST("crm/v1.0/Ticket/getRequestPartData")
     suspend fun getRequestPartData(
         @Field("Userid") userID: Int
     ): Response<GetRequestPartListResponse>
@@ -576,14 +576,14 @@ interface MyApi {
 
     // - - - - API to get parts requirement list - - - - -
     @FormUrlEncoded
-    @POST("Ticket/get-wiring-division-form")
+    @POST("crm/v1.0/Ticket/get-wiring-division-form")
     suspend fun getWiringDeviceFormData(
         @Field("TicketID") ticketId: Int
     ): Response<GetWiringDeviceFormData>
 
     // - - - - API to get parts requirement list - - - - -
     @FormUrlEncoded
-    @POST("Ticket/wiring-division-insert-update")
+    @POST("crm/v1.0/Ticket/wiring-division-insert-update")
     suspend fun updateWiringDeviceFormData(
         @Field("TicketID") ticketId: Int,
         @Field("UserId") userId: Int,
@@ -612,14 +612,14 @@ interface MyApi {
     ): Response<WiringDeviceUpdateData>
 
     @FormUrlEncoded
-    @POST("Ticket/get-symptoms-list")
+    @POST("crm/v1.0/Ticket/get-symptoms-list")
     suspend fun getNewProductSymptomsList(
         @Field("DivisionID") divisionID: Int,
         @Field("CategoryID") categoryId: Int
     ): Response<ProductSymptomsNewResponse>
 
     @FormUrlEncoded
-    @POST("Ticket/get-defect-reason-list")
+    @POST("crm/v1.0/Ticket/get-defect-reason-list")
     suspend fun getDefectReasonsList(
         @Field("DivisionID") divisionID: Int,
         @Field("CategoryID") categoryId: Int,
@@ -627,7 +627,7 @@ interface MyApi {
     ): Response<DefectReasonsResponse>
 
     @FormUrlEncoded
-    @POST("Ticket/get-repair-action-details")
+    @POST("crm/v1.0/Ticket/get-repair-action-details")
     suspend fun getRepairActionDetailsList(
         @Field("DivisionID") divisionID: Int,
         @Field("CategoryID") categoryId: Int,
@@ -636,13 +636,13 @@ interface MyApi {
     ): Response<RepairActionsDetailResponse>
 
     @FormUrlEncoded
-    @POST("Ticket/get-repair-type-list")
+    @POST("crm/v1.0/Ticket/get-repair-type-list")
     suspend fun getRepairTypeList(
         @Field("TicketID") ticketID: Int
     ): Response<RepairTypeResponse>
 
     @FormUrlEncoded
-    @POST("Ticket/get-replacement-reason-list")
+    @POST("crm/v1.0/Ticket/get-replacement-reason-list")
     suspend fun getReplacementReasonList(
         @Field("TicketID") ticketID: Int
     ): Response<ReplacementReasonsResponse>
