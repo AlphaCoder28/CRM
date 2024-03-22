@@ -27,6 +27,9 @@ class TicketViewModel(
     var strQRImage: String? = ""
     var strSelfieImage: String? = ""
     var strDateOfPurchase: String? = "01-01-1900"
+    var strDateOfWarranty: String? = ""
+    var warrantyMonths: Int? = 0
+    var isPurchaseDateEditable: Boolean? = true
     var strRescheduleDate: String? = "01-01-1900"
     var timeSlotId: Int? = -1
     var strRescheduleReason: String? = "-"
@@ -861,6 +864,7 @@ class TicketViewModel(
                     inWarranty ?: false,
                     strBillImage ?: "-",
                     strDateOfPurchase ?: "01-01-1900",
+                    strDateOfWarranty ?: "",
                     strProductSymptoms ?: "",
                     strRescheduleDate ?: "01-01-1900",
                     timeSlotId ?: 0,
@@ -1611,6 +1615,44 @@ class TicketViewModel(
                 apiListener?.onError(e.message!!, GET_REPLACEMENT_REASONS_LIST, true)
             } catch (e: SocketTimeoutException) {
                 apiListener?.onError(e.message!!, GET_REPLACEMENT_REASONS_LIST, true)
+
+
+            }
+        }
+
+    }
+
+    fun getStockList(engId: Int) {
+
+        apiListener?.onStarted(GET_STOCK_LIST)
+
+        Coroutines.main {
+            try {
+
+                val stockResponse = repository.getStockList(engId)
+
+                if (stockResponse.stockItemsList.isNotEmpty()) {
+                    stockResponse.stockItemsList.let {
+                        apiListener?.onSuccess(it, GET_STOCK_LIST)
+                        return@main
+                    }
+                } else {
+                    val errorResponse = stockResponse.errors
+                    if (errorResponse.isNotEmpty()) {
+                        errorResponse[0].ErrorMsg?.let {
+
+
+                            apiListener?.onError(it, GET_STOCK_LIST, false)
+                        }
+                    }
+                }
+
+            } catch (e: ApiException) {
+                apiListener?.onError(e.message!!, GET_STOCK_LIST, true)
+            } catch (e: NoInternetException) {
+                apiListener?.onError(e.message!!, GET_STOCK_LIST, true)
+            } catch (e: SocketTimeoutException) {
+                apiListener?.onError(e.message!!, GET_STOCK_LIST, true)
 
 
             }

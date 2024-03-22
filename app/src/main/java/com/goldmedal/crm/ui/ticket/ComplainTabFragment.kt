@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -60,6 +61,9 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.File
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.reflect.typeOf
 
@@ -222,7 +226,11 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             val qrScanData = _object as List<ProductInfoData>
             if(qrScanData.isNotEmpty()) {
                 viewModel.strDateOfPurchase = qrScanData[0].PurchaseDt
+                viewModel.strDateOfWarranty = qrScanData[0].WarrantyUptodate
+                viewModel.warrantyMonths = qrScanData[0].Warranty
+                viewModel.isPurchaseDateEditable = qrScanData[0].Flag
                 binding.layoutProductInfo.txtDOP.text = viewModel.strDateOfPurchase
+                binding.layoutProductInfo.txtDOW.text = viewModel.strDateOfWarranty
             }
 
             if (callFrom == "product_info_search" && strInput.isNotEmpty()) {
@@ -517,6 +525,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             viewModel.divisionId = modelItem?.DivisionID
             viewModel.categoryId = modelItem?.CategoryID
             viewModel.strDateOfPurchase = modelItem?.PurchaseDt ?: ""
+            viewModel.strDateOfWarranty = modelItem?.WarrantyUptoDate ?: ""
+            viewModel.isPurchaseDateEditable = modelItem?.Flag
+            viewModel.warrantyMonths = modelItem?.Warranty
+            // todo - add flag and warranty month
             // formatDateString(modelItem?.PurchaseDt ?: "", "dd/MM/yyyy", "MM-dd-yyyy")
 
             when (modelItem?.InWarranty) {
@@ -528,6 +540,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             if (modelItem?.WarrantyUptoDate?.isNotEmpty() == true) {
                 binding.layoutProductInfo.radioButtonYes.isEnabled = false
                 binding.layoutProductInfo.radioButtonNo.isEnabled = false
+                binding.layoutProductInfo.txtDOW.text = modelItem?.WarrantyUptoDate
             }
 
 //            when (viewModel?.isEanNoAvailable) {
@@ -1048,27 +1061,64 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
 
         binding.layoutProductInfo.txtDOP.setOnClickListener {
-            val c = Calendar.getInstance()
-            val mYear = c[Calendar.YEAR]
-            val mMonth = c[Calendar.MONTH]
-            val mDay = c[Calendar.DAY_OF_MONTH]
+            if (viewModel.isPurchaseDateEditable == true) {
+                binding.layoutProductInfo.txtDOP.isEnabled = true
+                val c = Calendar.getInstance()
+                val mYear = c[Calendar.YEAR]
+                val mMonth = c[Calendar.MONTH]
+                val mDay = c[Calendar.DAY_OF_MONTH]
 
-            val endDatePicker = DatePickerDialog(
-                requireContext(), R.style.SpinnerDatePickerStyle,
-                { view, year, monthOfYear, dayOfMonth ->
-                    binding.layoutProductInfo.txtDOP.text = String.format(
-                        Locale.getDefault(),
-                        "%d/%d/%d",
-                        dayOfMonth,
-                        monthOfYear + 1,
-                        year
-                    )
-                    viewModel.strDateOfPurchase =
-                        (monthOfYear + 1).toString() + "-" + dayOfMonth + "-" + year
-                }, mYear, mMonth, mDay
-            )
-            endDatePicker.datePicker.maxDate = c.timeInMillis
-            endDatePicker.show()
+                val endDatePicker = DatePickerDialog(
+                    requireContext(), R.style.SpinnerDatePickerStyle,
+                    { view, year, monthOfYear, dayOfMonth ->
+                        binding.layoutProductInfo.txtDOP.text = String.format(
+                            Locale.getDefault(),
+                            "%d/%d/%d",
+                            dayOfMonth,
+                            monthOfYear + 1,
+                            year
+                        )
+                        viewModel.strDateOfPurchase =
+                            (monthOfYear + 1).toString() + "-" + dayOfMonth + "-" + year
+
+                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            val date = LocalDate.of(year, monthOfYear + 1, dayOfMonth)
+                            viewModel.warrantyMonths?.let {
+                                viewModel.strDateOfWarranty = date.plusMonths(it.toLong()).format(DateTimeFormatter.ofPattern("MM-dd-yyyy"))
+                                val warrantyDate = date.plusMonths(it.toLong()).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                                binding.layoutProductInfo.txtDOW.text = warrantyDate
+                            }
+                        } else {*/
+                        val purchaseDate = Calendar.getInstance()
+                        purchaseDate.set(year, monthOfYear, dayOfMonth)
+
+                        val warrantyEndDate = Calendar.getInstance()
+                        warrantyEndDate.timeInMillis = purchaseDate.timeInMillis
+                        viewModel.warrantyMonths?.let { months ->
+                            warrantyEndDate.add(Calendar.MONTH,
+                                months
+                            )
+                        }
+
+                        viewModel.strDateOfWarranty =
+                            SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(
+                                warrantyEndDate.time
+                            )
+                        binding.layoutProductInfo.txtDOW.text =
+                            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
+                                warrantyEndDate.time
+                            )
+
+                        //}
+                    }, mYear, mMonth, mDay
+                )
+                endDatePicker.datePicker.maxDate = c.timeInMillis
+                endDatePicker.show()
+            } else {
+                binding.layoutProductInfo.txtDOP.isEnabled = false
+                context?.toast("Purchase Date cannot be edited for this Product.")
+            }
+
         }
 
         binding.layoutReschedule.txtAppointmentDate.setOnClickListener {

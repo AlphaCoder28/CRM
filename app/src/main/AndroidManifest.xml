@@ -20,7 +20,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!--<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
 
     <application
         android:name=".AppDelegate"
@@ -34,9 +33,9 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.ticket.WiringDeviceFormActivity"
-            android:screenOrientation="portrait"
+            android:label="@string/wiring_devices_txt"
             android:parentActivityName=".ui.ticket.TicketInfoActivity"
-            android:label="@string/wiring_devices_txt"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ticket.TicketViewDetailsActivity"
             android:screenOrientation="portrait" />
@@ -96,6 +95,10 @@
             android:name=".ui.auth.WebActivity"
             android:label="@string/pdf_view"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.stocks.StockListActivity"
+            android:label="@string/stock_list"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.ticket.scanner.QrCodeScanActivity"
             android:label="@string/str_scan" />

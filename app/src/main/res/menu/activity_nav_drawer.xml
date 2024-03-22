@@ -43,6 +43,10 @@
                 android:id="@+id/actionProgressReport"
                 android:title="@string/progress_report" />
 
+            <item
+                android:id="@+id/actionStockList"
+                android:title="@string/stock_list" />
+
         </menu>
     </item>
 

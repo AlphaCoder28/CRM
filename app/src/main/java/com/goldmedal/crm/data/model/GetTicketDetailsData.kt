@@ -65,7 +65,9 @@ data class GetTicketDetailsData(
     val DefectReason: String,
     val RepairActionType: String,
     val Symptoms: String,
-    val RepairType: String
+    val RepairType: String,
+    val Flag: Boolean,
+    val Warranty: Int?
 
 ) : Parcelable
 

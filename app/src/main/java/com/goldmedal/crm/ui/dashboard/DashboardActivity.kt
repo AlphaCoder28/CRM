@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -30,6 +31,7 @@ import com.goldmedal.crm.ui.dashboard.home.AppointmentsActivity
 import com.goldmedal.crm.ui.dashboard.leftpanel.ProgressReportActivity
 import com.goldmedal.crm.ui.dashboard.notification.NotificationActivity
 import com.goldmedal.crm.ui.invoice.InvoiceListActivity
+import com.goldmedal.crm.ui.stocks.StockListActivity
 import com.goldmedal.crm.ui.ticket.AcceptedTicketsActivity
 import com.goldmedal.crm.ui.ticket.ServiceTicketActivity
 import com.goldmedal.crm.ui.ticket.TicketHistoryActivity
@@ -149,12 +151,17 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 //                navController.setGraph(graph, intent.extras)
                 navController.graph = graph
 
+                try {
+                    Glide.with(this)
+                        .load(user.ProfilePhoto)
+                        .fitCenter()
+                        .placeholder(R.drawable.male_avatar)
+                        .into(imageViewProfile)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    imageViewProfile.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.male_avatar, null))
+                }
 
-                Glide.with(this)
-                    .load(user.ProfilePhoto)
-                    .fitCenter()
-                    .placeholder(R.drawable.male_avatar)
-                    .into(imageViewProfile)
 
             }
         })
@@ -257,6 +264,7 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
         val upcomingAppointmentsItem = navigationView.menu.findItem(R.id.actionUpcomingAppointments)
         val progressReportItem = navigationView.menu.findItem(R.id.actionProgressReport)
         val invoiceList = navigationView.menu.findItem(R.id.actionInvoiceList)
+        val stockList = navigationView.menu.findItem(R.id.actionStockList)
         val logoutItem = navigationView.menu.findItem(R.id.actionLogout)
         val headerView = navigationView.getHeaderView(0)
 
@@ -266,6 +274,11 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
         invoiceList.setOnMenuItemClickListener {
             InvoiceListActivity.start(this)
+            true
+        }
+
+        stockList.setOnMenuItemClickListener {
+            StockListActivity.start(this)
             true
         }
 

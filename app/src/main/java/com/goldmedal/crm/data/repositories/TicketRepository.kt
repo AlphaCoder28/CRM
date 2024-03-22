@@ -2,10 +2,7 @@ package com.goldmedal.crm.data.repositories
 
 import com.goldmedal.crm.data.db.AppDatabase
 import com.goldmedal.crm.data.db.entities.TicketHistoryData
-import com.goldmedal.crm.data.model.DefectReasonsResponse
-import com.goldmedal.crm.data.model.ProductSymptomsNewResponse
-import com.goldmedal.crm.data.model.RepairActionsDetailResponse
-import com.goldmedal.crm.data.model.RepairTypeResponse
+import com.goldmedal.crm.data.model.*
 import com.goldmedal.crm.data.model.wiringDeviceForm.GetWiringDeviceFormData
 import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.MyApi
@@ -157,6 +154,7 @@ class TicketRepository(
         isWarranty: Boolean,
         billProofImg: String,
         dateOfPurchase: String,
+        dateOfWarranty: String,
         productSymptoms: String,
         rescheduleDate: String,
         rescheduleTimeSlotId: Int,
@@ -197,6 +195,7 @@ class TicketRepository(
                 isWarranty = isWarranty,
                 strBillProofImg = billProofImg,
                 strPurchaseDate = dateOfPurchase,
+                strWarrantyDate = dateOfWarranty,
                 strProductSymptoms = productSymptoms,
                 strRescheduleDate = rescheduleDate,
                 timeSlotId = rescheduleTimeSlotId,
@@ -477,6 +476,10 @@ class TicketRepository(
 
     suspend fun getReplacementReasonsList(ticketId: Int): ReplacementReasonsResponse {
         return apiRequest { api.getReplacementReasonList(ticketId) }
+    }
+
+    suspend fun getStockList(engId: Int): StockListResponse {
+        return apiRequest { api.getStockList(engId) }
     }
 
 }

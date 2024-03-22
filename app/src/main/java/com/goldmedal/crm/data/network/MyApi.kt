@@ -381,6 +381,7 @@ interface MyApi {
         @Field("IsWarrenty") isWarranty : Boolean,
         @Field("BillProof") strBillProofImg: String,
         @Field("DateOfPurchase") strPurchaseDate: String,
+        @Field("DateOfWarranty") strWarrantyDate: String,
         @Field("Symtoms") strProductSymptoms: String,
         @Field("RescheduleDate") strRescheduleDate: String,
         @Field("RescheduleTimeSlotId") timeSlotId: Int,
@@ -647,6 +648,12 @@ interface MyApi {
         @Field("TicketID") ticketID: Int
     ): Response<ReplacementReasonsResponse>
 
+    @FormUrlEncoded
+    @POST("crm/v1.0/Ticket/get-fresh-stock-list")
+    suspend fun getStockList(
+        @Field("EngID") engID: Int
+    ): Response<StockListResponse>
+
 
     companion object {
         operator fun invoke(
@@ -665,7 +672,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                     .client(okkHttpclient)
-                    .baseUrl(BASE_URL)  // Done - change to base url for live
+                    .baseUrl(UAT_BASE_URL)  // todo - change to base url for live
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(MyApi::class.java)

@@ -580,17 +580,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_4"
                     android:layout_marginStart="@dimen/dp_6"
                     android:padding="@dimen/dp_4"
-                    android:text="@string/str_date_of_purchase" />
+                    android:text="@string/str_date_of_purchase"
+                    android:layout_weight="2"/>
 
 
                 <TextView
                     android:id="@+id/txtDOP"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_4"
                     android:layout_marginStart="@dimen/dp_16"
@@ -598,7 +599,56 @@
                     android:gravity="center"
                     android:padding="@dimen/dp_4"
                     android:text="@string/str_please_select"
+                    android:layout_weight="3"
                     app:drawableEndCompat="@drawable/arrow_down" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llDOW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/small_icon_width"
+                android:layout_height="@dimen/small_icon_height"
+                android:layout_margin="@dimen/dp_4"
+                android:padding="@dimen/dp_4"
+                app:srcCompat="@drawable/date_of_purchase" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_6"
+                    android:padding="@dimen/dp_4"
+                    android:layout_weight="2"
+                    android:text="@string/str_date_of_warranty" />
+
+
+                <TextView
+                    android:id="@+id/txtDOW"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:background="@drawable/spinner_border"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_4"
+                    android:layout_weight="3"
+                    android:text="Date"/>
 
 
             </LinearLayout>

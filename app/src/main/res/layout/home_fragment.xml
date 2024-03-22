@@ -117,7 +117,13 @@
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 app:bvp_indicator_visibility="visible"
-                                app:bvp_round_corner="@dimen/dp_8" />
+                                app:bvp_round_corner="@dimen/dp_8" >
+
+                                <com.goldmedal.crm.util.ViewCommonCustom
+                                    android:id="@+id/service_tickets_view_common"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </com.zhpan.bannerview.BannerViewPager>
 
 
                             <com.zhpan.indicator.IndicatorView
@@ -199,11 +205,6 @@
                             android:paddingStart="@dimen/dp_12"
                             android:paddingEnd="@dimen/dp_12"
                             tools:listitem="@layout/ticket_count_item" />
-
-                        <com.goldmedal.crm.util.ViewCommonCustom
-                            android:id="@+id/service_tickets_view_common"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
 
 
                     </RelativeLayout>

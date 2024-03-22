@@ -12,5 +12,7 @@ data class ProductInfoData(
     val Warranty: Int,
     val PurchaseDt: String,
     val Out: Int,
-    val ProductDescription: String
+    val ProductDescription: String,
+    val WarrantyUptodate: String,
+    val Flag: Boolean
 )

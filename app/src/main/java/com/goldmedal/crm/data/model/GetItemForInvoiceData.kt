@@ -14,5 +14,6 @@ data class GetItemForInvoiceData(
         val TotalTaxAmount: Double,
         val FinalAmountAsMRP: Double,
         val DiscountPer: Double,
-        val DiscountAmt: Double
+        val DiscountAmt: Double,
+        val Qty: Int
 )

@@ -186,7 +186,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
             "","","","","",false,"",0,0,0,"",
             false,"","","","","","","","","",
                 "",0,false,"",false,0,false, false, "", "", "",
-            "", ""))
+            "", "", false, 0))
         }
 
         layout_availableParts?.setOnClickListener {
@@ -528,10 +528,14 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private fun bindUI(list: List<GetDashboardData?>?) = Coroutines.main {
         list?.let {
-            tvInProgressTicket?.text = it[0]?.InProgressTicket.toString()
-            tvAllTicket?.text = it[0]?.AllTicket.toString()
-            tvPendingTicket?.text = it[0]?.PendingTicket.toString()
-            tvUrgentTicket?.text = it[0]?.UrgentTicket.toString()
+            try {
+                tvInProgressTicket?.text = it[0]?.InProgressTicket.toString()
+                tvAllTicket?.text = it[0]?.AllTicket.toString()
+                tvPendingTicket?.text = it[0]?.PendingTicket.toString()
+                tvUrgentTicket?.text = it[0]?.UrgentTicket.toString()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

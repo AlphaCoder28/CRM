@@ -218,6 +218,10 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         itemPrice = edt_price.text.toString().toDouble()
         totalTaxPercent = edt_tax.text.toString().toDouble()
         totalQty = edt_qty.text.toString().toInt()
+        if (totalQty > (selectedItem?.Qty ?: 0)) {
+            toast("Quantity should be less than or equal to available quantity.")
+            return
+        }
 
         afterDiscountAmnt =
             ((itemPrice.toInt()) - (selectedItem?.DiscountAmt?.toInt() ?: 0))
@@ -284,8 +288,8 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 //                            Toast.LENGTH_SHORT
 //                        ).show()
                         if (it!![position] != null) {
-                            setItemValues(it!![position])
-                            selectedItem = it!![position]
+                            setItemValues(it[position])
+                            selectedItem = it[position]
                         } else {
                             toast("Invalid Ticket Selected")
                         }
@@ -311,6 +315,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         tvItemColor.text = data?.ItemColor ?: "-"
         tvItemcategory.text = data?.Category ?: "-"
         tvItemSubCategory.text = data?.SubCategory ?: "-"
+        tvItemQuantity.text = data?.Qty.toString()
 
         edt_price.setText((data?.Rate ?: 0.0).toString())
         edt_tax.setText((data?.TaxPer ?: 0.0).toString())
@@ -367,7 +372,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         if (callFrom.equals("invoice_item")) {
             val data = _object as List<GetItemForInvoiceData?>
 
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 initSpinnerItemList(data)
             }
         }
@@ -379,8 +384,13 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
             builder.setPositiveButton(R.string.str_ok, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface, id12: Int) {
-                    finish()
-                    refreshListener?.onRefresh()
+                    try {
+                        finish()
+                        refreshListener?.onRefresh()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 }
             })
 
