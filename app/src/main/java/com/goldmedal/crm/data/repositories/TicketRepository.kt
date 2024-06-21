@@ -8,6 +8,7 @@ import com.goldmedal.crm.data.model.wiringDeviceForm.WiringDeviceUpdateData
 import com.goldmedal.crm.data.network.MyApi
 import com.goldmedal.crm.data.network.SafeApiRequest
 import com.goldmedal.crm.data.network.responses.*
+import okhttp3.RequestBody
 import org.json.JSONArray
 
 class TicketRepository(
@@ -394,6 +395,10 @@ class TicketRepository(
                 gstNumber
             )
         }
+    }
+
+    suspend fun postGenerateInvoiceForItems(jsonObject: RequestBody): UpdateVisitStatusResponse {
+        return apiRequest { api.postGenerateInvoiceForItems(jsonObject) }
     }
 
     /*  - - - - - - - - - - - - -   GET WIRING DEVICE FORM DATA - - - - - - - - - - - -  */

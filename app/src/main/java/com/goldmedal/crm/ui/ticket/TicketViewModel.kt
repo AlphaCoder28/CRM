@@ -6,7 +6,10 @@ import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.network.GlobalConstant
 import com.goldmedal.crm.data.repositories.TicketRepository
 import com.goldmedal.crm.util.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
+import org.json.JSONObject
 import java.net.SocketTimeoutException
 
 class TicketViewModel(
@@ -1097,7 +1100,29 @@ class TicketViewModel(
 
         Coroutines.main {
             try {
-                val invoiceGenerateResponse = repository.generateInvoiceForItems(
+                val jsonObject = JSONObject()
+                jsonObject.put("Slno", slNo)
+                jsonObject.put("CustomerID", custId)
+                jsonObject.put("TicketID", tktId)
+                jsonObject.put("Status", status)
+                jsonObject.put("TaxType", taxType)
+                jsonObject.put("TaxAmount1", taxAmount1)
+                jsonObject.put("TaxAmount2", taxAmount2)
+                jsonObject.put("PreTaxAmount", preTaxAmount)
+                jsonObject.put("Discount", discount)
+                jsonObject.put("AfterDiscountAmount", afterDiscountAmount)
+                jsonObject.put("FinalTotal", finalTotal)
+                jsonObject.put("UserID", userID)
+                jsonObject.put("LogNo", logNo)
+                jsonObject.put("ApplicationID", applicationID)
+                jsonObject.put("InvoiceItemDetails", invoiceItemDetail)
+                jsonObject.put("PaymentMethod", paymentMethod)
+                jsonObject.put("GSTNo", gstNumber)
+
+                val requestBody = jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+                val invoiceGenerateResponse = repository.postGenerateInvoiceForItems(requestBody)
+
+                /*val invoiceGenerateResponse = repository.generateInvoiceForItems(
                     slNo,
                     custId,
                     tktId,
@@ -1115,17 +1140,17 @@ class TicketViewModel(
                     invoiceItemDetail,
                     paymentMethod,
                     gstNumber
-                )
+                )*/
 
-                if (!invoiceGenerateResponse.updateStatus?.isNullOrEmpty()!!) {
+                if (!invoiceGenerateResponse.updateStatus.isNullOrEmpty()) {
                     invoiceGenerateResponse.updateStatus.let {
                         apiListener?.onSuccess(it, "invoice_generate")
                         return@main
                     }
                 } else {
 
-                    val errorResponse = invoiceGenerateResponse?.Errors
-                    if (!errorResponse?.isNullOrEmpty()!!) {
+                    val errorResponse = invoiceGenerateResponse.Errors
+                    if (!errorResponse.isNullOrEmpty()) {
                         errorResponse[0]?.ErrorMsg?.let {
                             apiListener?.onError(it, "invoice_generate", false)
                         }
