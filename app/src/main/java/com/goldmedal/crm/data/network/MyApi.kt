@@ -10,15 +10,13 @@ import com.goldmedal.crm.ui.dashboard.Manager.Data
 import com.goldmedal.crm.ui.dashboard.Manager.ManagerMonthWiseData
 import com.goldmedal.crm.ui.dashboard.Manager.ManagerTicketCountData
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Url
+import retrofit2.http.*
 import java.util.concurrent.TimeUnit
 
 interface MyApi {
@@ -489,6 +487,11 @@ interface MyApi {
         @Field("PaymentMethod") paymentMethod: String,
         @Field("GSTNo") gstNumber: String
     ): Response<UpdateVisitStatusResponse>
+
+    @POST("crm/v1.0/Ticket/addUpdateItemInvoice")
+    suspend fun postGenerateInvoiceForItems(
+        @Body jsonObject: RequestBody
+    ) : Response<UpdateVisitStatusResponse>
 
 
     //  - - -- - - - API to get invoice history list - - - - - - - -
