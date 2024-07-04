@@ -83,7 +83,7 @@ class QrCodeScanActivity : AppCompatActivity() {
                                     val split3 = split2[1].split("&r=")
 
                                     val key = split3[0]
-                                    val master = split3[1] != "0"
+                                    val master = if (split3.size > 1) split3[1] != "0" else false
 
                                     val returnIntent = Intent()
                                     returnIntent.putExtra("key", key)
@@ -94,6 +94,8 @@ class QrCodeScanActivity : AppCompatActivity() {
                                     finish()
                                 } catch (e: Exception) {
                                     e.printStackTrace()
+                                    alertDialog("Something went wrong")
+                                    finish()
                                 }
 
                             } else {
