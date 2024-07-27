@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goldmedal.crm.R
 import com.goldmedal.crm.common.ApiStageListener
+import com.goldmedal.crm.data.model.UpdateVisitStatusData
 import com.goldmedal.crm.databinding.DialogCloseBinding
 import com.goldmedal.crm.ui.ticket.TicketViewModel
 import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
@@ -125,23 +126,24 @@ class TicketCloseDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         progress_bar?.stop()
 
         if (callFrom == "update_ticket_status") {
-            showSuccessAlert()
+            val updateStatusData = _object as List<UpdateVisitStatusData>
+            showSuccessAlert(updateStatusData[0].statusMessage)
         }
     }
 
 
-    private fun showSuccessAlert() {
+    private fun showSuccessAlert(apiMessage: String) {
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        var statusMsg = ""
+        /*var statusMsg = ""
         if (actionId == 5) {
             statusMsg = "Re-Assign"
         } else if (actionId == 6) {
             statusMsg = "Close"
         }
         val message =
-                "Ticket no $ticketNo status updated as $statusMsg successfully!"
-        builder.setMessage(message)
+                "Ticket no $ticketNo status updated as $statusMsg successfully!"*/
+        builder.setMessage(apiMessage)
         builder.setPositiveButton(R.string.str_ok, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, id12: Int) {
                 callBack?.onCloseReceived()

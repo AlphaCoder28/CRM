@@ -231,6 +231,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                 viewModel.isPurchaseDateEditable = qrScanData[0].Flag
                 binding.layoutProductInfo.txtDOP.text = viewModel.strDateOfPurchase
                 binding.layoutProductInfo.txtDOW.text = viewModel.strDateOfWarranty
+                //Log.d("TAG", "Purchase Date - ${qrScanData[0].PurchaseDt}")
             }
 
             if (callFrom == "product_info_search" && strInput.isNotEmpty()) {
@@ -251,7 +252,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         }
         if (callFrom == "update_ticket_status") {
             val updateStatusData = _object as List<UpdateVisitStatusData>
-            showSuccessAlert(updateStatusData[0].ActionIDStatus)
+            showSuccessAlert(updateStatusData[0].statusMessage)
         }
         if (callFrom == "time_slots") {
             val timeSlots = _object as MutableList<GetTimeSlots?>?
@@ -1486,10 +1487,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
     }
 
 
-    private fun showSuccessAlert(actionStatus: Int?) {
+    private fun showSuccessAlert(apiMessage: String) {
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        var statusMessage = ""
+        /*var statusMessage = ""
         when (actionStatus) {
 
             //Re-Assign
@@ -1506,8 +1507,8 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             }
         }
         val message =
-            "Ticket no ${modelItem?.TicketNo} status updated as $statusMessage successfully!"
-        builder.setMessage(message)
+            "Ticket no ${modelItem?.TicketNo} status updated as $statusMessage successfully!"*/
+        builder.setMessage(apiMessage)
         builder.setPositiveButton(R.string.str_ok, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, id12: Int) {
                 requireActivity().setResult(REFRESH_RESULT_CODE)
