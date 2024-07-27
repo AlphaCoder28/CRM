@@ -838,13 +838,14 @@ class TicketViewModel(
 
 
         if(strDateOfPurchase?.contains("/") == true) {
-            strDateOfPurchase = strDateOfPurchase?.let { formatDateString(it, "dd/MM/YYYY", "MM-dd-YYYY") }
+            strDateOfPurchase = strDateOfPurchase?.let { formatDateString(it, "dd/MM/yyyy", "MM-dd-yyyy") }
         }
 
         if (callCloseTypeId == 3 && replacementReasonId == 0) {
             apiListener?.onValidationError("Select Replacement Reason", "update_ticket_status")
             return
         }
+        //Log.d("TAG", "Purchase Date - $strDateOfPurchase")
 
 
         apiListener?.onStarted("update_ticket_status")

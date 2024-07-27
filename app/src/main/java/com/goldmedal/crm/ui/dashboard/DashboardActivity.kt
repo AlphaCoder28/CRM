@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -150,11 +151,16 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
                 navController.graph = graph
 
 
-                Glide.with(this)
-                    .load(user.ProfilePhoto)
-                    .fitCenter()
-                    .placeholder(R.drawable.male_avatar)
-                    .into(imageViewProfile)
+                try {
+                    Glide.with(this)
+                        .load(user.ProfilePhoto)
+                        .fitCenter()
+                        .placeholder(R.drawable.male_avatar)
+                        .into(imageViewProfile)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    imageViewProfile.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.male_avatar, null))
+                }
 
             }
         })

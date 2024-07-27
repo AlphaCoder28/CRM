@@ -223,6 +223,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             if(qrScanData.isNotEmpty()) {
                 viewModel.strDateOfPurchase = qrScanData[0].PurchaseDt
                 binding.layoutProductInfo.txtDOP.text = viewModel.strDateOfPurchase
+                //Log.d("TAG", "Purchase Date - ${qrScanData[0].PurchaseDt}")
             }
 
             if (callFrom == "product_info_search" && strInput.isNotEmpty()) {
@@ -243,7 +244,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         }
         if (callFrom == "update_ticket_status") {
             val updateStatusData = _object as List<UpdateVisitStatusData>
-            showSuccessAlert(updateStatusData[0].ActionIDStatus)
+            showSuccessAlert(updateStatusData[0].statusMessage)
         }
         if (callFrom == "time_slots") {
             val timeSlots = _object as MutableList<GetTimeSlots?>?
@@ -517,6 +518,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             viewModel.divisionId = modelItem?.DivisionID
             viewModel.categoryId = modelItem?.CategoryID
             viewModel.strDateOfPurchase = modelItem?.PurchaseDt ?: ""
+            //Log.d("TAG", "Purchare Date: ${modelItem!!.PurchaseDt}")
             // formatDateString(modelItem?.PurchaseDt ?: "", "dd/MM/yyyy", "MM-dd-yyyy")
 
             when (modelItem?.InWarranty) {
@@ -1065,6 +1067,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
                     )
                     viewModel.strDateOfPurchase =
                         (monthOfYear + 1).toString() + "-" + dayOfMonth + "-" + year
+                    //Log.d("TAG", "Purchase Date - ${viewModel.strDateOfPurchase}")
                 }, mYear, mMonth, mDay
             )
             endDatePicker.datePicker.maxDate = c.timeInMillis
@@ -1436,10 +1439,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
     }
 
 
-    private fun showSuccessAlert(actionStatus: Int?) {
+    private fun showSuccessAlert(apiMessage: String) {
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        var statusMessage = ""
+        /*var statusMessage = ""
         when (actionStatus) {
 
             //Re-Assign
@@ -1456,8 +1459,8 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
             }
         }
         val message =
-            "Ticket no ${modelItem?.TicketNo} status updated as $statusMessage successfully!"
-        builder.setMessage(message)
+            "Ticket no ${modelItem?.TicketNo} status updated as $statusMessage successfully!"*/
+        builder.setMessage(apiMessage)
         builder.setPositiveButton(R.string.str_ok, object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, id12: Int) {
                 requireActivity().setResult(REFRESH_RESULT_CODE)
