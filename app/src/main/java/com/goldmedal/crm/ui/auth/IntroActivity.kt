@@ -16,9 +16,9 @@ import com.goldmedal.crm.common.transform.PageTransformerFactory
 import com.goldmedal.crm.common.transform.TransformerStyle
 import com.goldmedal.crm.data.adapters.IntroAdapter
 import com.goldmedal.crm.data.model.CustomBean
+import com.goldmedal.crm.databinding.ActivityIntroBinding
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.indicator.enums.IndicatorSlideMode
-import kotlinx.android.synthetic.main.activity_intro.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -31,6 +31,7 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
 //    private var Titles: MutableList<String>? = null
 
     override val kodein by kodein()
+    private lateinit var mBinding: ActivityIntroBinding
     private val factory: LoginViewModelFactory by instance()
     private lateinit var mViewPager: BannerViewPager<CustomBean>
 
@@ -56,7 +57,8 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        mBinding = ActivityIntroBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         val viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
@@ -64,7 +66,7 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
         updateUI(0)
 
 
-        btn_start?.setOnClickListener {
+        mBinding.btnStart.setOnClickListener {
 
 
 
@@ -134,13 +136,13 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun updateUI(position: Int) {
-        tv_describe?.text = des[position]
-        val translationAnim = ObjectAnimator.ofFloat(tv_describe, "translationX", -120f, 0f)
+        mBinding.tvDescribe.text = des[position]
+        val translationAnim = ObjectAnimator.ofFloat(mBinding.tvDescribe, "translationX", -120f, 0f)
         translationAnim.apply {
             duration = ANIMATION_DURATION.toLong()
             interpolator = DecelerateInterpolator()
         }
-        val alphaAnimator = ObjectAnimator.ofFloat(tv_describe, "alpha", 0f, 1f)
+        val alphaAnimator = ObjectAnimator.ofFloat(mBinding.tvDescribe, "alpha", 0f, 1f)
         alphaAnimator.apply {
             duration = ANIMATION_DURATION.toLong()
         }
@@ -148,13 +150,13 @@ class IntroActivity : AppCompatActivity(), KodeinAware {
         animatorSet.playTogether(translationAnim, alphaAnimator)
         animatorSet.start()
 
-        if (position == mViewPager.data.size - 1 && btn_start?.visibility == View.GONE) {
-            btn_start?.visibility = View.VISIBLE
+        if (position == mViewPager.data.size - 1 && mBinding.btnStart.visibility == View.GONE) {
+            mBinding.btnStart.visibility = View.VISIBLE
             ObjectAnimator
-                    .ofFloat(btn_start, "alpha", 0f, 1f)
+                    .ofFloat(mBinding.btnStart, "alpha", 0f, 1f)
                     .setDuration(ANIMATION_DURATION.toLong()).start()
         } else {
-            btn_start?.visibility = View.GONE
+            mBinding.btnStart.visibility = View.GONE
         }
     }
 

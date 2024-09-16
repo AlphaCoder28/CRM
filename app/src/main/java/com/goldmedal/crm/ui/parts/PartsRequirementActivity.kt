@@ -8,11 +8,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.model.*
 import com.goldmedal.crm.databinding.PartsRequirementBinding
@@ -25,7 +23,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.add_parts_requirement.*
 import org.json.JSONArray
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -70,7 +67,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         supportActionBar?.setHomeButtonEnabled(true)
 
 
-        if (callFromScreen.equals("Ticket")) {
+        if (callFromScreen == "Ticket") {
             resetBindUI()
 
             custID = modelItem?.CustomerID ?: 0
@@ -98,7 +95,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
         initTabs()
 
-        llPartsAddedMain.visibility = View.GONE
+        binding.layoutAddParts.llPartsAddedMain.visibility = View.GONE
 
         viewModel = ViewModelProvider(this, factory).get(PartsViewModel::class.java)
         viewModel.apiListener = this
@@ -107,7 +104,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
             if (user != null) {
                 userID = user.UserId ?: 0
                 // - - - This will get all customers list - - - -
-                if (callFromScreen.equals("Dashboard")) {
+                if (callFromScreen == "Dashboard") {
                     viewModel.getPartsRequirementDetail(userID, 0, 0)
                 }
 
@@ -116,7 +113,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         })
 
 
-        tvAddItem.setOnClickListener {
+        binding.layoutAddParts.tvSubmit.setOnClickListener {
 
             if (userID == 0) {
                 toast("Please select valid User")
@@ -125,14 +122,14 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
             } else if (ticketID == 0) {
                 toast("Please select valid Ticket")
             } else {
-                if (edtPartsQty.text.isNullOrEmpty() || (edtPartsQty.text.toString()
+                if (binding.layoutAddParts.edtPartsQty.text.isNullOrEmpty() || (binding.layoutAddParts.edtPartsQty.text.toString()
                         .toInt() == 0)
                 ) {
                     toast("Select valid Quantity")
                 } else {
                     if (selectedItem != null) {
                         if ((listAddedParts?.count() ?: 0) > 0) {
-                            var ifItemExist =
+                            val ifItemExist =
                                 listAddedParts?.any { it?.PartID == selectedItem?.PartId } ?: false
                             if (ifItemExist) {
                                 toast("${selectedItem?.PartName ?: "-"} already selected")
@@ -151,12 +148,12 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         }
 
 
-        tvSubmit.setOnClickListener {
+        binding.layoutAddParts.tvSubmit.setOnClickListener {
             val jsArray = Gson().toJson(listAddedParts)
             val jsonArray = JSONArray(jsArray)
             Log.d("Array for parts req ___", jsArray)
 
-            if (listAddedParts?.count() == 0) {
+            if (listAddedParts?.isEmpty() == true) {
                 toast("Please Add Items")
             } else {
                 viewModel.getLoggedInUser().observe(this, Observer { user ->
@@ -178,7 +175,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
     private fun addParts() {
 
-        totalQty = edtPartsQty.text.toString().toInt()
+        totalQty = binding.layoutAddParts.edtPartsQty.text.toString().toInt()
 
         addPartsData = AddedPartsData(
             selectedItem?.PartName ?: "-",
@@ -189,9 +186,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         listAddedParts?.add(addPartsData)
 
         listAddedParts?.let {
-            if (it != null) {
-                initAddPartRecyclerView(it.toAddPartsData())
-            }
+            initAddPartRecyclerView(it.toAddPartsData())
         }
         //binding.layoutAddParts.rvListAddParts.adapter?.notifyDataSetChanged()
 
@@ -293,10 +288,10 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
             adapter = mAdapter
         }
 
-        if (toAddPartsData.count() > 0) {
-            llPartsAddedMain.visibility = View.VISIBLE
+        if (toAddPartsData.isNotEmpty()) {
+            binding.layoutAddParts.llPartsAddedMain.visibility = View.VISIBLE
         } else {
-            llPartsAddedMain.visibility = View.GONE
+            binding.layoutAddParts.llPartsAddedMain.visibility = View.GONE
         }
     }
 
@@ -306,23 +301,19 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         if (position >= 0) {
             listAddedParts?.removeAt(position)
             listAddedParts?.let {
-                if (it != null) {
-                    initAddPartRecyclerView(it.toAddPartsData())
-                }
+                initAddPartRecyclerView(it.toAddPartsData())
             }
             // binding.layoutAddParts.rvListAddParts.adapter?.notifyDataSetChanged()
         }
     }
 
     override fun onStarted(callFrom: String) {
-        if (callFrom.equals("PartsCustomerList") || callFrom.equals("PartsTicketNoList") || callFrom.equals(
-                "PartsAllDetails"
-            )
+        if (callFrom == "PartsCustomerList" || callFrom == "PartsTicketNoList" || callFrom == "PartsAllDetails"
         ) {
             resetBindUI()
         }
 
-        if (callFrom.equals("parts_requirement_list")) {
+        if (callFrom == "parts_requirement_list") {
             binding.layoutListParts.viewCommon.showProgressBar()
         }
     }
@@ -330,41 +321,41 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
     // - - - - - - when API yields success response ---- ------- --------
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        if (callFrom.equals("PartsCustomerList")) {
+        if (callFrom == "PartsCustomerList") {
             val data = _object as List<GetPartsRequirementData?>
 
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 initSpinnerCustomerList(data)
             }
         }
 
-        if (callFrom.equals("PartsTicketNoList")) {
+        if (callFrom == "PartsTicketNoList") {
             val data = _object as List<GetPartsRequirementData?>
 
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 initSpinnerTicketList(data)
             }
         }
 
-        if (callFrom.equals("PartsAllDetails")) {
+        if (callFrom == "PartsAllDetails") {
             val data = _object as List<GetPartsRequirementData?>
 
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 bindUI(data)
             }
         }
 
-        if (callFrom.equals("StockPartsList")) {
+        if (callFrom == "StockPartsList") {
             val data = _object as List<SelectPartsListData?>
 
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 initSpinnerPartsList(data)
             }
         }
 
-        if (callFrom.equals("submit_parts_requirement")) {
+        if (callFrom == "submit_parts_requirement") {
             val data = _object as List<SubmitPartsReqData?>
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 toast("Parts Request Submitted Successfully")
 
                 resetBindUI()
@@ -384,10 +375,10 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
             }
         }
 
-        if (callFrom.equals("parts_requirement_list")) {
+        if (callFrom == "parts_requirement_list") {
             binding.layoutListParts.viewCommon.hide()
             val data = _object as List<GetRequestPartListData?>
-            if (data.count() > 0) {
+            if (data.isNotEmpty()) {
                 bindPartsListUI(data)
             } else {
                 binding.layoutListParts.viewCommon.showNoData()
@@ -501,9 +492,9 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         if (partsData.isNullOrEmpty()) {
             resetBindUI()
         } else {
-            binding.layoutAddParts.txtContactNumber.text = partsData?.get(0)?.ContactNo ?: "-"
-            binding.layoutAddParts.txtAddress.text = partsData?.get(0)?.Address ?: "-"
-            binding.layoutAddParts.txtTktStatus.text = partsData?.get(0)?.TktStatus ?: "-"
+            binding.layoutAddParts.txtContactNumber.text = partsData[0]?.ContactNo ?: "-"
+            binding.layoutAddParts.txtAddress.text = partsData[0]?.Address ?: "-"
+            binding.layoutAddParts.txtTktStatus.text = partsData[0]?.TktStatus ?: "-"
         }
 
     }
@@ -516,15 +507,13 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         binding.layoutAddParts.txtTktStatus.text = "-"
 
         totalQty = 0
-        edtPartsQty.clearFocus()
-        edtPartsQty.setText("")
+        binding.layoutAddParts.edtPartsQty.clearFocus()
+        binding.layoutAddParts.edtPartsQty.setText("")
 
         listAddedParts?.clear()
 
         listAddedParts?.let {
-            if (it != null) {
-                initAddPartRecyclerView(it.toAddPartsData())
-            }
+            initAddPartRecyclerView(it.toAddPartsData())
         }
 
         binding.layoutAddParts.spSelectPart.clearSelection()
@@ -557,15 +546,15 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     ) {
                         Toast.makeText(
                             this@PartsRequirementActivity,
-                            listParts!![position],
+                            listParts[position],
                             Toast.LENGTH_SHORT
                         ).show()
                         if (it!![position] != null) {
 //                            setItemValues(it!![position])
 //                            selectedItem = it!![position]
                             // - - - - - call API to get Ticket List - - - -
-                            if (it != null && it[position]?.PartId != 0) {
-                                selectedItem = it!![position]
+                            if (it[position]?.PartId != 0) {
+                                selectedItem = it[position]
                             } else {
                                 toast("Invalid Part")
                             }
@@ -585,7 +574,7 @@ class PartsRequirementActivity : AppCompatActivity(), KodeinAware, ApiStageListe
 
     // - - - -  Error respone of API - - - - - - -
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        if (callFrom.equals("parts_requirement_list")) {
+        if (callFrom == "parts_requirement_list") {
             binding.layoutListParts.viewCommon.hide()
             if (isNetworkError) {
                 binding.layoutListParts.viewCommon.showNoInternet()

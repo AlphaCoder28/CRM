@@ -22,7 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
-import androidx.annotation.RequiresApi
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -44,7 +44,7 @@ import com.goldmedal.crm.databinding.ComplainTabFragmentBinding
 import com.goldmedal.crm.ui.auth.WebActivity
 import com.goldmedal.crm.ui.invoice.GenerateInvoiceActivity
 import com.goldmedal.crm.ui.parts.PartsRequirementActivity
-import com.goldmedal.crm.ui.ticket.scanner.QrCodeScanActivity
+import com.goldmedal.crm.ui.ticket.scanner.QRScannerActivity
 import com.goldmedal.crm.ui.ticket.scanner.QrCodeScanActivity.Companion.RESULT_REQUEST_CODE
 import com.goldmedal.crm.util.*
 import com.goldmedal.crm.util.interfaces.OnRefreshListener
@@ -53,8 +53,6 @@ import com.google.android.material.chip.Chip
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.complain_tab_fragment.*
-import kotlinx.android.synthetic.main.product_info.*
 import org.angmarch.views.OnSpinnerItemSelectedListener
 import org.angmarch.views.SpinnerTextFormatter
 import org.kodein.di.KodeinAware
@@ -79,6 +77,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
     OptionsBottomSheetFragment.ItemClickListener, ImageSelectionListener,
     TicketOTPDialog.OnOTPReceived, OnRefreshListener {
 
+    private var callFrom: String = ""
     private var strInput: String = ""
     private var modelItem: GetTicketDetailsData? = null
 
@@ -108,6 +107,67 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
     // - - - - 1 - bill, 2- product , 3 - qr , 4- selfie, 5- replacement
     var uploadCallFrom = 0
+
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                try {
+                    val content = result.data?.getStringExtra(BARCODE_RESULT_KEY)
+                    content?.let {
+                        Log.d(TAG, "uri: $it")
+                        val key: String
+                        val qrCode: String
+                        val master: Boolean
+                        try {
+                            if (content.contains("gmqr")) {
+                                val split1 = content.split("q=")
+                                val split2 = split1[1].split("&k=")
+
+                                qrCode = split2[0]
+                                val split3 = split2[1].split("&r=")
+
+                                key = split3[0]
+                                master = split3.getOrNull(1) != "0"
+
+                            } else {
+                                val parsedUri = Uri.parse(it)
+                                key = parsedUri.getQueryParameter("key")
+                                    ?: parsedUri.getQueryParameter("k") ?: ""
+                                qrCode = parsedUri.getQueryParameter("qrcode")
+                                    ?: parsedUri.getQueryParameter("q") ?: ""
+                                master = parsedUri.getBooleanQueryParameter("master", false)
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            activity?.alertDialog("Something went wrong...")
+                            return@let
+                        }
+
+                        Log.d("CALLFROM - - -", "onActivityResult: $callFrom")
+                        when (callFrom) {
+                            "scan" -> {
+                                viewModel.strQrCode = qrCode
+                                viewModel.master = master
+                                Coroutines.main {
+                                    if ((modelItem?.CustomerID ?: 0) == 0) {
+                                        Toast.makeText(requireContext(), "Invalid Customer", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        viewModel.scanQrCode(key, qrCode, modelItem?.CustomerID ?: 0, master)
+                                    }
+                                }
+                            }
+                            "replacement" -> {
+                                viewModel.strReplacementImage = it
+                                binding.layoutProductInfo.txtQrCodeReplacementTitle.text =
+                                    if (qrCode.isEmpty()) "" else viewModel.strReplacementImage
+                            }
+                        }
+                        Log.d(TAG, "onActivityResult: slNoKey: $key, qr code: $qrCode, master: $master")                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,7 +222,7 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
         }
 
         if (!qrCode.isEmpty()) {
-            if (modelItem?.CustomerID ?: 0 == 0) {
+            if ((modelItem?.CustomerID ?: 0) == 0) {
                 Toast.makeText(requireContext(), "Invalid Customer", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.searchQrCode(
@@ -420,7 +480,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
     override fun onItemClick(param: String) {
         when (param) {
             "scan" -> {
-                QrCodeScanActivity.start(requireContext(), this,"scan")
+                //QrCodeScanActivity.start(requireContext(), this,"scan")
+                callFrom = "scan"
+                val intent = Intent(activity, QRScannerActivity::class.java)
+                resultLauncher.launch(intent)
             }
             "search" -> {
                 searchQRCode(1)
@@ -1049,7 +1112,10 @@ class ComplainTabFragment : Fragment(), KodeinAware, ApiStageListener<Any>,
 
         // - -  - - for replacement upload
         binding.layoutProductInfo.btnAddReplacementQrCode.setOnClickListener {
-            QrCodeScanActivity.start(requireContext(), this,"replacement")
+            callFrom = "replacement"
+            //QrCodeScanActivity.start(requireContext(), this,"replacement")
+            val intent = Intent(activity, QRScannerActivity::class.java)
+            resultLauncher.launch(intent)
         }
 
         /*binding.layoutComplainInfo.btnWiringForm.setOnClickListener {

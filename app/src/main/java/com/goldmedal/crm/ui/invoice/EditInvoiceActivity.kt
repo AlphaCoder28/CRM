@@ -11,16 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.model.*
 import com.goldmedal.crm.databinding.ActivityEditInvoiceBinding
-import com.goldmedal.crm.ui.auth.WebActivity
 import com.goldmedal.crm.ui.ticket.TicketViewModel
 import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
 import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.snackbar
 import com.goldmedal.crm.util.toast
-import kotlinx.android.synthetic.main.activity_edit_invoice.*
-import kotlinx.android.synthetic.main.activity_edit_invoice.txtCustName
-import kotlinx.android.synthetic.main.activity_edit_invoice.txtTktNumber
-import kotlinx.android.synthetic.main.activity_generate_invoice.*
 import org.angmarch.views.OnSpinnerItemSelectedListener
 import org.angmarch.views.SpinnerTextFormatter
 import org.kodein.di.KodeinAware
@@ -70,7 +65,7 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
 
 
        // - - - - - - click on update status button
-        tvUpdateStatus.setOnClickListener {
+        binding.tvUpdateStatus.setOnClickListener {
             viewModel.getLoggedInUser().observe(this, Observer { user ->
                 if (user != null && invoiceData != null) {
                     if(strPaymentStatus.equals("Select")){
@@ -167,16 +162,16 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
 
     private fun bindUI(modelItem: EditInvoiceData?) = Coroutines.main {
         modelItem?.let {
-            txtCustName.text = modelItem.CustName
-            txtTktNumber.text = modelItem.TktNo
-            txtGstNumber.text = modelItem.GSTNumber.ifEmpty { "-" }
+            binding.txtCustName.text = modelItem.CustName
+            binding.txtTktNumber.text = modelItem.TktNo
+            binding.txtGstNumber.text = modelItem.GSTNumber.ifEmpty { "-" }
 
             if(modelItem.IsPaid == 0){
-                txtAmountPaid.text ="No"
+                binding.txtAmountPaid.text ="No"
             }else{
-                txtAmountPaid.text = "Yes"
+                binding.txtAmountPaid.text = "Yes"
             }
-            txtFinalAmount.text = modelItem.FinalTotal
+            binding.txtFinalAmount.text = modelItem.FinalTotal
 
             strPaymentMethod = modelItem.PaymentMethod
             strPaymentStatus = modelItem.PaymentStatus
@@ -184,15 +179,15 @@ class EditInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListener<A
             if(modelItem.PaymentStatus.lowercase(Locale.getDefault()) == "paid"){
                 boolPaymentStatus = true
                 strPaymentStatus = "Paid"
-                spinner_payment_status.text = strPaymentStatus
+                binding.spinnerPaymentStatus.text = strPaymentStatus
             }else if(modelItem.PaymentStatus.lowercase(Locale.getDefault()) == "unpaid"){
                 boolPaymentStatus = false
                 strPaymentStatus = "UnPaid"
-                spinner_payment_status.text  = strPaymentStatus
+                binding.spinnerPaymentStatus.text  = strPaymentStatus
             }else{
                 boolPaymentStatus = false
                 strPaymentStatus = "Select"
-                spinner_payment_status.text  = strPaymentStatus
+                binding.spinnerPaymentStatus.text  = strPaymentStatus
             }
 
             if(modelItem.PaymentMethod.lowercase(Locale.getDefault()) == "cash"){

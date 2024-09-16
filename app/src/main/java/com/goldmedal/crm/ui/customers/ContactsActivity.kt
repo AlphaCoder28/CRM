@@ -11,15 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldmedal.crm.common.DashboardApiListener
 import com.goldmedal.crm.data.model.ContactsData
 import com.goldmedal.crm.databinding.ActivityContactsBinding
-import com.goldmedal.crm.ui.auth.VerifyOTPActivity
 import com.goldmedal.crm.ui.dashboard.home.HomeViewModel
 import com.goldmedal.crm.ui.dashboard.home.HomeViewModelFactory
 import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.snackbar
-import com.goldmedal.crm.util.toString
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_accepted_ticket.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -54,7 +51,7 @@ class ContactsActivity : AppCompatActivity(), KodeinAware, DashboardApiListener<
         })
 
 
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -76,7 +73,7 @@ class ContactsActivity : AppCompatActivity(), KodeinAware, DashboardApiListener<
                 return true
             }
         })
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 

@@ -22,7 +22,6 @@ import com.goldmedal.hrapp.ui.dialogs.UsedPartDialog
 import com.google.android.material.tabs.TabLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_used_parts.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -65,7 +64,7 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
         })
 
 
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -96,7 +95,7 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
             }
         })
 
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 
@@ -123,8 +122,8 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
-                search_view.setQuery("", false);
-                search_view.clearFocus();
+                binding.searchView.setQuery("", false);
+                binding.searchView.clearFocus();
                 strSearchBy = ""
                 tabPosition = tab.position
                 if (tabPosition == 0) {
@@ -198,40 +197,40 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
 
     override fun onStarted(callFrom: String) {
         //binding.viewCommon.showProgressBar()
-        if (callFrom.equals("itemAndPartDetail")) {
+        if (callFrom == "itemAndPartDetail") {
             binding.layoutItems.viewCommonItems.showProgressBar()
         }
 
-        if (callFrom.equals("partAndItemDetail")) {
+        if (callFrom == "partAndItemDetail") {
             binding.layoutParts.viewCommonParts.showProgressBar()
         }
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
 
-        if (callFrom.equals("itemAndPartDetail")) {
+        if (callFrom == "itemAndPartDetail") {
             binding.layoutItems.viewCommonItems.hide()
             val data = _object as List<Any?>
             bindItemsUI(data as List<UsedItemAndPartData?>)
 
-            if (data.isNullOrEmpty()) {
+            if (data.isEmpty()) {
                 binding.layoutItems.viewCommonItems.showNoData()
             }
         }
 
-        if (callFrom.equals("partAndItemDetail")) {
+        if (callFrom == "partAndItemDetail") {
             binding.layoutParts.viewCommonParts.hide()
             val data = _object as List<Any?>
             bindPartsUI(data as List<UsedPartAndItemData?>)
 
-            if (data.isNullOrEmpty()) {
+            if (data.isEmpty()) {
                 binding.layoutParts.viewCommonParts.showNoData()
             }
         }
     }
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        if (callFrom.equals("itemAndPartDetail")) {
+        if (callFrom == "itemAndPartDetail") {
             binding.layoutItems.viewCommonItems.hide()
             if (isNetworkError) {
                 binding.layoutItems.viewCommonItems.showNoInternet()
@@ -240,7 +239,7 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
             }
         }
 
-        if (callFrom.equals("partAndItemDetail")) {
+        if (callFrom == "partAndItemDetail") {
             binding.layoutParts.viewCommonParts.hide()
             if (isNetworkError) {
                 binding.layoutParts.viewCommonParts.showNoInternet()
@@ -269,7 +268,7 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
     }
 
     override fun itemClicked(slno: Int?, strName: String?, callFrom: String) {
-        if (callFrom.equals("ItemAndPart")) {
+        if (callFrom == "ItemAndPart") {
             val dialogFragment = UsedItemsDialog.newInstance()
             val bundle = Bundle()
             bundle.putInt("ItemSlNo", slno ?: 0)
@@ -284,7 +283,7 @@ class UsedPartsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any
             dialogFragment.show(ft, "used_item_dialog")
         }
 
-        if (callFrom.equals("PartAndItem")) {
+        if (callFrom == "PartAndItem") {
             val dialogFragment = UsedPartDialog.newInstance()
             val bundle = Bundle()
             bundle.putInt("PartSlNo", slno ?: 0)

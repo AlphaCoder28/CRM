@@ -115,12 +115,12 @@ class UserRepository(
 //
 //    }
 
-    suspend fun saveProfilePic(profilePicLink: String?) = db.getUserDao().updateProfilePicture(profilePicLink)
+    suspend fun saveProfilePic(profilePicLink: String) = db.getUserDao().updateProfilePicture(profilePicLink)
 
 //saveprofile{
 // db
 // }
-    suspend fun saveUser(user: User?) = db.getUserDao().upsert(user)
+    suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
 
     fun getUser() = db.getUserDao().getUser()
 

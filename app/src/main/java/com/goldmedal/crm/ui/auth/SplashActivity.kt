@@ -14,10 +14,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.goldmedal.crm.R
 import com.goldmedal.crm.data.network.responses.AppUpdateData
+import com.goldmedal.crm.databinding.ActivitySplashBinding
 import com.goldmedal.crm.ui.dashboard.DashboardActivity
 import com.goldmedal.crm.util.toast
 import com.goldmedal.hrapp.ui.auth.UpdateAppDialogFragment
-import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -26,6 +26,7 @@ class SplashActivity : AppCompatActivity(), KodeinAware,AuthListener<Any>, Updat
 
 
     override val kodein by kodein()
+    private lateinit var mBinding: ActivitySplashBinding
     private val factory: LoginViewModelFactory by instance()
     private lateinit var viewModel: LoginViewModel
 
@@ -33,16 +34,17 @@ class SplashActivity : AppCompatActivity(), KodeinAware,AuthListener<Any>, Updat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        mBinding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
         viewModel.authListener = this
 
-        lottie?.setAnimation(splashJson.random())
-        lottie?.playAnimation()
+        mBinding.lottie.setAnimation(splashJson.random())
+        mBinding.lottie.playAnimation()
 
-        lottie?.addAnimatorListener(object : Animator.AnimatorListener {
+        mBinding.lottie.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(p0: Animator) {
 
             }

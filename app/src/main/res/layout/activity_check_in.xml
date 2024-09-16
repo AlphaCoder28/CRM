@@ -69,7 +69,9 @@
         app:tint="@color/colorBlack" />
 
     <!--bottom sheet container-->
-    <include layout="@layout/sheet_map"
+    <include
+        android:id="@+id/sheet_map"
+        layout="@layout/sheet_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

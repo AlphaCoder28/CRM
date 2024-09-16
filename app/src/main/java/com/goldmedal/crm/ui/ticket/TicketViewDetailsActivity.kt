@@ -16,10 +16,10 @@ import com.goldmedal.crm.data.model.GetTicketDetailsData
 import com.goldmedal.crm.databinding.ActivityTicketViewDetailsBinding
 import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.downloadFile
-import kotlinx.android.synthetic.main.activity_ticket_view_details.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
+import java.util.*
 
 class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageListener<Any> {
     override val kodein by kodein()
@@ -60,159 +60,159 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
     private fun bindUI(modelItem: GetTicketDetailsData?) = Coroutines.main {
         modelItem?.let {
 
-            txt_tktNo.text = modelItem.TicketNo
-            txt_div_name.text = modelItem.DivisionName
-            txt_priority.text = modelItem.TicketPriority
-            txt_date.text = modelItem.TicketDate
-            txt_cust_name.text = modelItem.CustName
-            txt_reschedule_date.text = modelItem.ReScheduleDate + "  " + modelItem.ReScheduledByName
-            txt_reschedule_remark.text = modelItem.ReScheduleRemark
-            txt_contact_no.text = modelItem.CustContactNo
-            txt_cust_address.text = modelItem.CustAddress + ", " + modelItem.City + ", " + modelItem.Distrctnm + ", " + modelItem.statenm + ", " + modelItem.Pincode
-            txt_cust_emailId.text = modelItem.EmailID
-            txt_item_name.text = modelItem.ProductName
-            txt_manufacture_date.text = modelItem.ManufactureDate
-            txt_time_slot.text = modelItem.TimeSlot
-            txt_prod_warranty.text = modelItem.WarrantyUptoDate
-            txt_item_qr_code.text = modelItem.ItemQRCode
-            txt_item_ean_no.text = modelItem.ItemEANNo
-            txt_item_product_code.text = ""
-            txt_item_purchase_date.text = modelItem.PurchaseDt
-            txt_item_issues.text = modelItem.ProductIssues
-            txt_item_descr.text = modelItem.ProductIssueDesc
-            txt_party_name.text = modelItem.PartyName + "  " + modelItem.PartyTypeName
+            binding.txtTktNo.text = modelItem.TicketNo
+            binding.txtDivName.text = modelItem.DivisionName
+            binding.txtPriority.text = modelItem.TicketPriority
+            binding.txtDate.text = modelItem.TicketDate
+            binding.txtCustName.text = modelItem.CustName
+            binding.txtRescheduleDate.text = modelItem.ReScheduleDate + "  " + modelItem.ReScheduledByName
+            binding.txtRescheduleRemark.text = modelItem.ReScheduleRemark
+            binding.txtContactNo.text = modelItem.CustContactNo
+            binding.txtCustAddress.text = modelItem.CustAddress + ", " + modelItem.City + ", " + modelItem.Distrctnm + ", " + modelItem.statenm + ", " + modelItem.Pincode
+            binding.txtCustEmailId.text = modelItem.EmailID
+            binding.txtItemName.text = modelItem.ProductName
+            binding.txtManufactureDate.text = modelItem.ManufactureDate
+            binding.txtTimeSlot.text = modelItem.TimeSlot
+            binding.txtProdWarranty.text = modelItem.WarrantyUptoDate
+            binding.txtItemQrCode.text = modelItem.ItemQRCode
+            binding.txtItemEanNo.text = modelItem.ItemEANNo
+            binding.txtItemProductCode.text = ""
+            binding.txtItemPurchaseDate.text = modelItem.PurchaseDt
+            binding.txtItemIssues.text = modelItem.ProductIssues
+            binding.txtItemDescr.text = modelItem.ProductIssueDesc
+            binding.txtPartyName.text = modelItem.PartyName + "  " + modelItem.PartyTypeName
           //  txt_remarks.text = modelItem?.AssignRemark
-            txt_party_address.text = modelItem.PartyAddress
-            txtSymptoms.text = modelItem.Symptoms.ifEmpty { "-" }
-            txtDefectReason.text = modelItem.DefectReason.ifEmpty { "-" }
-            txtRepairActionType.text = modelItem.RepairActionType.ifEmpty { "-" }
-            txtRepairType.text = modelItem.RepairType.ifEmpty { "-" }
-            txtReplacementReason.text = modelItem.ReplacementReason.ifEmpty { "-" }
+            binding.txtPartyAddress.text = modelItem.PartyAddress
+            binding.txtSymptoms.text = modelItem.Symptoms.ifEmpty { "-" }
+            binding.txtDefectReason.text = modelItem.DefectReason.ifEmpty { "-" }
+            binding.txtRepairActionType.text = modelItem.RepairActionType.ifEmpty { "-" }
+            binding.txtRepairType.text = modelItem.RepairType.ifEmpty { "-" }
+            binding.txtReplacementReason.text = modelItem.ReplacementReason.ifEmpty { "-" }
 
             if(modelItem.IsCheckedIn == 1){
-                txt_checkedIn.text = "YES"
+                binding.txtCheckedIn.text = "YES"
             }else{
-                txt_checkedIn.text = "NO"
+                binding.txtCheckedIn.text = "NO"
             }
 
             if(modelItem.IsDealerCall){
-                txt_dealer_call.text = "YES"
+                binding.txtDealerCall.text = "YES"
             }else{
-                txt_dealer_call.text = "NO"
+                binding.txtDealerCall.text = "NO"
             }
 
             if(!modelItem.IsNoRepair){
-                txt_dealer_isNoRepair.text = "YES"
+                binding.txtDealerIsNoRepair.text = "YES"
             }else{
-                txt_dealer_isNoRepair.text = "NO"
+                binding.txtDealerIsNoRepair.text = "NO"
             }
 
             if(!modelItem.IsInvoiceGenrated){
-                txt_dealer_isNoRepair.text = "-"
+                binding.txtDealerIsNoRepair.text = "-"
             }
 
-            if(modelItem.TicketStatus?.toLowerCase().equals("closed")){
-                llImgMain.visibility = View.VISIBLE
+            if(modelItem.TicketStatus?.lowercase(Locale.getDefault()).equals("closed")){
+                binding.llImgMain.visibility = View.VISIBLE
             }else{
-                llImgMain.visibility = View.GONE
+                binding.llImgMain.visibility = View.GONE
             }
 
 
             val tktStatus= modelItem.TicketStatus
 
-            when (tktStatus?.toLowerCase()) {
+            when (tktStatus?.lowercase(Locale.getDefault())) {
 
                 "pending ticket" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorYellow,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorYellow,null))
                     }
                 }
                 "visited" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialIndigo,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialIndigo,null))
                     }
                 }
                 "reschedule" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialPink,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialPink,null))
                     }
                 }
                 "not accepted" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorBlue,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorBlue,null))
                     }
                 }
                 "urgent ticket" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorRed,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorRed,null))
                     }
                 }
                 "inprogress ticket" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.material_teal_700,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.material_teal_700,null))
                     }
                 }
                 "closed" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialLime,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialLime,null))
                     }
                 }
                 "reassign" -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialAmber,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialAmber,null))
                     }
                 }
                 else -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        txt_tktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialGreen,null))
+                        binding.txtTktStatus.setTextColor(this.resources.getColor(R.color.colorMaterialGreen,null))
                     }
                 }
             }
 
-            txt_tktStatus.text = tktStatus
+            binding.txtTktStatus.text = tktStatus
 
 //            txt_warranty_uptoDate.text = modelItem?.WarrantyUptoDate
 //            txt_due_by_date.text = modelItem?.DueByDate
 
             if(modelItem.InWarranty == true){
-                txt_in_warranty.text = "YES"
+                binding.txtInWarranty.text = "YES"
             }else{
-                txt_in_warranty.text = "NO"
+                binding.txtInWarranty.text = "NO"
             }
 
-            txt_engg_instruction.text = modelItem.EngineerInstructions
+            binding.txtEnggInstruction.text = modelItem.EngineerInstructions
 
             if(modelItem.IsSCAddressverified == true){
-                txt_sc_address_verified.text = "YES"
+                binding.txtScAddressVerified.text = "YES"
             }else{
-                txt_sc_address_verified.text = "NO"
+                binding.txtScAddressVerified.text = "NO"
             }
-            txt_appointment_date.text = modelItem.AppointmentDate
+            binding.txtAppointmentDate.text = modelItem.AppointmentDate
         }
 
         Glide.with(this)
                 .load(modelItem?.BillPhotoProof)
                 .fitCenter()
                 .placeholder(R.drawable.no_image_icon)
-                .into(imgBill)
+                .into(binding.imgBill)
 
         Glide.with(this)
                 .load(modelItem?.SelfieImage)
                 .fitCenter()
                 .placeholder(R.drawable.no_image_icon)
-                .into(imgSelfie)
+                .into(binding.imgSelfie)
 
         Glide.with(this)
                 .load(modelItem?.QRImage)
                 .fitCenter()
                 .placeholder(R.drawable.no_image_icon)
-                .into(imgQR)
+                .into(binding.imgQR)
 
         Glide.with(this)
                 .load(modelItem?.ProductImage)
                 .fitCenter()
                 .placeholder(R.drawable.no_image_icon)
-                .into(imgProduct)
+                .into(binding.imgProduct)
 
     }
 
@@ -234,12 +234,11 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
     }
 
 
-    fun splitStr(strLink: String): String {
-        if (!strLink.isNullOrEmpty()) {
+    private fun splitStr(strLink: String): String {
+        if (strLink.isNotEmpty()) {
             val tokens: List<String> = strLink.split("/")
-            if(tokens.count() > 0){
-                var strPath = tokens[tokens.count() - 1]
-                return strPath
+            if(tokens.isNotEmpty()) {
+                return tokens[tokens.count() - 1]
             }
             return "crm.jpg"
         }else{
@@ -249,52 +248,52 @@ class TicketViewDetailsActivity : AppCompatActivity(), KodeinAware, ApiStageList
 
     private fun clickListener(modelItem: GetTicketDetailsData?) {
 
-        binding.txtProductView?.setOnClickListener {
+        binding.txtProductView.setOnClickListener {
             if(!modelItem?.ProductImage.isNullOrEmpty()) {
                 val intent = Intent(this, FullscreenImageActivity::class.java)
-                        .putExtra(ARG_IMAGE_URL, modelItem?.ProductImage)
+                    .putExtra(ARG_IMAGE_URL, modelItem?.ProductImage)
                 startActivity(intent)
             }
         }
 
-        binding.txtProductDownload?.setOnClickListener {
+        binding.txtProductDownload.setOnClickListener {
             downloadFile(this,modelItem?.ProductImage ?: "",splitStr(modelItem?.ProductImage ?: ""))
         }
 
-        binding.txtQrView?.setOnClickListener {
+        binding.txtQrView.setOnClickListener {
             if(!modelItem?.QRImage.isNullOrEmpty()){
                 val intent = Intent(this, FullscreenImageActivity::class.java)
-                        .putExtra(ARG_IMAGE_URL, modelItem?.QRImage)
+                    .putExtra(ARG_IMAGE_URL, modelItem?.QRImage)
                 startActivity(intent)
             }
 
         }
 
-        binding.txtQrDownload?.setOnClickListener {
-                downloadFile(this,modelItem?.QRImage ?: "",splitStr(modelItem?.QRImage ?: ""))
+        binding.txtQrDownload.setOnClickListener {
+            downloadFile(this,modelItem?.QRImage ?: "",splitStr(modelItem?.QRImage ?: ""))
         }
 
-        binding.txtBillView?.setOnClickListener {
+        binding.txtBillView.setOnClickListener {
             if(!modelItem?.BillPhotoProof.isNullOrEmpty()){
-            val intent = Intent(this, FullscreenImageActivity::class.java)
+                val intent = Intent(this, FullscreenImageActivity::class.java)
                     .putExtra(ARG_IMAGE_URL, modelItem?.BillPhotoProof)
-            startActivity(intent)
+                startActivity(intent)
             }
         }
 
-        binding.txtBillDownload?.setOnClickListener {
+        binding.txtBillDownload.setOnClickListener {
             downloadFile(this,modelItem?.BillPhotoProof ?: "",splitStr(modelItem?.BillPhotoProof ?: ""))
         }
 
-        binding.txtSelfieView?.setOnClickListener {
+        binding.txtSelfieView.setOnClickListener {
             if(!modelItem?.SelfieImage.isNullOrEmpty()) {
                 val intent = Intent(this, FullscreenImageActivity::class.java)
-                        .putExtra(ARG_IMAGE_URL, modelItem?.SelfieImage)
+                    .putExtra(ARG_IMAGE_URL, modelItem?.SelfieImage)
                 startActivity(intent)
             }
         }
 
-        binding.txtSelfieDownload?.setOnClickListener {
+        binding.txtSelfieDownload.setOnClickListener {
             downloadFile(this,modelItem?.SelfieImage ?: "",splitStr(modelItem?.SelfieImage ?: ""))
         }
 

@@ -23,7 +23,6 @@ import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
 import com.goldmedal.crm.util.TimeDurationUtil
 import com.goldmedal.crm.util.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.dialog_otp.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -64,10 +63,9 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        attBinding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_otp, container, false)
+        attBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_otp, container, false)
         return attBinding.root
     }
 
@@ -80,7 +78,7 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
         if (time_in_milli_seconds > 0) {
             startTimer(time_in_milli_seconds)
-            tvResend.isClickable = false
+            attBinding.tvResend.isClickable = false
         }
 
 //        viewModel.getLoggedInUser().observe(viewLifecycleOwner, Observer { user ->
@@ -95,29 +93,29 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 //        viewModel.strCustName = arguments?.getString("custName")!!
 
 
-        imvClose?.setOnClickListener {
+        attBinding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
 
-        tvResend?.setOnClickListener {
+        attBinding.tvResend.setOnClickListener {
             callBack?.onResendOtp(1)
             time_in_milli_seconds = 60000L
             startTimer(time_in_milli_seconds)
         }
 
-        btnSubmit?.setOnClickListener {
-            if (input_otp.text.toString() == strGoodOtp) {
-                showSuccessMessage("OTP Verified is Good",input_otp.text.toString())
-            } else if (input_otp.text.toString() == strBadOtp) {
-                showSuccessMessage("OTP Verified is Bad",input_otp.text.toString())
+        attBinding.btnSubmit.setOnClickListener {
+            if (attBinding.inputOtp.text.toString() == strGoodOtp) {
+                showSuccessMessage("OTP Verified is Good", attBinding.inputOtp.text.toString())
+            } else if (attBinding.inputOtp.text.toString() == strBadOtp) {
+                showSuccessMessage("OTP Verified is Bad", attBinding.inputOtp.text.toString())
             }else {
-                showSuccessMessage("Invalid OTP",input_otp.text.toString())
+                showSuccessMessage("Invalid OTP", attBinding.inputOtp.text.toString())
             }
         }
 
 // - - -  In case is user doesnt want to submit otp - - - - - -
-        btnCancel?.setOnClickListener {
+        attBinding.btnCancel.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
 
                     .setMessage("Do you want to proceed without OTP??")
@@ -154,18 +152,14 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         countdown_timer = object : CountDownTimer(time_in_seconds, GlobalConstant.TICK_TOCK_INTERVAL) {
             override fun onFinish() {
                 Log.d("TAG", "onFinish: +timer timeout")
-                if(tvResend != null) {
-                    tvResend.text = "Resend OTP"
-                    tvResend.isClickable = true
-                }
+                attBinding.tvResend.text = "Resend OTP"
+                attBinding.tvResend.isClickable = true
             }
 
             override fun onTick(p0: Long) {
                 time_in_milli_seconds = p0
-                if(tvResend != null){
-                    tvResend.text = TimeDurationUtil.formatMinutesSeconds(time_in_milli_seconds)
-                    tvResend.isClickable = false
-                }
+                attBinding.tvResend.text = TimeDurationUtil.formatMinutesSeconds(time_in_milli_seconds)
+                attBinding.tvResend.isClickable = false
             }
         }
         countdown_timer.start()
@@ -174,11 +168,11 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
 
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        attBinding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        attBinding.progressBar?.stop()
     }
 
     private fun showSuccessMessage(message: String,otp:String) {
@@ -199,7 +193,7 @@ class TicketOTPDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
+        attBinding.progressBar.stop()
         context?.toast(message)
     }
 

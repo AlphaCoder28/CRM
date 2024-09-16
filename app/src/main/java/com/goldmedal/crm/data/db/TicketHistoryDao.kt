@@ -12,7 +12,7 @@ import com.goldmedal.crm.data.db.entities.TicketHistoryData
 interface TicketHistoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTicketHistory(historyData: List<TicketHistoryData?>)
+    suspend fun insertTicketHistory(historyData: List<TicketHistoryData>)
 
     @Query("SELECT * FROM TicketHistoryData")
     fun getTicketHistory() : LiveData<List<TicketHistoryData>>

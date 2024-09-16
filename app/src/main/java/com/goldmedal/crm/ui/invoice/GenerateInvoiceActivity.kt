@@ -30,7 +30,6 @@ import com.goldmedal.crm.util.toast
 import com.google.gson.Gson
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_generate_invoice.*
 import org.angmarch.views.OnSpinnerItemSelectedListener
 import org.angmarch.views.SpinnerTextFormatter
 import org.json.JSONArray
@@ -127,17 +126,17 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                     modelItem?.ProductID ?: 0
                 )
 
-                txtCustName.text = modelItem?.CustName ?: "-"
-                txtTktNumber.text = modelItem?.TicketNo ?: "-"
-                txtAddress.text = modelItem?.CustAddress ?: "-"
-                tvContactNo.text = modelItem?.CustContactNo ?: "-"
-                tvEmailID.text = modelItem?.EmailID ?: "-"
-                tvTktStatus.text = modelItem?.TicketStatus ?: "-"
+                binding.txtCustName.text = modelItem?.CustName ?: "-"
+                binding.txtTktNumber.text = modelItem?.TicketNo ?: "-"
+                binding.txtAddress.text = modelItem?.CustAddress ?: "-"
+                binding.tvContactNo.text = modelItem?.CustContactNo ?: "-"
+                binding.tvEmailID.text = modelItem?.EmailID ?: "-"
+                binding.tvTktStatus.text = modelItem?.TicketStatus ?: "-"
                 initPaymentMethodSpinner()
             }
         })
 
-        tvAddItem.setOnClickListener {
+        binding.tvAddItem.setOnClickListener {
 
             if (selectedItem != null) {
                 if ((listAddedItems?.count() ?: 0) > 0) {
@@ -157,13 +156,13 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
             }
         }
 
-        tvGenerateInvoice.setOnClickListener {
+        binding.tvGenerateInvoice.setOnClickListener {
 
             val jsArray = Gson().toJson(listAddedItems)
             val jsonArray = JSONArray(jsArray)
             Log.d("Arraduad ___", jsArray)
 
-            if (listAddedItems?.count() == 0) {
+            if (listAddedItems?.isEmpty() == true) {
                 toast("Please Add Items")
             } else {
                 viewModel.getLoggedInUser().observe(this, Observer { user ->
@@ -185,7 +184,7 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                             1,
                             jsonArray,
                             strPaymentMethod,
-                            edt_gst_no.text.toString()
+                            binding.edtGstNo.text.toString()
                         )
                     }
                 })
@@ -215,9 +214,9 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
     }
 
     private fun addItem() {
-        itemPrice = edt_price.text.toString().toDouble()
-        totalTaxPercent = edt_tax.text.toString().toDouble()
-        totalQty = edt_qty.text.toString().toInt()
+        itemPrice = binding.edtPrice.text.toString().toDouble()
+        totalTaxPercent = binding.edtTax.text.toString().toDouble()
+        totalQty = binding.edtQty.text.toString().toInt()
         if (totalQty > (selectedItem?.Qty ?: 0)) {
             toast("Quantity should be less than or equal to available quantity.")
             return
@@ -311,16 +310,16 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
     }
 
     private fun setItemValues(data: GetItemForInvoiceData?) {
-        tvItemCode.text = data?.itemCode ?: "-"
-        tvItemColor.text = data?.ItemColor ?: "-"
-        tvItemcategory.text = data?.Category ?: "-"
-        tvItemSubCategory.text = data?.SubCategory ?: "-"
-        tvItemQuantity.text = data?.Qty.toString()
+        binding.tvItemCode.text = data?.itemCode ?: "-"
+        binding.tvItemColor.text = data?.ItemColor ?: "-"
+        binding.tvItemcategory.text = data?.Category ?: "-"
+        binding.tvItemSubCategory.text = data?.SubCategory ?: "-"
+        binding.tvItemQuantity.text = data?.Qty.toString()
 
-        edt_price.setText((data?.Rate ?: 0.0).toString())
-        edt_tax.setText((data?.TaxPer ?: 0.0).toString())
-        edt_qty.setText("1")
-        edt_roundoff_amount.setText((roundoffAmount).toString())
+        binding.edtPrice.setText((data?.Rate ?: 0.0).toString())
+        binding.edtTax.setText((data?.TaxPer ?: 0.0).toString())
+        binding.edtQty.setText("1")
+        binding.edtRoundoffAmount.setText((roundoffAmount).toString())
     }
 
     private fun List<AddedInvoiceItemData?>.toAddedInvoiceItem(): List<AddedInvoiceItem?> {
@@ -332,18 +331,15 @@ class GenerateInvoiceActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
     private fun bindUI(list: List<AddedInvoiceItemData?>?) = Coroutines.main {
         list?.let {
-            if (it != null) {
+            roundoffAmount = list.map { it?.FinalPrice ?: 0 }.sum()
+            totalTaxAmount1 = list.map { it?.TaxAmount1 ?: 0 }.sum()
+            totalTaxAmount2 = list.map { it?.TaxAmount2 ?: 0 }.sum()
+            totalPreTaxAmount = list.map { it?.PreTaxAmount ?: 0 }.sum()
+            totalDiscountAmount = list.map { it?.DiscountAmount ?: 0 }.sum()
+            totalAfterDiscountAmount = list.map { it?.AfterDiscountAmount ?: 0 }.sum()
 
-                roundoffAmount = list.map { it?.FinalPrice ?: 0 }.sum()
-                totalTaxAmount1 = list.map { it?.TaxAmount1 ?: 0 }.sum()
-                totalTaxAmount2 = list.map { it?.TaxAmount2 ?: 0 }.sum()
-                totalPreTaxAmount = list.map { it?.PreTaxAmount ?: 0 }.sum()
-                totalDiscountAmount = list.map { it?.DiscountAmount ?: 0 }.sum()
-                totalAfterDiscountAmount = list.map { it?.AfterDiscountAmount ?: 0 }.sum()
-
-                edt_roundoff_amount.setText(roundoffAmount.toString())
-                initRecyclerView(it.toAddedInvoiceItem())
-            }
+            binding.edtRoundoffAmount.setText(roundoffAmount.toString())
+            initRecyclerView(it.toAddedInvoiceItem())
 
         }
 

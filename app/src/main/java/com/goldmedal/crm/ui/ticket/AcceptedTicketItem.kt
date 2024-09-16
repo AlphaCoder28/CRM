@@ -14,7 +14,6 @@ import com.goldmedal.crm.data.model.GetAcceptedTicketData
 import com.goldmedal.crm.databinding.AcceptedTicketRowBinding
 import com.goldmedal.crm.util.interfaces.IStatusListener
 import com.xwray.groupie.viewbinding.BindableItem
-import kotlinx.android.synthetic.main.accepted_ticket_row.*
 import java.util.*
 
 
@@ -125,24 +124,18 @@ class AcceptedTicketItem(private val acceptedTicketData: GetAcceptedTicketData?,
             }
 
 
-            textViewClose.setOnClickListener(View.OnClickListener { v: View? ->
-                if (callBackListener != null) {
-                    callBackListener.cancelTicket(acceptedTicketData,6)
-                }
-            })
+            textViewClose.setOnClickListener { v: View? ->
+                callBackListener?.cancelTicket(acceptedTicketData, 6)
+            }
 
 
-            textViewReassign.setOnClickListener(View.OnClickListener { v: View? ->
-                if (callBackListener != null) {
-                    callBackListener.cancelTicket(acceptedTicketData,5)
-                }
-            })
+            textViewReassign.setOnClickListener { v: View? ->
+                callBackListener?.cancelTicket(acceptedTicketData, 5)
+            }
 
-            txtTicketReschedule.setOnClickListener(View.OnClickListener { v: View? ->
-                if (callBackListener != null) {
-                    callBackListener.cancelTicket(acceptedTicketData,4)
-                }
-            })
+            txtTicketReschedule.setOnClickListener { v: View? ->
+                callBackListener?.cancelTicket(acceptedTicketData, 4)
+            }
 
             if(statusBy == 4 || statusBy == 5 || statusBy == 6){
                 btnMain.visibility = View.GONE

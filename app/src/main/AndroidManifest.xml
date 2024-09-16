@@ -12,11 +12,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--Required if app targets Android 13-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- Required if app targets Android 13 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"/>
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -98,7 +98,7 @@
         <activity
             android:name=".ui.stocks.StockListActivity"
             android:label="@string/stock_list"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ticket.scanner.QrCodeScanActivity"
             android:label="@string/str_scan" />
@@ -162,7 +162,10 @@
         <activity
             android:name=".common.FullscreenImageActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".ui.ticket.scanner.QRScannerActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.common.GenericFileProvider"

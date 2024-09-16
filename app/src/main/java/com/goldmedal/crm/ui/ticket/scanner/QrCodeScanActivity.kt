@@ -12,19 +12,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.budiyev.android.codescanner.*
 import com.goldmedal.crm.R
 import com.goldmedal.crm.ui.ticket.ComplainTabFragment
-import com.goldmedal.crm.util.alertDialog
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.client.result.ParsedResultType
-import com.google.zxing.client.result.ResultParser
-import com.google.zxing.client.result.URIParsedResult
 
 
 class QrCodeScanActivity : AppCompatActivity() {
 
-    private lateinit var codeScanner: CodeScanner
+    //private lateinit var codeScanner: CodeScanner
     private var callFrom: String = ""
 //    private var cameraProvider: ProcessCameraProvider? = null
 //    private var cameraSelector: CameraSelector? = null
@@ -42,14 +36,14 @@ class QrCodeScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_code_scan)
-        setupCamera()
+        //setupCamera()
 
         intent.let {
             callFrom = intent.getStringExtra(ARG_CALL_FROM).toString()
         }
     }
 
-    private fun setupCamera() {
+    /*private fun setupCamera() {
 
         val scannerView = findViewById<CodeScannerView>(R.id.scanner_view)
 
@@ -199,17 +193,17 @@ class QrCodeScanActivity : AppCompatActivity() {
 //                    }
 //                }
 //            )
-    }
+    }*/
 
     private fun bindCameraUseCases() {
 
-        codeScanner.startPreview()
+        //codeScanner.startPreview()
 //        bindPreviewUseCase()
         //   bindAnalyseUseCase()
     }
 
     override fun onPause() {
-        codeScanner.releaseResources()
+        //codeScanner.releaseResources()
         super.onPause()
     }
 
@@ -218,7 +212,7 @@ class QrCodeScanActivity : AppCompatActivity() {
         super.onResume()
 
         if (isCameraPermissionGranted()) {
-            codeScanner.startPreview()
+            //codeScanner.startPreview()
         } else {
             ActivityCompat.requestPermissions(
                 this,
@@ -374,7 +368,7 @@ class QrCodeScanActivity : AppCompatActivity() {
         if (requestCode == PERMISSION_CAMERA_REQUEST) {
             if (isCameraPermissionGranted()) {
 //                bindCameraUseCases()
-                codeScanner.startPreview()
+                //codeScanner.startPreview()
             } else {
                 Log.e(TAG, "no camera permission")
             }

@@ -25,11 +25,10 @@ import com.goldmedal.crm.util.*
 import com.goldmedal.crm.util.interfaces.IStatusListener
 import com.goldmedal.hrapp.ui.dialogs.TicketCloseDialog
 import com.goldmedal.hrapp.ui.dialogs.TicketRescheduleDialog
-import com.goldmedal.hrapp.ui.dialogs.TicketUnacceptanceDialog
+import com.goldmedal.crm.ui.dialogs.TicketUnacceptanceDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_accepted_ticket.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -49,6 +48,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
     override val kodein by kodein()
 
     private val factory: TicketViewModelFactory by instance()
+    private lateinit var mBinding: ActivityAcceptedTicketBinding
 
     private lateinit var viewModel: TicketViewModel
     private var statusBy: Int? = null
@@ -69,14 +69,13 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityAcceptedTicketBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_accepted_ticket)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_accepted_ticket)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
 
-        viewModel = ViewModelProvider(this, factory).get(TicketViewModel::class.java)
-        binding.viewmodelAcceptedTicket = viewModel
+        viewModel = ViewModelProvider(this, factory)[TicketViewModel::class.java]
+        mBinding.viewmodelAcceptedTicket = viewModel
         viewModel.apiListener = this
 
 //        ticketID = intent.getIntExtra("TicketID",0)
@@ -89,8 +88,8 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 //            })
 //        }
 
-        layout_startDate?.setOnClickListener(this)
-        layout_endDate?.setOnClickListener(this)
+        mBinding.layoutStartDate.setOnClickListener(this)
+        mBinding.layoutEndDate.setOnClickListener(this)
 
         maxStartDate = Calendar.getInstance()
         val calendar = Calendar.getInstance()
@@ -104,8 +103,8 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         strStartDate = previous.toString("MM-dd-yyyy")
 
 
-        tvSelectStartDate?.text = previous.toString("dd/MM/yyyy")
-        tvSelectEndDate?.text = today.toString("dd/MM/yyyy")
+        mBinding.tvSelectStartDate.text = previous.toString("dd/MM/yyyy")
+        mBinding.tvSelectEndDate.text = today.toString("dd/MM/yyyy")
 
         intent?.let {
             statusBy = it.getIntExtra(ARG_STATUS_BY, 0)
@@ -142,7 +141,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
 
 //SearchView
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        mBinding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -172,7 +171,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
             }
         })
 
-        search_view?.setOnCloseListener {
+        mBinding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 
@@ -209,7 +208,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
             addAll(acceptedData)
         }
 
-        rvList?.apply {
+        mBinding.rvList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = mAdapter
@@ -241,7 +240,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                 val startDatePicker = DatePickerDialog(
                     this,
                     DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        tvSelectStartDate.text = String.format(
+                        mBinding.tvSelectStartDate.text = String.format(
                             Locale.getDefault(),
                             "%s/%d/%d",
                             dayOfMonth.toString(),
@@ -253,7 +252,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                         strStartDate = (monthOfYear + 1).toString() + "-" + dayOfMonth + "-" + year
 
                         if (strEndDate.isNullOrEmpty()) {
-                            root_layout?.snackbar("Please Select End Date")
+                            mBinding.rootLayout.snackbar("Please Select End Date")
                         } else {
 
 
@@ -292,7 +291,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                 val endDatePicker = DatePickerDialog(
                     this,
                     DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        tvSelectEndDate.text = String.format(
+                        mBinding.tvSelectEndDate.text = String.format(
                             Locale.getDefault(),
                             "%d/%d/%d",
                             dayOfMonth,
@@ -302,7 +301,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
                         maxStartDate.set(year, monthOfYear, dayOfMonth)
                         strEndDate = (monthOfYear + 1).toString() + "-" + dayOfMonth + "-" + year
                         if (strStartDate.isNullOrEmpty()) {
-                            root_layout?.snackbar("Please Select Start Date")
+                            mBinding.rootLayout.snackbar("Please Select Start Date")
                         } else {
                             viewModel.getLoggedInUser().observe(this, Observer { user ->
 
@@ -337,18 +336,18 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
 
     override fun onStarted(callFrom: String) {
-        view_common?.showProgressBar()
+        mBinding.viewCommon.showProgressBar()
         Log.d(TAG, "onStarted: HIT")
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        view_common?.hide()
+        mBinding.viewCommon.hide()
 
         if (callFrom == "accepted_tickets") {
 
             val data = _object as List<GetAcceptedTicketData?>
-            if (data.isNullOrEmpty()) {
-                view_common?.showNoData()
+            if (data.isEmpty()) {
+                mBinding.viewCommon.showNoData()
             }
             bindUI(data)
         }
@@ -359,7 +358,7 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         if (callFrom == "ticket_details") {
             val data = _object as List<GetTicketDetailsData?>
 
-            if (!data.isNullOrEmpty()) {
+            if (data.isNotEmpty()) {
                 if (data[0]?.IsCheckedIn == 0) {
 
 //                    val intent = Intent(this, CheckInActivity::class.java)
@@ -395,18 +394,18 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
         if (isNetworkError) {
-            view_common?.showNoInternet()
+            mBinding.viewCommon.showNoInternet()
         } else {
-            view_common?.showNoData()
+            mBinding.viewCommon.showNoData()
         }
 
         bindUI(ArrayList())
-        root_layout?.snackbar(message)
+        mBinding.rootLayout.snackbar(message)
 
     }
 
     override fun onValidationError(message: String, callFrom: String) {
-        root_layout?.snackbar(message)
+        mBinding.rootLayout.snackbar(message)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -553,9 +552,9 @@ class AcceptedTicketsActivity : AppCompatActivity(), KodeinAware, ApiStageListen
         val dialogFragment = TicketCloseDialog.newInstance()
         dialogFragment.callBack = this
         val bundle = Bundle()
-        bundle.putInt("ticketId", modelItem?.TicketID ?: -1)
+        bundle.putInt("ticketId", modelItem.TicketID ?: -1)
         bundle.putInt("actionId", action_id)
-        bundle.putString("ticketNo", modelItem?.Tktno ?: "")
+        bundle.putString("ticketNo", modelItem.Tktno ?: "")
         bundle.putString("deviceLatitude", latitude.toString())
         bundle.putString("deviceLongitude", longitude.toString())
         bundle.putString(

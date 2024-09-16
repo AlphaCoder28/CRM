@@ -1,4 +1,4 @@
-package com.goldmedal.hrapp.ui.dialogs
+package com.goldmedal.crm.ui.dialogs
 
 
 import android.app.Dialog
@@ -24,8 +24,9 @@ import com.goldmedal.crm.databinding.DialogTicketUnacceptanceBinding
 import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.getDeviceId
 import com.goldmedal.crm.util.toast
+import com.goldmedal.hrapp.ui.dialogs.TicketUnacceptanceViewModel
+import com.goldmedal.hrapp.ui.dialogs.TicketUnacceptanceViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.dialog_ticket_unacceptance.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -70,10 +71,9 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        attBinding =
-                DataBindingUtil.inflate(inflater, R.layout.dialog_ticket_unacceptance, container, false)
+        attBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_ticket_unacceptance, container, false)
 
         //set to adjust screen height automatically, when soft keyboard appears on screen
 
@@ -107,37 +107,37 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
 
         val items = listOf("Please Select", "Incorrectly Assigned", "Incorrect Address", "Others")
         val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, items)
-        (spinner_reason.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        (attBinding.spinnerReason.editText as? AutoCompleteTextView)?.setAdapter(adapter)
 
 
-        (spinner_reason.editText as? AutoCompleteTextView)?.setText(
+        (attBinding.spinnerReason.editText as? AutoCompleteTextView)?.setText(
                 resources.getString(R.string.str_please_select),
                 false
         )
 
-        imvClose?.setOnClickListener {
+        attBinding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
-        (spinner_reason.editText as? AutoCompleteTextView)?.setOnItemClickListener { adapterView, _, i, l ->
+        (attBinding.spinnerReason.editText as? AutoCompleteTextView)?.setOnItemClickListener { adapterView, _, i, l ->
 
             when (adapterView.getItemAtPosition(i)) {
                 "Please Select" -> {
                     viewModel.reasonId = -1
-                    layout_incorrect_address?.visibility = View.GONE
+                    attBinding.layoutIncorrectAddress.visibility = View.GONE
                 }
                 "Incorrectly Assigned" -> {
                     viewModel.reasonId = 1
-                    layout_incorrect_address?.visibility = View.GONE
+                    attBinding.layoutIncorrectAddress.visibility = View.GONE
                 }
                 "Incorrect Address" -> {
                     viewModel.reasonId = 2
-                    layout_incorrect_address?.visibility = View.VISIBLE
+                    attBinding.layoutIncorrectAddress.visibility = View.VISIBLE
 
                 }
                 "Others" -> {
                     viewModel.reasonId = 3
-                    layout_incorrect_address?.visibility = View.GONE
+                    attBinding.layoutIncorrectAddress.visibility = View.GONE
                 }
             }
 
@@ -145,7 +145,7 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
         }
 
 //Pincode TextField text changed
-        edt_pincode?.doAfterTextChanged {
+        attBinding.edtPincode.doAfterTextChanged {
 
             if (it?.length == 6) {
                 viewModel.getPincodeWiseStateDistrict()
@@ -162,8 +162,8 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
             viewModel.districtId = list[0]?.DistrictID
             viewModel.stateId = list[0]?.StateID
 
-            edt_state.setText(list[0]?.StateName)
-            edt_district.setText(list[0]?.DistrictName)
+            attBinding.edtState.setText(list[0]?.StateName)
+            attBinding.edtDistrict.setText(list[0]?.DistrictName)
         }
     }
 
@@ -171,17 +171,17 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
         viewModel.districtId = 0
         viewModel.stateId = 0
 
-        edt_district.setText("")
-        edt_state.setText("")
+        attBinding.edtDistrict.setText("")
+        attBinding.edtState.setText("")
 
     }
 
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        attBinding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        attBinding.progressBar.stop()
 
 
         if (callFrom == "info_pincode") {
@@ -211,7 +211,7 @@ class TicketUnacceptanceDialog : DialogFragment(), KodeinAware, ApiStageListener
 
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
+        attBinding.progressBar.stop()
         context?.toast(message)
 
         if (callFrom == "info_pincode") {

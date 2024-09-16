@@ -25,7 +25,6 @@ import com.goldmedal.crm.util.toString
 import com.google.android.material.tabs.TabLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_accepted_ticket.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -128,8 +127,8 @@ class ProgressReportActivity : AppCompatActivity(), KodeinAware, DashboardApiLis
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                statusBy = tab.id
-                search_view.setQuery("", false);
-                search_view.clearFocus();
+                binding.searchView.setQuery("", false);
+                binding.searchView.clearFocus();
                 strSearchBy = ""
 
                 viewModel.getLoggedInUser().observe(this@ProgressReportActivity, Observer { user ->
@@ -157,7 +156,7 @@ class ProgressReportActivity : AppCompatActivity(), KodeinAware, DashboardApiLis
 
 
         // - - - - searchview - - - - - -
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -186,7 +185,7 @@ class ProgressReportActivity : AppCompatActivity(), KodeinAware, DashboardApiLis
                 return true
             }
         })
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 

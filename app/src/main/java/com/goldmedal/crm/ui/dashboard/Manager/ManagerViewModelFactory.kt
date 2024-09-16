@@ -13,7 +13,7 @@ class ManagerViewModelFactory(
         private val repository: ManagerRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ManagerViewModel(repository) as T
     }
 }

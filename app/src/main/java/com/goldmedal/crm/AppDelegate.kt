@@ -25,6 +25,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import java.io.File
 
 
 /**
@@ -68,6 +69,12 @@ class AppDelegate : Application(), KodeinAware {
         bind() from provider { PartsViewModelFactory(instance()) }
         bind() from provider { ManagerViewModelFactory(instance()) }
 
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        val dexOutputDir: File = codeCacheDir
+        dexOutputDir.setReadOnly()
     }
 
 }

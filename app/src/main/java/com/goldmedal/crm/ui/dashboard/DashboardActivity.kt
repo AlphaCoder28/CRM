@@ -8,13 +8,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -23,6 +21,7 @@ import com.goldmedal.crm.BuildConfig
 import com.goldmedal.crm.R
 import com.goldmedal.crm.data.model.GetTicketsCountData
 import com.goldmedal.crm.databinding.ActivityDashboardBinding
+import com.goldmedal.crm.databinding.NavHeaderHomeScreenBinding
 import com.goldmedal.crm.ui.auth.LoginActivity
 import com.goldmedal.crm.ui.auth.LoginViewModel
 import com.goldmedal.crm.ui.auth.LoginViewModelFactory
@@ -35,6 +34,7 @@ import com.goldmedal.crm.ui.stocks.StockListActivity
 import com.goldmedal.crm.ui.ticket.AcceptedTicketsActivity
 import com.goldmedal.crm.ui.ticket.ServiceTicketActivity
 import com.goldmedal.crm.ui.ticket.TicketHistoryActivity
+import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -42,10 +42,6 @@ import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
 import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.tasks.Task
-import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.nav_header_home_screen.*
-import kotlinx.android.synthetic.main.toolbar.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -57,15 +53,14 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by kodein()
     private val factory: LoginViewModelFactory by instance()
-
+    private lateinit var mBinding: ActivityDashboardBinding
+    private lateinit var mHeaderBinding: NavHeaderHomeScreenBinding
+    private lateinit var navController: NavController
 
     var mToast: Toast? = null
 
     companion object {
         private lateinit var viewModel: LoginViewModel
-        private lateinit var navController: NavController
-
-
     }
 
     @SuppressLint("ShowToast")
@@ -73,36 +68,32 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
 
 
-        val binding: ActivityDashboardBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+        mHeaderBinding = NavHeaderHomeScreenBinding.bind(mBinding.navigationView.getHeaderView(0))
+        mBinding.viewmodel = viewModel
 
-        viewModel =
-            ViewModelProvider(this, factory).get(LoginViewModel::class.java)
-
-        binding.viewmodel = viewModel
-
-        setSupportActionBar(toolbar)
+        setSupportActionBar(mBinding.appBarHomeScreen.appBarToolBar.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         mToast =
             Toast.makeText(this@DashboardActivity, R.string.press_back_again, Toast.LENGTH_SHORT)
 
         val toggle = ActionBarDrawerToggle(
             this,
-            drawerLayout,
-            toolbar,
+            mBinding.drawerLayout,
+            mBinding.appBarHomeScreen.appBarToolBar.toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
-        drawerLayout.addDrawerListener(toggle)
+        mBinding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
-
-        navController = Navigation.findNavController(this, R.id.navFragment)
+        //navController = findNavController(R.id.navFragment)
+        //navController = Navigation.findNavController(this, R.id.navFragment)
 
 
         //  bottomNav.setupWithNavController(navController)
-        navigationView.setupWithNavController(navController)
+        //mBinding.navigationView.setupWithNavController(navController)
 
 
 
@@ -113,38 +104,35 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 //        val navController = navHostFragment.navController
 
 
-        val navHostFragment = navFragment as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navFragment) as NavHostFragment
+        navController = navHostFragment.navController
+        mBinding.navigationView.setupWithNavController(navController)
         val inflater = navController.navInflater
         val graph = inflater.inflate(R.navigation.nav_graph)
-        navController = navHostFragment.navController
 
-
-
-
-        toolbar_notification?.setOnClickListener {
+        mBinding.appBarHomeScreen.appBarToolBar.toolbarNotification.setOnClickListener {
             startActivity(Intent(this, NotificationActivity::class.java))
         }
 
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
             if (user != null) {
-                textViewMsg?.text = "Hello, " + user.UserName
+                mHeaderBinding.textViewMsg.text = "Hello, " + user.UserName
 
-
-                navigationView.getMenu().clear();
+                mBinding.navigationView.menu.clear();
 
 
 //                val isTrue = true
                 if (user.RoleName.equals("Service Engineer", true)) {
 
                     graph.startDestination = R.id.homeFragment
-                    navigationView.inflateMenu(R.menu.activity_nav_drawer);
+                    mBinding.navigationView.inflateMenu(R.menu.activity_nav_drawer);
                     bindServiceEngMenus()
 
                 } else {
 
                     graph.startDestination = R.id.ManagerHomeFragment
-                    navigationView.inflateMenu(R.menu.nav_drawer_manager);
+                    mBinding.navigationView.inflateMenu(R.menu.nav_drawer_manager);
                     bindServiceEngMenus()
 
                 }
@@ -156,10 +144,9 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
                         .load(user.ProfilePhoto)
                         .fitCenter()
                         .placeholder(R.drawable.male_avatar)
-                        .into(imageViewProfile)
+                        .into(mHeaderBinding.imageViewProfile)
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    imageViewProfile.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.male_avatar, null))
                 }
 
 
@@ -258,15 +245,15 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
     private fun bindServiceEngMenus() {
 
-        val assignedTicketItem = navigationView.menu.findItem(R.id.actionAssignedTicket)
-        val serviceTicketItem = navigationView.menu.findItem(R.id.actionServiceTicket)
-        val ticketHistoryItem = navigationView.menu.findItem(R.id.actionTicketHistory)
-        val upcomingAppointmentsItem = navigationView.menu.findItem(R.id.actionUpcomingAppointments)
-        val progressReportItem = navigationView.menu.findItem(R.id.actionProgressReport)
-        val invoiceList = navigationView.menu.findItem(R.id.actionInvoiceList)
-        val stockList = navigationView.menu.findItem(R.id.actionStockList)
-        val logoutItem = navigationView.menu.findItem(R.id.actionLogout)
-        val headerView = navigationView.getHeaderView(0)
+        val assignedTicketItem = mBinding.navigationView.menu.findItem(R.id.actionAssignedTicket)
+        val serviceTicketItem = mBinding.navigationView.menu.findItem(R.id.actionServiceTicket)
+        val ticketHistoryItem = mBinding.navigationView.menu.findItem(R.id.actionTicketHistory)
+        val upcomingAppointmentsItem = mBinding.navigationView.menu.findItem(R.id.actionUpcomingAppointments)
+        val progressReportItem = mBinding.navigationView.menu.findItem(R.id.actionProgressReport)
+        val invoiceList = mBinding.navigationView.menu.findItem(R.id.actionInvoiceList)
+        val stockList = mBinding.navigationView.menu.findItem(R.id.actionStockList)
+        val logoutItem = mBinding.navigationView.menu.findItem(R.id.actionLogout)
+        val headerView = mBinding.navigationView.getHeaderView(0)
 
         headerView.setOnClickListener {
             UserProfileActivity.start(this)
@@ -328,8 +315,8 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
     override fun onBackPressed() {
 
 
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
+        if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mBinding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
 
 
@@ -351,7 +338,7 @@ class DashboardActivity : AppCompatActivity(), KodeinAware {
 
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, drawerLayout)
+        return NavigationUI.navigateUp(navController, mBinding.drawerLayout)
     }
 
 

@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.model.UsedItemAndPartData
-import com.goldmedal.crm.databinding.DialogUsedItemsBinding
 import com.goldmedal.crm.databinding.DialogUsedPartsBinding
 import com.goldmedal.crm.ui.parts.PartsViewModel
 import com.goldmedal.crm.ui.parts.PartsViewModelFactory
@@ -25,7 +24,6 @@ import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.toast
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.dialog_used_items.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -70,10 +68,10 @@ class UsedItemsDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogUsedPartsBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +79,7 @@ class UsedItemsDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         viewModel = ViewModelProvider(this, factory).get(PartsViewModel::class.java)
         viewModel.apiListener = this
 
-        imvClose?.setOnClickListener {
+        binding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
@@ -94,7 +92,7 @@ class UsedItemsDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         })
 
 
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -117,7 +115,7 @@ class UsedItemsDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
             }
         })
 
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 

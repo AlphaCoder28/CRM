@@ -15,7 +15,6 @@ import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_used_parts.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -49,7 +48,7 @@ class AvailablePartsActivity : AppCompatActivity(), KodeinAware, ApiStageListene
         })
 
 
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -72,7 +71,7 @@ class AvailablePartsActivity : AppCompatActivity(), KodeinAware, ApiStageListene
                 return true
             }
         })
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 

@@ -13,13 +13,13 @@ import com.goldmedal.crm.data.db.entities.User
 interface UserDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(user: User?) : Long
+    suspend fun upsert(user: User)
 
     @Query("SELECT * FROM user WHERE uid = $CURRENT_USER_ID")
      fun getUser() : LiveData<User>
 
     @Query("UPDATE user SET ProfilePhoto = :profilePic")
-    suspend fun updateProfilePicture(profilePic : String?)
+    suspend fun updateProfilePicture(profilePic : String)
 
     @Query("DELETE FROM user")
     suspend fun logoutUser()

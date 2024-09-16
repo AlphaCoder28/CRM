@@ -26,6 +26,7 @@ import com.goldmedal.crm.R
 import com.goldmedal.crm.common.ApiStageListener
 import com.goldmedal.crm.data.model.AcceptRejectTicket
 import com.goldmedal.crm.data.model.GetTicketDetailsData
+import com.goldmedal.crm.databinding.ActivityCheckInBinding
 import com.goldmedal.crm.util.*
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -38,8 +39,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import kotlinx.android.synthetic.main.activity_check_in.*
-import kotlinx.android.synthetic.main.sheet_map.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -53,6 +52,7 @@ private const val TAG = "CheckInActivity"
 
 class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
     ApiStageListener<Any>, EasyPermissions.PermissionCallbacks {
+    private lateinit var mBinding: ActivityCheckInBinding
     private lateinit var mMap: GoogleMap
 
     private var modelItem: GetTicketDetailsData? = null
@@ -76,7 +76,8 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_check_in)
+        mBinding = ActivityCheckInBinding.inflate(layoutInflater)
+        setContentView(mBinding.root)
 
         intent?.let {
             modelItem = it.getParcelableExtra(ARG_PARAM)
@@ -102,7 +103,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
         getLocationPermission()
         bindUI()
 
-        btnCall?.setOnClickListener {
+        mBinding.sheetMap.btnCall.setOnClickListener {
             Log.d("TAG", "bind: only call")
             if (!modelItem?.CustContactNo.isNullOrEmpty()) {
                 val intent = Intent(Intent.ACTION_DIAL)
@@ -111,7 +112,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
             }
         }
 
-        btnCheckin?.setOnClickListener {
+        mBinding.sheetMap.btnCheckin.setOnClickListener {
 
 
             viewModel.getLoggedInUser().observe(this@CheckInActivity, Observer { user ->
@@ -155,13 +156,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
                         isGeofenceLock = true
 
                     } else {
-                        if (checkIfWithinGeofenceRange()) {
-                            isGeofenceLock = true
-                         //   alertDialog("You are inside geofence")
-                        } else {
-//                            alertDialog(getString(R.string.str_check_in_alert))
-                            isGeofenceLock = false
-                        }
+                        isGeofenceLock = checkIfWithinGeofenceRange()
                     }
 
 
@@ -180,13 +175,13 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
 
         }
 
-        imv_back?.setOnClickListener {
+        mBinding.imvBack.setOnClickListener {
             finish()
         }
     }
 
 
-    fun checkIfWithinGeofenceRange(): Boolean {
+    private fun checkIfWithinGeofenceRange(): Boolean {
 
         val results1 = FloatArray(1)
         Location.distanceBetween(
@@ -207,7 +202,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
 
         // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
         // This will display a dialog directing them to enable the permission in app settings.
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms[0])) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             SettingsDialog.Builder(this).build().show()
         }
     }
@@ -323,15 +318,15 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
     }
 
     private fun bindUI() {
-        txtCustomerName?.text = modelItem?.CustName
-        text_view_customer_address?.text = modelItem?.CustAddress
+        mBinding.sheetMap.txtCustomerName.text = modelItem?.CustName
+        mBinding.sheetMap.textViewCustomerAddress.text = modelItem?.CustAddress
 
         if (modelItem?.IsSCAddressverified == true) {
-            txt_verification?.text = getString(R.string.str_verified_address)
-            imv_verification_status?.setImageResource(R.drawable.ic_verified)
+            mBinding.sheetMap.txtVerification.text = getString(R.string.str_verified_address)
+            mBinding.sheetMap.imvVerificationStatus.setImageResource(R.drawable.ic_verified)
         } else {
-            txt_verification?.text = getString(R.string.str_un_verified_address)
-            imv_verification_status?.setImageResource(R.drawable.ic_unverified)
+            mBinding.sheetMap.txtVerification.text = getString(R.string.str_un_verified_address)
+            mBinding.sheetMap.imvVerificationStatus.setImageResource(R.drawable.ic_unverified)
         }
 
 
@@ -424,7 +419,7 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
         } catch (e: IOException) {
             Log.e(TAG, "geoLocate: IOException: " + e.localizedMessage)
         }
-        if (list.size > 0) {
+        if (list.isNotEmpty()) {
             val address: Address = list[0]
             Log.d(TAG, "geoLocate: found a location: " + address.toString())
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
@@ -468,14 +463,14 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
     }
 
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        mBinding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        mBinding.progressBar.stop()
 
         val data = _object as List<AcceptRejectTicket?>
-        if (!data.isNullOrEmpty()) {
+        if (data.isNotEmpty()) {
            toast("Checked in successfully")
 
 
@@ -489,12 +484,10 @@ class CheckInActivity : AppCompatActivity(), OnMapReadyCallback, KodeinAware,
     }
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
-
-
+        mBinding.progressBar.stop()
     }
 
     override fun onValidationError(message: String, callFrom: String) {
-        myCoordinatorLayout?.snackbar(message)
+        mBinding.myCoordinatorLayout.snackbar(message)
     }
 }

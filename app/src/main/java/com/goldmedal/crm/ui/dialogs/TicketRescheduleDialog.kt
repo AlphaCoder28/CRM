@@ -21,7 +21,6 @@ import com.goldmedal.crm.databinding.DialogRescheduleBinding
 import com.goldmedal.crm.ui.ticket.TicketViewModel
 import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
 import com.goldmedal.crm.util.toast
-import kotlinx.android.synthetic.main.dialog_reschedule.*
 import org.angmarch.views.OnSpinnerItemSelectedListener
 import org.angmarch.views.SpinnerTextFormatter
 import org.kodein.di.KodeinAware
@@ -96,11 +95,11 @@ class TicketRescheduleDialog : DialogFragment(), KodeinAware, ApiStageListener<A
 
         viewModel.getTimeSlots()
 
-        binding.imvClose?.setOnClickListener {
+        binding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
-        binding.btnReschedule?.setOnClickListener {
+        binding.btnReschedule.setOnClickListener {
             viewModel.actionId = 4
             viewModel.getLoggedInUser().observe(viewLifecycleOwner, Observer { user ->
                 if (user != null) {
@@ -180,11 +179,11 @@ class TicketRescheduleDialog : DialogFragment(), KodeinAware, ApiStageListener<A
 
 
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        binding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        binding.progressBar.stop()
 
         if (callFrom == "time_slots") {
             val timeSlots = _object as MutableList<GetTimeSlots?>?
@@ -223,7 +222,7 @@ class TicketRescheduleDialog : DialogFragment(), KodeinAware, ApiStageListener<A
 
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
+        binding.progressBar.stop()
         context?.toast(message)
     }
 

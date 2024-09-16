@@ -24,8 +24,6 @@ import com.goldmedal.crm.util.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
-import kotlinx.android.synthetic.main.activity_user_profile.*
-import kotlinx.android.synthetic.main.activity_user_profile.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -76,7 +74,7 @@ class UserProfileActivity : AppCompatActivity(), KodeinAware, ImageSelectionList
                                 .load("")
                                 .fitCenter()
                                 .placeholder(R.drawable.male_avatar)
-                                .into(imgprofile)
+                                .into(binding.imgprofile)
 
                             binding.rootLayout.snackbar("Profile Photo removed successfully")
                             profilePhoto = ""
@@ -122,12 +120,12 @@ class UserProfileActivity : AppCompatActivity(), KodeinAware, ImageSelectionList
             binding.tvHighestQualification.text = user.HighestQualification
             binding.tvHomeAddress.text = user.Address
 
-            profilePhotoLink = user?.ProfilePhoto ?: ""
+            profilePhotoLink = user.ProfilePhoto ?: ""
             Glide.with(this)
                 .load(profilePhotoLink)
                 .fitCenter()
                 .placeholder(R.drawable.male_avatar)
-                .into(imgprofile)
+                .into(binding.imgprofile)
         }
     }
 
@@ -264,7 +262,7 @@ class UserProfileActivity : AppCompatActivity(), KodeinAware, ImageSelectionList
             .load(displayedBitmap)
             .fitCenter()
             .placeholder(R.drawable.male_avatar)
-            .into(imgprofile)
+            .into(binding.imgprofile)
 
      //   Toast.makeText(this, "Image attached successfully", Toast.LENGTH_SHORT).show()
 
@@ -291,21 +289,21 @@ class UserProfileActivity : AppCompatActivity(), KodeinAware, ImageSelectionList
     }
 
     override fun onStarted() {
-            progress_bar.start()
+        binding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
 
-        if(callFrom.equals("profile_photo_update")){
-            progress_bar.stop()
+        if(callFrom == "profile_photo_update"){
+            binding.progressBar.stop()
             toast("Profile Photo Updated Successfully")
         }
 
-        if(callFrom.equals("profile_detail")){
-            progress_bar.stop()
+        if(callFrom == "profile_detail"){
+            binding.progressBar.stop()
             val data = _object as List<profileDetailData?>
 
-            if(data.count()>0){
+            if(data.isNotEmpty()){
                 bindUI(data[0])
             }
         }
@@ -313,13 +311,13 @@ class UserProfileActivity : AppCompatActivity(), KodeinAware, ImageSelectionList
     }
 
     override fun onFailure(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar.stop()
-        if(callFrom.equals("profile_photo_update")){
+        binding.progressBar.stop()
+        if(callFrom == "profile_photo_update"){
             toast(message)
         }
     }
 
     override fun onValidationError(message: String) {
-        progress_bar.stop()
+        binding.progressBar.stop()
     }
 }

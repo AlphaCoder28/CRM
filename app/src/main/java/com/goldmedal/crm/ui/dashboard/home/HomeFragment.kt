@@ -40,17 +40,15 @@ import com.goldmedal.crm.ui.ticket.TicketInfoActivity
 import com.goldmedal.crm.util.*
 import com.goldmedal.crm.util.interfaces.AcceptRejectTicketsListener
 import com.goldmedal.crm.util.interfaces.IStatusListener
-import com.goldmedal.hrapp.ui.dialogs.TicketUnacceptanceDialog
+import com.goldmedal.crm.ui.dialogs.TicketUnacceptanceDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.zhpan.bannerview.BannerViewPager
-import com.zhpan.bannerview.BaseViewHolder
 import com.zhpan.bannerview.constants.IndicatorGravity
 import com.zhpan.bannerview.constants.PageStyle
 import com.zhpan.indicator.base.IIndicator
 import com.zhpan.indicator.enums.IndicatorSlideMode
-import kotlinx.android.synthetic.main.home_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -89,10 +87,9 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        homeFragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
+        homeFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return homeFragmentBinding.root
     }
 
@@ -125,7 +122,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         //getLocationPermission()
 
 
-        layout_all_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutAllTickets.setOnClickListener {
 
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 1)
@@ -133,7 +130,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 //            AcceptedTicketsActivity.start(requireContext(), 1)
         }
 
-        layout_urgent_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutUrgentTickets.setOnClickListener {
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 2)
             startActivityForResult(intent, REFRESH_REQUEST_CODE)
@@ -141,14 +138,14 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 //            AcceptedTicketsActivity.start(requireContext(), 2)
         }
 
-        layout_in_progress_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutInProgressTickets.setOnClickListener {
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 3)
             startActivityForResult(intent, REFRESH_REQUEST_CODE)
 //            AcceptedTicketsActivity.start(requireContext(), 3)
         }
 
-        layout_pending_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutPendingTickets.setOnClickListener {
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 4)
             startActivityForResult(intent, REFRESH_REQUEST_CODE)
@@ -156,14 +153,14 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         }
 
 
-        layout_unpaid_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutUnpaidTickets.setOnClickListener {
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 5)
             startActivityForResult(intent, REFRESH_REQUEST_CODE)
 //            AcceptedTicketsActivity.start(requireContext(), 5)
         }
 
-        layout_paid_tickets?.setOnClickListener {
+        homeFragmentBinding.layoutPaidTickets.setOnClickListener {
             val intent = Intent(requireContext(), AcceptedTicketsActivity::class.java)
             intent.putExtra(ARG_STATUS_BY, 6)
             startActivityForResult(intent, REFRESH_REQUEST_CODE)
@@ -171,15 +168,15 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         }
 
 
-        layout_contacts?.setOnClickListener {
+        homeFragmentBinding.layoutContacts.setOnClickListener {
             ContactsActivity.start(requireContext())
         }
 
-        layout_usedParts?.setOnClickListener {
+        homeFragmentBinding.layoutUsedParts.setOnClickListener {
             UsedPartsActivity.start(requireContext())
         }
 
-        layout_partsRequirement?.setOnClickListener {
+        homeFragmentBinding.layoutPartsRequirement.setOnClickListener {
             PartsRequirementActivity.start(requireContext(),"Dashboard",GetTicketDetailsData("","","","","","",
                 "","","","",false,0,"",false,"","",
                 "","","","","","","","","","",0,
@@ -189,12 +186,12 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
             "", "", false, 0))
         }
 
-        layout_availableParts?.setOnClickListener {
+        homeFragmentBinding.layoutAvailableParts.setOnClickListener {
             AvailablePartsActivity.start(requireContext())
         }
 
 
-        imv_refresh?.setOnClickListener {
+        homeFragmentBinding.imvRefresh.setOnClickListener {
             refreshAnimation()
         }
     }
@@ -216,7 +213,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private fun lastUpdatedText(timeStamp: String) {
 
-        txt_last_updated?.text = getString(R.string.last_updated) + formatDateString(timeStamp ?: "", "MM/dd/yyyy hh:mm:ss a", "dd/MM/yyyy hh:mm:ss a")
+        homeFragmentBinding.txtLastUpdated.text = getString(R.string.last_updated) + formatDateString(timeStamp ?: "", "MM/dd/yyyy hh:mm:ss a", "dd/MM/yyyy hh:mm:ss a")
 
         if(latitude!! == 0.0 && longitude!! == 0.0){
             mContext?.let {
@@ -234,7 +231,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
 
     private fun refreshAnimation() {
-        imv_refresh?.clearAnimation()
+        homeFragmentBinding.imvRefresh.clearAnimation()
         val animation: Animation = RotateAnimation(
             0.0f, 360.0f,
             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -242,7 +239,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         )
         animation.repeatCount = 0
         animation.duration = 1000
-        imv_refresh?.startAnimation(animation)
+        homeFragmentBinding.imvRefresh.startAnimation(animation)
 
         viewModel.getLoggedInUser().observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
@@ -300,22 +297,20 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
 
     private fun bindTodaysAppointment(list: List<GetAppointmentsData?>?) = Coroutines.main {
-        if(llAppointmentTicketMain != null){
-            if (list.isNullOrEmpty()) {
-                llAppointmentTicketMain.visibility = GONE
-            } else {
-                llAppointmentTicketMain.visibility = VISIBLE
-            }
-
-
-            list?.let {
-                if(latitude!! == 0.0 && longitude!! == 0.0){
-                    Toast.makeText(requireContext(), "Location not found for today's appointment. Please check your location permission.", Toast.LENGTH_SHORT).show()
-                }
-                initAppointmentRecyclerView(it.toTodayAppointment())
-            }
-
+        if (list.isNullOrEmpty()) {
+            homeFragmentBinding.llAppointmentTicketMain.visibility = GONE
+        } else {
+            homeFragmentBinding.llAppointmentTicketMain.visibility = VISIBLE
         }
+
+
+        list?.let {
+            if(latitude!! == 0.0 && longitude!! == 0.0){
+                Toast.makeText(requireContext(), "Location not found for today's appointment. Please check your location permission.", Toast.LENGTH_SHORT).show()
+            }
+            initAppointmentRecyclerView(it.toTodayAppointment())
+        }
+
     }
 
     private fun initAppointmentRecyclerView(toTodayAppointment: List<AppointmentsItem?>) {
@@ -324,7 +319,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
             addAll(toTodayAppointment)
         }
 
-        rvAppointmentList
+        homeFragmentBinding.rvAppointmentList
             .apply {
                 layoutManager =
                     PeekingLinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
@@ -363,12 +358,12 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     private fun setupCustomIndicator(list: MutableList<GetAllAssignedTicketsData?>) {
         if (list.isEmpty()) {
-            llAssignedTicketMain?.visibility = GONE
+            homeFragmentBinding.llAssignedTicketMain.visibility = GONE
         }else{
-            llAssignedTicketMain?.visibility = VISIBLE
+            homeFragmentBinding.llAssignedTicketMain.visibility = VISIBLE
         }
 
-        indicator_view?.visibility = View.INVISIBLE
+        homeFragmentBinding.indicatorView.visibility = View.INVISIBLE
         try {
             mContext?.resources?.let {
                 verticalAssignedTicketsBanner.setAutoPlay(true).setCanLoop(true)
@@ -398,19 +393,19 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     override fun onStarted(callFrom: String) {
 
-        if (callFrom.equals("all_assigned_tickets")) {
-            assigned_tickets_progress_bar?.start()
+        if (callFrom == "all_assigned_tickets") {
+            homeFragmentBinding.assignedTicketsProgressBar.start()
         }
         if (callFrom == "tickets_cnt") {
-            service_tickets_view_common?.showProgressBar()
+            homeFragmentBinding.serviceTicketsViewCommon.showProgressBar()
         }
 
-        if (callFrom.equals("today_appointment")) {
-            todays_appointment_view_common?.showProgressBar()
+        if (callFrom == "today_appointment") {
+            homeFragmentBinding.todaysAppointmentViewCommon.showProgressBar()
         }
 
-        if (callFrom.equals("dashboard")) {
-            dashboard_tickets_progress_bar?.start()
+        if (callFrom == "dashboard") {
+            homeFragmentBinding.dashboardTicketsProgressBar.start()
         }
 
     }
@@ -418,7 +413,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     override fun onSuccess(_object: List<Any?>, callFrom: String, timestamp: String) {
         if (callFrom == "all_assigned_tickets") {
-            assigned_tickets_progress_bar?.stop()
+            homeFragmentBinding.assignedTicketsProgressBar.stop()
            val data = _object as MutableList<GetAllAssignedTicketsData?>
 //            if (data.isEmpty()) {
 //                llAssignedTicketMain.visibility = GONE
@@ -434,23 +429,23 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
             //verticalAssignedTicketsBanner.refreshData(data)
         } else if (callFrom == "tickets_cnt") {
-            service_tickets_view_common?.hide()
+            homeFragmentBinding.serviceTicketsViewCommon.hide()
 
             bindTicketsCount(_object as List<GetTicketsCountData?>)
             lastUpdatedText(timestamp)
         } else if (callFrom == "today_appointment") {
 
-            todays_appointment_view_common?.hide()
+            homeFragmentBinding.todaysAppointmentViewCommon.hide()
 
             val data = _object as List<GetAppointmentsData?>
             if (data.isNullOrEmpty()) {
-                todays_appointment_view_common?.showNoData()
+                homeFragmentBinding.todaysAppointmentViewCommon.showNoData()
             }
             bindTodaysAppointment(data)
             lastUpdatedText(timestamp)
         } else if (callFrom == "dashboard") {
 
-            dashboard_tickets_progress_bar?.stop()
+            homeFragmentBinding.dashboardTicketsProgressBar.stop()
             bindUI(_object as List<GetDashboardData?>)
             lastUpdatedText(timestamp)
         } else if (callFrom == "accept_tkt") {
@@ -461,22 +456,15 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
             if (!data.isNullOrEmpty()) {
                 if (data[0]?.IsCheckedIn == 0) {
-
-
                     val intent = Intent(requireContext(), CheckInActivity::class.java)
                     intent.putExtra(ARG_PARAM, data[0])
                     startActivityForResult(intent, REFRESH_REQUEST_CODE)
-
-
                     //   CheckInActivity.start(requireContext(), item = data[0])
                 } else {
-
                     val intent = Intent(requireContext(), TicketInfoActivity::class.java)
                     intent.putExtra(ARG_PARAM, data[0])
                     startActivityForResult(intent, REFRESH_REQUEST_CODE)
-
                     //TicketInfoActivity.start(requireContext(), data[0])
-
                 }
             }
         }
@@ -489,15 +477,15 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
         if (callFrom == "tickets_cnt") {
 
             if (isNetworkError) {
-                service_tickets_view_common?.showNoInternet()
+                homeFragmentBinding.serviceTicketsViewCommon.showNoInternet()
             } else {
-                service_tickets_view_common?.showNoData()
+                homeFragmentBinding.serviceTicketsViewCommon.showNoData()
             }
             bindTicketsCount(ArrayList())
         }
 
-        if (callFrom.equals("all_assigned_tickets")) {
-            assigned_tickets_progress_bar?.stop()
+        if (callFrom == "all_assigned_tickets") {
+            homeFragmentBinding.assignedTicketsProgressBar.stop()
 
             val data: MutableList<GetAllAssignedTicketsData?> = ArrayList()
 
@@ -508,14 +496,14 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
             setupCustomIndicator(data)
         }
         if (callFrom == "dashboard") {
-            dashboard_tickets_progress_bar?.stop()
+            homeFragmentBinding.dashboardTicketsProgressBar.stop()
         }
 
         if (callFrom == "today_appointment") {
             if (isNetworkError) {
-                todays_appointment_view_common?.showNoInternet()
+                homeFragmentBinding.todaysAppointmentViewCommon.showNoInternet()
             } else {
-                todays_appointment_view_common?.showNoData()
+                homeFragmentBinding.todaysAppointmentViewCommon.showNoData()
             }
             bindTodaysAppointment(ArrayList())
         }
@@ -529,10 +517,10 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
     private fun bindUI(list: List<GetDashboardData?>?) = Coroutines.main {
         list?.let {
             try {
-                tvInProgressTicket?.text = it[0]?.InProgressTicket.toString()
-                tvAllTicket?.text = it[0]?.AllTicket.toString()
-                tvPendingTicket?.text = it[0]?.PendingTicket.toString()
-                tvUrgentTicket?.text = it[0]?.UrgentTicket.toString()
+                homeFragmentBinding.tvInProgressTicket.text = it[0]?.InProgressTicket.toString()
+                homeFragmentBinding.tvAllTicket.text = it[0]?.AllTicket.toString()
+                homeFragmentBinding.tvPendingTicket.text = it[0]?.PendingTicket.toString()
+                homeFragmentBinding.tvUrgentTicket.text = it[0]?.UrgentTicket.toString()
             } catch (e: Exception) {
                 e.printStackTrace()
             }

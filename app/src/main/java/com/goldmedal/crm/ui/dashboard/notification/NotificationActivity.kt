@@ -14,7 +14,6 @@ import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.snackbar
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.activity_notification.*
 
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -25,13 +24,14 @@ class NotificationActivity : TransitionsActivity(), ApiStageListener<Any>, Kodei
 
     override val kodein by kodein()
     private val factory : NotificationViewModelFactory by instance()
+    private lateinit var mBinding: ActivityNotificationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_notification)
-        val binding: ActivityNotificationBinding = DataBindingUtil.setContentView(this, R.layout.activity_notification)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_notification)
 
         val viewModel = ViewModelProvider(this, factory).get(NotificationViewModel::class.java)
-        binding.viewmodel = viewModel
+        mBinding.viewmodel = viewModel
 
         viewModel.apiListener = this
 
@@ -54,7 +54,7 @@ class NotificationActivity : TransitionsActivity(), ApiStageListener<Any>, Kodei
             addAll(toLeaveRecord)
         }
 
-        rvList.apply {
+        mBinding.rvList.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = mAdapter
@@ -66,14 +66,14 @@ class NotificationActivity : TransitionsActivity(), ApiStageListener<Any>, Kodei
         }
     }
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        mBinding.progressBar.start()
     }
 
 
 
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        mBinding.progressBar.stop()
         bindUI(_object as List<NotificationFeedsData?>)
 
     }
@@ -84,13 +84,12 @@ class NotificationActivity : TransitionsActivity(), ApiStageListener<Any>, Kodei
 //    }
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
-        root_layout.snackbar(message)
+        mBinding.progressBar.stop()
+        mBinding.rootLayout.snackbar(message)
     }
 
     override fun onValidationError(message: String, callFrom: String) {
-        root_layout.snackbar(message)
-      //  TODO("Not yet implemented")
+        mBinding.rootLayout.snackbar(message)
     }
 
 

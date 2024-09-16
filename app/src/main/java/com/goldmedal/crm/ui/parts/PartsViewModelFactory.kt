@@ -9,7 +9,7 @@ class PartsViewModelFactory(
     private val repository: HomeRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return PartsViewModel(repository) as T
     }
 }

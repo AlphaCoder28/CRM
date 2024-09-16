@@ -20,7 +20,6 @@ import com.goldmedal.crm.util.snackbar
 import com.goldmedal.crm.util.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.item_wiring_device_multi_selection.view.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.kodein.di.KodeinAware
@@ -254,11 +253,12 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         val jsonArray = JSONArray()
         binding.llVoltage.children.forEach {
             val jsonObject = JSONObject()
-            val item = it.spinner.selectedItem as Voltage
+            val llMultiSelectionLayout = it as MultiSelectionItemLayout
+            val item = llMultiSelectionLayout.binding.spinner.selectedItem as Voltage
             jsonObject.put("VoltageID", item.voltageID)
             jsonObject.put("VoltageName", item.voltageName)
 
-            val itemRemarks = it.etRemarks.text.toString()
+            val itemRemarks = llMultiSelectionLayout.binding.etRemarks.text.toString()
             item.voltageRemark = itemRemarks
             jsonObject.put("VoltageRemark", item.voltageRemark)
             postList.add(item)
@@ -274,11 +274,12 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         val jsonArray = JSONArray()
         binding.llFaultyChannel.children.forEach {
             val jsonObject = JSONObject()
-            val item = it.spinner.selectedItem as FaultyChannel
+            val llMultiSelectionLayout = it as MultiSelectionItemLayout
+            val item = llMultiSelectionLayout.binding.spinner.selectedItem as FaultyChannel
             jsonObject.put("FaultyChannelID", item.faultyChannelID)
             jsonObject.put("FaultyChannelName", item.faultyChannelName)
 
-            val itemRemarks = it.etRemarks.text.toString()
+            val itemRemarks = llMultiSelectionLayout.binding.etRemarks.text.toString()
             item.faultyChannelRemark = itemRemarks
 
             jsonObject.put("FaultyChannelRemark", item.faultyChannelRemark)
@@ -294,11 +295,12 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         val jsonArray = JSONArray()
         binding.llLoadDescription.children.forEach {
             val jsonObject = JSONObject()
-            val item = it.spinner.selectedItem as LoadDescription
+            val llMultiSelectionLayout = it as MultiSelectionItemLayout
+            val item = llMultiSelectionLayout.binding.spinner.selectedItem as LoadDescription
             jsonObject.put("LoadDescriptionID", item.loadDescriptionID)
             jsonObject.put("LoadDescriptionName", item.loadDescriptionName)
 
-            val itemRemarks = it.etRemarks.text.toString()
+            val itemRemarks = llMultiSelectionLayout.binding.etRemarks.text.toString()
             item.loadDescriptionRemark = itemRemarks
 
             jsonObject.put("LoadDescriptionRemark", item.loadDescriptionRemark)
@@ -314,11 +316,12 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
         val jsonArray = JSONArray()
         binding.llTypeLed.children.forEach {
             val jsonObject = JSONObject()
-            val item = it.spinner.selectedItem as TypeLED
+            val llMultiSelectionLayout = it as MultiSelectionItemLayout
+            val item = llMultiSelectionLayout.binding.spinner.selectedItem as TypeLED
             jsonObject.put("TypeofLEDID", item.typeofLEDID)
             jsonObject.put("TypeofLEDName", item.typeofLEDName)
 
-            val itemRemarks = it.etRemarks.text.toString()
+            val itemRemarks = llMultiSelectionLayout.binding.etRemarks.text.toString()
             item.typeofLEDRemark = itemRemarks
 
             jsonObject.put("TypeofLEDRemark", item.typeofLEDRemark)
@@ -493,7 +496,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     voltageViewCount++
                     binding.llVoltage.addView(newVoltageView)
                     newVoltageView.binding.spinner.attachDataSource(list)
-                    newVoltageView.ivCancel.setOnClickListener {
+                    newVoltageView.binding.ivCancel.setOnClickListener {
                         if (voltageViewCount > 1) {
                             binding.llVoltage.removeView(newVoltageView)
                             voltageViewCount--
@@ -509,7 +512,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                         newVoltageView.binding.etRemarks.setText(voltage.voltageRemark)
                         voltageViewCount++
                         binding.llVoltage.addView(newVoltageView)
-                        newVoltageView.ivCancel.setOnClickListener {
+                        newVoltageView.binding.ivCancel.setOnClickListener {
                             if (voltageViewCount > 1) {
                                 binding.llVoltage.removeView(newVoltageView)
                                 voltageViewCount--
@@ -533,7 +536,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     typeLedViewCount++
                     binding.llTypeLed.addView(newTypeLedView)
                     newTypeLedView.binding.spinner.attachDataSource(list)
-                    newTypeLedView.ivCancel.setOnClickListener {
+                    newTypeLedView.binding.ivCancel.setOnClickListener {
                         if (typeLedViewCount > 1) {
                             binding.llTypeLed.removeView(newTypeLedView)
                             typeLedViewCount--
@@ -550,7 +553,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                         newTypeLedView.binding.etRemarks.setText(typeLED.typeofLEDRemark)
                         typeLedViewCount++
                         binding.llTypeLed.addView(newTypeLedView)
-                        newTypeLedView.ivCancel.setOnClickListener {
+                        newTypeLedView.binding.ivCancel.setOnClickListener {
                             if (typeLedViewCount > 1) {
                                 binding.llTypeLed.removeView(newTypeLedView)
                                 typeLedViewCount--
@@ -573,7 +576,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     loadDescriptionViewCount++
                     binding.llLoadDescription.addView(newLoadDescriptionView)
                     newLoadDescriptionView.binding.spinner.attachDataSource(list)
-                    newLoadDescriptionView.ivCancel.setOnClickListener {
+                    newLoadDescriptionView.binding.ivCancel.setOnClickListener {
                         if (loadDescriptionViewCount > 1) {
                             binding.llLoadDescription.removeView(newLoadDescriptionView)
                             loadDescriptionViewCount--
@@ -589,7 +592,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                         newLoadDescriptionView.binding.etRemarks.setText(loadDescription.loadDescriptionRemark)
                         loadDescriptionViewCount++
                         binding.llLoadDescription.addView(newLoadDescriptionView)
-                        newLoadDescriptionView.ivCancel.setOnClickListener {
+                        newLoadDescriptionView.binding.ivCancel.setOnClickListener {
                             if (loadDescriptionViewCount > 1) {
                                 binding.llLoadDescription.removeView(newLoadDescriptionView)
                                 loadDescriptionViewCount--
@@ -612,7 +615,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                     channelViewCount++
                     binding.llFaultyChannel.addView(newFaultyChannelView)
                     newFaultyChannelView.binding.spinner.attachDataSource(list)
-                    newFaultyChannelView.ivCancel.setOnClickListener {
+                    newFaultyChannelView.binding.ivCancel.setOnClickListener {
                         if (channelViewCount > 1) {
                             binding.llFaultyChannel.removeView(newFaultyChannelView)
                             channelViewCount--
@@ -628,7 +631,7 @@ class WiringDeviceFormActivity : AppCompatActivity(), KodeinAware, ApiStageListe
                         newFaultyChannelView.binding.etRemarks.setText(faultyChannel.faultyChannelRemark)
                         channelViewCount++
                         binding.llFaultyChannel.addView(newFaultyChannelView)
-                        newFaultyChannelView.ivCancel.setOnClickListener {
+                        newFaultyChannelView.binding.ivCancel.setOnClickListener {
                             if (channelViewCount > 1) {
                                 binding.llFaultyChannel.removeView(newFaultyChannelView)
                                 channelViewCount--

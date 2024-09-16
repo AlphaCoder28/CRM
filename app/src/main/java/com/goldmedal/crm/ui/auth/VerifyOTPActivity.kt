@@ -13,13 +13,7 @@ import com.goldmedal.crm.databinding.OtpLayoutBinding
 import com.goldmedal.crm.ui.dashboard.DashboardActivity
 
 import com.goldmedal.crm.util.getDeviceId
-import com.goldmedal.crm.util.hide
-import com.goldmedal.crm.util.show
 import com.goldmedal.crm.util.snackbar
-
-import kotlinx.android.synthetic.main.otp_layout.*
-import kotlinx.android.synthetic.main.otp_layout.progress_bar
-
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -28,32 +22,32 @@ import org.kodein.di.generic.instance
 class VerifyOTPActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
 
     override val kodein by kodein()
+    private lateinit var mBinding: OtpLayoutBinding
     private val factory: LoginViewModelFactory by instance()
     private lateinit var viewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        val binding: OtpLayoutBinding = DataBindingUtil.setContentView(this, R.layout.otp_layout)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.otp_layout)
 
         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
-        binding.viewmodel = viewModel
+        mBinding.viewmodel = viewModel
 
         viewModel.authListener = this
         viewModel.strDeviceId = getDeviceId(this@VerifyOTPActivity)
     }
 
     override fun onStarted() {
-        progress_bar?.start()
+        mBinding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
 
-        progress_bar?.stop()
+        mBinding.progressBar.stop()
 
         if(callFrom == "get_otp"){
-          get_otp_layout?.visibility = View.GONE
-          verify_otp_layout?.visibility = View.VISIBLE
+          mBinding.getOtpLayout.visibility = View.GONE
+          mBinding.verifyOtpLayout.visibility = View.VISIBLE
         }
 
         if (callFrom == "verify_otp"){
@@ -65,12 +59,12 @@ class VerifyOTPActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
     }
 
     override fun onFailure(message: String, callFrom: String, isNetworkError: Boolean) {
-         progress_bar?.stop()
-         root_layout?.snackbar(message)
+         mBinding.progressBar.stop()
+         mBinding.rootLayout.snackbar(message)
     }
 
     override fun onValidationError(message: String) {
-       root_layout?.snackbar(message)
+       mBinding.rootLayout.snackbar(message)
     }
 
      companion object {

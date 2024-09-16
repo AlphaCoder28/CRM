@@ -150,9 +150,9 @@ class Wherebout(context: Context) : EasyPermissions.PermissionCallbacks {
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(mcontext as Activity, perms[0])) {
-        SettingsDialog.Builder(mcontext!!).build().show()
-          }
+        if (EasyPermissions.somePermissionPermanentlyDenied(mcontext as Activity, perms)) {
+            SettingsDialog.Builder(mcontext!!).build().show()
+        }
     }
 
     @SuppressLint("MissingPermission")

@@ -25,7 +25,6 @@ import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.toast
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.dialog_used_items.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -70,10 +69,10 @@ class UsedPartDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogUsedItemsBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,7 +82,7 @@ class UsedPartDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
         binding.txtHeaderDialog.text = strPartName
 
-        imvClose?.setOnClickListener {
+        binding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
@@ -94,7 +93,7 @@ class UsedPartDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         })
 
 
-        search_view?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
@@ -117,7 +116,7 @@ class UsedPartDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
             }
         })
 
-        search_view?.setOnCloseListener {
+        binding.searchView.setOnCloseListener {
             strSearchBy = ""
             viewModel.getLoggedInUser().observe(this, Observer { user ->
 

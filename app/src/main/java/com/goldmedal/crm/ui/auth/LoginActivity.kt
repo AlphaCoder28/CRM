@@ -13,7 +13,6 @@ import com.goldmedal.crm.databinding.ActivityLoginBinding
 import com.goldmedal.crm.ui.dashboard.DashboardActivity
 import com.goldmedal.crm.util.getDeviceId
 import com.goldmedal.crm.util.snackbar
-import kotlinx.android.synthetic.main.activity_login.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
@@ -22,6 +21,7 @@ import org.kodein.di.generic.instance
 class LoginActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
 
     override val kodein by kodein()
+    private lateinit var mBinding: ActivityLoginBinding
     private val factory: LoginViewModelFactory by instance()
 
     private lateinit var viewModel: LoginViewModel
@@ -29,17 +29,16 @@ class LoginActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-
-         viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
-        binding.viewmodel = viewModel
+        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
+        mBinding.viewmodel = viewModel
 
         viewModel.authListener = this
         viewModel.strDeviceId = getDeviceId(this@LoginActivity)
 
-       // viewModel.strGeneratedCaptcha = generateRandomCaptcha()
-     //   tvCaptcha.text = viewModel.strGeneratedCaptcha
+        // viewModel.strGeneratedCaptcha = generateRandomCaptcha()
+        //   tvCaptcha.text = viewModel.strGeneratedCaptcha
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
 
@@ -71,17 +70,16 @@ class LoginActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
 //                })
 
 
+        mBinding.verifyOtpLayout.setOnClickListener {
 
-        verify_otp_layout?.setOnClickListener {
-
-               VerifyOTPActivity.start(this)
+            VerifyOTPActivity.start(this)
         }
 
     }
 
 
     override fun onStarted() {
-        progress_bar?.start()
+        mBinding.progressBar.start()
 //
 //        Intent(this, DashboardActivity::class.java).also {
 //            //  it.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -97,18 +95,18 @@ class LoginActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
 //    }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        mBinding.progressBar.stop()
 
-        if (callFrom.equals("authenticate_email")) {
+        if (callFrom == "authenticate_email") {
 
             val sessionData = _object as List<SessionData>
 
-            if(sessionData.isNotEmpty()){
-                 viewModel.authenticatePassword(sessionData[0].LogNo,sessionData[0].SessionId)
+            if (sessionData.isNotEmpty()) {
+                viewModel.authenticatePassword(sessionData[0].LogNo, sessionData[0].SessionId)
             }
 
 
-           // viewModel.strCaptcha = sessionData[0].SessionId
+            // viewModel.strCaptcha = sessionData[0].SessionId
 
         }
 
@@ -124,14 +122,13 @@ class LoginActivity : AppCompatActivity(), AuthListener<Any>, KodeinAware {
     }
 
     override fun onFailure(message: String, callFrom: String, isNetworkError: Boolean) {
-         progress_bar?.stop()
-        root_layout?.snackbar(message)
+        mBinding.progressBar.stop()
+        mBinding.rootLayout.snackbar(message)
     }
 
     override fun onValidationError(message: String) {
-        root_layout?.snackbar(message)
+        mBinding.rootLayout.snackbar(message)
     }
-
 
 
 //    override fun setCaptcha(strCaptcha: String) {

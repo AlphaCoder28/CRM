@@ -9,7 +9,7 @@ class TicketViewModelFactory(
         private val repository: TicketRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return TicketViewModel(repository) as T
     }
 }

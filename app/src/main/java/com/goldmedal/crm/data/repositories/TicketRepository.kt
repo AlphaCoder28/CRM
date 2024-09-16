@@ -287,7 +287,7 @@ class TicketRepository(
         return apiRequest { api.getTicketHistory(userID) }
     }
 
-    suspend fun saveTicketHistory(historyData: List<TicketHistoryData?>) =
+    suspend fun saveTicketHistory(historyData: List<TicketHistoryData>) =
         db.getTicketHistoryDao().insertTicketHistory(historyData)
 
     fun getTicketHistory() = db.getTicketHistoryDao().getTicketHistory()

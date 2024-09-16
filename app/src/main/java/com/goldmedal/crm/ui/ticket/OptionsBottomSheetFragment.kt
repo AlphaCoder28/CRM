@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.goldmedal.crm.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottom_sheet_options.*
 
 class OptionsBottomSheetFragment : BottomSheetDialogFragment() {
+    private lateinit var scanTextView: TextView
+    private lateinit var searchTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,18 +23,20 @@ class OptionsBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
+        scanTextView = view.findViewById(R.id.txt_scan)
+        searchTextView = view.findViewById(R.id.txt_search)
     }
 
     private fun setUpViews() {
         // We can have cross button on the top right corner for providing elemnet to dismiss the bottom sheet
         //iv_close.setOnClickListener { dismissAllowingStateLoss() }
-        txt_scan.setOnClickListener {
+        scanTextView.setOnClickListener {
             dismissAllowingStateLoss()
             mListener?.onItemClick("scan")
 
         }
 
-        txt_search.setOnClickListener {
+        searchTextView.setOnClickListener {
             dismissAllowingStateLoss()
             mListener?.onItemClick("search")
         }

@@ -20,7 +20,6 @@ import com.goldmedal.crm.databinding.DialogCloseBinding
 import com.goldmedal.crm.ui.ticket.TicketViewModel
 import com.goldmedal.crm.ui.ticket.TicketViewModelFactory
 import com.goldmedal.crm.util.toast
-import kotlinx.android.synthetic.main.dialog_close.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -92,17 +91,17 @@ class TicketCloseDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         viewModel.apiListener = this
 
         if (actionId == 5) {
-            tvPopupHeader.text = "Re-Assign"
+            binding.tvPopupHeader.text = "Re-Assign"
         }
         if (actionId == 6) {
-            tvPopupHeader.text = "Close"
+            binding.tvPopupHeader.text = "Close"
         }
 
-        binding.imvClose?.setOnClickListener {
+        binding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
-        binding.btnClose?.setOnClickListener {
+        binding.btnClose.setOnClickListener {
             viewModel.actionId = actionId
             viewModel.getLoggedInUser().observe(viewLifecycleOwner, Observer { user ->
                 if (user != null) {
@@ -119,11 +118,11 @@ class TicketCloseDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
 
     override fun onStarted(callFrom: String) {
-        progress_bar?.start()
+        binding.progressBar.start()
     }
 
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
-        progress_bar?.stop()
+        binding.progressBar.stop()
 
         if (callFrom == "update_ticket_status") {
             val updateStatusData = _object as List<UpdateVisitStatusData>
@@ -163,7 +162,7 @@ class TicketCloseDialog : DialogFragment(), KodeinAware, ApiStageListener<Any> {
 
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        progress_bar?.stop()
+        binding.progressBar.stop()
         context?.toast(message)
     }
 

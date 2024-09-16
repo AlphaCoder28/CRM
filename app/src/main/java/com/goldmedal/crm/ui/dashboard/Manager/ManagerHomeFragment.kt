@@ -26,8 +26,6 @@ import com.goldmedal.crm.ui.auth.AuthListener
 import com.goldmedal.crm.ui.dashboard.home.HomeViewModel
 import com.goldmedal.crm.ui.dashboard.home.HomeViewModelFactory
 import com.goldmedal.crm.util.*
-import kotlinx.android.synthetic.main.fragment_manager.*
-import kotlinx.android.synthetic.main.home_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -71,10 +69,10 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         managerFragmentBinding =
-            DataBindingUtil.inflate(inflater, com.goldmedal.crm.R.layout.fragment_manager, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_manager, container, false)
         return managerFragmentBinding.root
         // return inflater.inflate(R.layout.fragment_manager, container, false)
     }
@@ -100,7 +98,7 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
         managerFragmentBinding.viewmodelHome = viewModel
 
         viewModel.apiListener = this
@@ -128,11 +126,11 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
     override fun onSuccess(_object: List<Any?>, callFrom: String, timestamp: String) {
 
 
-        if (callFrom.equals("manager_ticket_monthwise_count")) {
+        if (callFrom == "manager_ticket_monthwise_count") {
 
             val data = _object as List<MonthwiseData?>
 
-            data?.let { updateAnalysisChart(it)
+            data.let { updateAnalysisChart(it)
                 analysisChart()}
 
         }
@@ -148,9 +146,9 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
 
     private fun updateAnalysisChart(it: List<MonthwiseData?>) {
 
-        rlAnalysisChart.removeAllViews()
+        managerFragmentBinding.rlAnalysisChart.removeAllViews()
         val managerAnalysisChart = ManagerAnalysisChart(context,it)
-        rlAnalysisChart.addView(managerAnalysisChart)
+        managerFragmentBinding.rlAnalysisChart.addView(managerAnalysisChart)
 
     }
 
@@ -165,13 +163,13 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
 
     private fun bindTicketUI(list: List<Data?>?) = Coroutines.main {
         list?.let {
-            tv_Open_ticket?.text = it[0]?.OpenTickets.toString()
-            tv_Assign_ticket?.text = it[0]?.AssignedTickets.toString()
-            tv_Reassign_ticket?.text = it[0]?.ReassignTickets.toString()
-            tv_processed_ticket?.text = it[0]?.ProcessedTickets.toString()
-            tv_Closed_ticket?.text = it[0]?.ClosedTickets.toString()
-            tv_Pending_Assign?.text = it[0]?.PendingTickets.toString()
-            tv_Rejected_ticket?.text = it[0]?.RejectedTicketsse.toString()
+            managerFragmentBinding.tvOpenTicket.text = it[0]?.OpenTickets.toString()
+            managerFragmentBinding.tvAssignTicket.text = it[0]?.AssignedTickets.toString()
+            managerFragmentBinding.tvReassignTicket.text = it[0]?.ReassignTickets.toString()
+            managerFragmentBinding.tvProcessedTicket.text = it[0]?.ProcessedTickets.toString()
+            managerFragmentBinding.tvClosedTicket.text = it[0]?.ClosedTickets.toString()
+            managerFragmentBinding.tvPendingAssign.text = it[0]?.PendingTickets.toString()
+            managerFragmentBinding.tvRejectedTicket.text = it[0]?.RejectedTicketsse.toString()
         }
     }
 
@@ -182,11 +180,11 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
         // creating a new bar data set.
        val barDataSet1 = BarDataSet(getBarEntriesOne(), "First Set")
 //        barDataSet1.setColor(Color.rgb(220, 60, 46))
-        context?.resources?.let { barDataSet1.setColor(it?.getColor(R.color.bar_blue)) }
+        context?.resources?.let { barDataSet1.color = it.getColor(R.color.bar_blue) }
 
         val barDataSet2 = BarDataSet(getBarEntriesTwo(), "Second Set")
 //        barDataSet2.setColor(Color.rgb(60, 70, 85))
-        context?.resources?.getColor(R.color.bar_red)?.let { barDataSet2.setColor(it) }
+        context?.resources?.getColor(R.color.bar_red)?.let { barDataSet2.color = it }
 
         // below line is to add bar data set to our bar data.
 
@@ -198,21 +196,21 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
 
         // after adding data to our bar data we
         // are setting that data to our bar chart.
-        idBarChart.setData(data)
+        managerFragmentBinding.idBarChart.data = data
 
         // below line is to remove description
         // label of our bar chart.
 
         // below line is to remove description
         // label of our bar chart.
-        idBarChart.getDescription().setEnabled(false)
+        managerFragmentBinding.idBarChart.description.isEnabled = false
 
         // below line is to get x axis
         // of our bar chart.
 
         // below line is to get x axis
         // of our bar chart.
-        val xAxis: XAxis = idBarChart.getXAxis()
+        val xAxis: XAxis = managerFragmentBinding.idBarChart.xAxis
 
         // below line is to set value formatter to our x-axis and
         // we are adding our days to our x axis.
@@ -254,14 +252,14 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
 
         // below line is to make our
         // bar chart as draggable.
-        idBarChart.setDragEnabled(true)
+        managerFragmentBinding.idBarChart.isDragEnabled = true
 
         // below line is to make visible
         // range for our bar chart.
 
         // below line is to make visible
         // range for our bar chart.
-        idBarChart.setVisibleXRangeMaximum(3f)
+        managerFragmentBinding.idBarChart.setVisibleXRangeMaximum(3f)
 
         // below line is to add bar
         // space to our chart.
@@ -289,28 +287,28 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
 
         // below line is to set minimum
         // axis to our chart.
-        idBarChart.getXAxis().setAxisMinimum(0f)
+        managerFragmentBinding.idBarChart.xAxis.axisMinimum = 0f
 
         // below line is to
         // animate our chart.
 
         // below line is to
         // animate our chart.
-        idBarChart.animate()
+        managerFragmentBinding.idBarChart.animate()
 
         // below line is to group bars
         // and add spacing to it.
 
         // below line is to group bars
         // and add spacing to it.
-        idBarChart.groupBars(0f, groupSpace, barSpace)
+        managerFragmentBinding.idBarChart.groupBars(0f, groupSpace, barSpace)
 
         // below line is to invalidate
         // our bar chart.
 
         // below line is to invalidate
         // our bar chart.
-        idBarChart.invalidate()
+        managerFragmentBinding.idBarChart.invalidate()
 
 
 
@@ -321,7 +319,7 @@ class ManagerHomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any> {
         xAxis.granularity = 1f
         xAxis.valueFormatter = IndexAxisValueFormatter(months)
 
-        val leftAxis: YAxis = idBarChart.axisLeft
+        val leftAxis: YAxis = managerFragmentBinding.idBarChart.axisLeft
         leftAxis.setDrawGridLines(false)
         leftAxis.axisMinimum = 0f // this replaces setStartAtZero(true)
 

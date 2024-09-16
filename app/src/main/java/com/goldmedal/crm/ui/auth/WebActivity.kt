@@ -1,7 +1,6 @@
 package com.goldmedal.crm.ui.auth
 
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.http.SslError
@@ -13,8 +12,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.goldmedal.crm.R
-import kotlinx.android.synthetic.main.web_view_detail.*
-
 
 class WebActivity :AppCompatActivity() {
     companion object {
@@ -30,10 +27,12 @@ class WebActivity :AppCompatActivity() {
     }
 
     private lateinit var pageUrl: String
+    private lateinit var webView: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_view_detail)
+        webView = findViewById(R.id.webView)
         // get pageUrl from String
         pageUrl = intent.getStringExtra(PAGE_URL)
             ?: throw IllegalStateException("field $PAGE_URL missing in Intent")

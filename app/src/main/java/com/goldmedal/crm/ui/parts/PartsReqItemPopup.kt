@@ -19,7 +19,6 @@ import com.goldmedal.crm.util.Coroutines
 import com.goldmedal.crm.util.toast
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import kotlinx.android.synthetic.main.dialog_parts_requirement_item.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -62,10 +61,10 @@ class PartsReqItemPopup : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogPartsRequirementItemBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,20 +72,19 @@ class PartsReqItemPopup : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         viewModel = ViewModelProvider(this, factory).get(PartsViewModel::class.java)
         viewModel.apiListener = this
 
-        imvClose?.setOnClickListener {
+        binding.imvClose.setOnClickListener {
             dismissAllowingStateLoss()
         }
 
         viewModel.getLoggedInUser().observe(this, Observer { user ->
             if (user != null) {
-                if(callFrom.equals("parts")){
-                    txtQtyHeader.text = "Quantity"
+                if(callFrom == "parts"){
+                    binding.txtQtyHeader.text = "Quantity"
                     viewModel.getRequestedItemListByUser(itemReqNo)
                 }
 
-                if(callFrom.equals("status")){
-
-                    txtQtyHeader.text = "Available Quantity"
+                if(callFrom == "status"){
+                    binding.txtQtyHeader.text = "Available Quantity"
                     viewModel.getStockPartsList(user.UserId ?: 0, itemReqNo,"")
                 }
 
@@ -105,8 +103,8 @@ class PartsReqItemPopup : DialogFragment(), KodeinAware, ApiStageListener<Any> {
         list?.let {
             initRecyclerView(it.toParts())
 
-            var totalQty = list.map { ((it?.ActualQuantity ?: "0").toDouble().toInt()) }.sum()
-            txtTotalQty.text = totalQty.toString()
+            val totalQty = list.map { ((it?.ActualQuantity ?: "0").toDouble().toInt()) }.sum()
+            binding.txtTotalQty.text = totalQty.toString()
         }
     }
 
@@ -129,18 +127,18 @@ class PartsReqItemPopup : DialogFragment(), KodeinAware, ApiStageListener<Any> {
     override fun onSuccess(_object: List<Any?>, callFrom: String) {
         binding.viewCommon.hide()
         val data = _object as List<Any?>
-        if (data.isNullOrEmpty()) {
-            llPartsReqItemMain.visibility = View.INVISIBLE
+        if (data.isEmpty()) {
+            binding.llPartsReqItemMain.visibility = View.INVISIBLE
             binding.viewCommon.showNoData()
         }else{
-            llPartsReqItemMain.visibility = View.VISIBLE
+            binding.llPartsReqItemMain.visibility = View.VISIBLE
             bindItemsUI(data as List<SelectPartsListData?>)
         }
 
     }
 
     override fun onError(message: String, callFrom: String, isNetworkError: Boolean) {
-        llPartsReqItemMain.visibility = View.INVISIBLE
+        binding.llPartsReqItemMain.visibility = View.INVISIBLE
         binding.viewCommon.hide()
         if (isNetworkError) {
             binding.viewCommon.showNoInternet()
