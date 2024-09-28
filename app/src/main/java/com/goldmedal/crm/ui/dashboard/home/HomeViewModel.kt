@@ -124,17 +124,17 @@ class HomeViewModel(
             try {
                 val getDashboardResponse = repository.getDashboardData(userID)
 
-                    getDashboardResponse.data?.let {
-                    apiListener?.onSuccess(it, "dashboard",getDashboardResponse.servertime ?: "")
+                getDashboardResponse.data?.let {
+                    apiListener?.onSuccess(it, "dashboard", getDashboardResponse.servertime ?: "")
                     return@main
                 }
 
-                    val errorResponse = getDashboardResponse.Errors
-                    if (!errorResponse?.isNullOrEmpty()!!) {
-                        errorResponse[0]?.ErrorMsg?.let {
-                            apiListener?.onError(it, "dashboard", false)
-                        }
+                val errorResponse = getDashboardResponse.Errors
+                if (!errorResponse?.isNullOrEmpty()!!) {
+                    errorResponse[0]?.ErrorMsg?.let {
+                        apiListener?.onError(it, "dashboard", false)
                     }
+                }
                             //    apiListener?.onError("Error","dashboard",false)
 
             } catch (e: ApiException) {

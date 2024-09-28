@@ -22,9 +22,9 @@ class OptionsBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViews()
         scanTextView = view.findViewById(R.id.txt_scan)
         searchTextView = view.findViewById(R.id.txt_search)
+        setUpViews()
     }
 
     private fun setUpViews() {

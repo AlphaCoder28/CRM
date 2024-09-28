@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), KodeinAware, DashboardApiListener<Any>,
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
         homeFragmentBinding.viewmodelHome = viewModel
 
         verticalAssignedTicketsBanner =
