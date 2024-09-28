@@ -55,13 +55,13 @@ public class ManagerAnalysisChart extends LinearLayout {
         chartManagerAnalysis.setDescription(null);
         chartManagerAnalysis.setDrawGridBackground(false);
 
-        ArrayList xVals = new ArrayList();
+        ArrayList<String> xVals = new ArrayList<String>();
 
         xVals.add("Wiring Devices");
         xVals.add("Wires,Lights & Pipes");
 
-        ArrayList yVals1 = new ArrayList();
-        ArrayList yVals2 = new ArrayList();
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> yVals2 = new ArrayList<BarEntry>();
 
         yVals1.add(new BarEntry(1, 100000.0f));
         yVals2.add(new BarEntry(1, 200000.0f));
@@ -114,7 +114,7 @@ public class ManagerAnalysisChart extends LinearLayout {
         leftAxis.setDrawGridLines(true);
     }
 
-    public class MyValueFormatter extends ValueFormatter implements IValueFormatter {
+    public static class MyValueFormatter extends ValueFormatter implements IValueFormatter {
 
         private DecimalFormat mFormat;
 
