@@ -1,6 +1,39 @@
 package com.goldmedal.crm.ui.ticket
 
 
+/*
+// Logic in the code:
+
+1. **Data Binding**:
+- Binds ticket data (like ticket number, customer name, appointment details) to the UI elements.
+
+2. **Reschedule Information**:
+- Displays reschedule date and time if available, otherwise shows a placeholder.
+
+3. **Priority Highlight**:
+- Highlights tickets with "high" or "urgent" priority.
+
+4. **Status Handling**:
+- Displays ticket status with color-coded text based on the status (e.g., "Pending", "Visited", "Reschedule").
+- Colors are mapped using `when` conditions.
+
+5. **Call Functionality**:
+- Allows users to make a call to the customer by clicking the call button.
+
+6. **Ticket Details**:
+- Navigates to the ticket details page when the "Details" button is clicked.
+
+7. **Ticket Actions**:
+- Buttons for ticket actions like "Close", "Reassign", and "Reschedule" trigger callback functions with specific status codes.
+
+8. **Check-in Status**:
+- Observes and handles ticket check-in status when the root layout is clicked (if the status is not 4, 5, or 6).
+
+9. **Visibility Control**:
+- Shows or hides action buttons (e.g., main button) based on the current status of the ticket.
+*/
+
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -16,7 +49,7 @@ import com.goldmedal.crm.util.interfaces.IStatusListener
 import com.xwray.groupie.viewbinding.BindableItem
 import java.util.*
 
-
+//This code binds ticket data to UI elements, displays reschedule info if available, sets priority and status colors, and handles various button clicks for actions like calling, viewing details, canceling, reassigning, and tracking check-in status.
 class AcceptedTicketItem(private val acceptedTicketData: GetAcceptedTicketData?, private val context: Context, private val callBackListener: IStatusListener?, statusby: Int?) : BindableItem<AcceptedTicketRowBinding>() { //Item()
 
     var statusBy = statusby
@@ -124,6 +157,7 @@ class AcceptedTicketItem(private val acceptedTicketData: GetAcceptedTicketData?,
             }
 
 
+//This function is called with the ticket data and a status code to handle actions like closing, reassigning, or rescheduling the ticket.
             textViewClose.setOnClickListener { v: View? ->
                 callBackListener?.cancelTicket(acceptedTicketData, 6)
             }
@@ -141,7 +175,7 @@ class AcceptedTicketItem(private val acceptedTicketData: GetAcceptedTicketData?,
                 btnMain.visibility = View.GONE
             }else{
                 btnMain.visibility = View.VISIBLE
-
+//                This function is called to  check-in status of a ticket when layoutRoot is clicked for particular conditions.
                 layoutRoot.setOnClickListener {
                     callBackListener?.observeCheckInStatus(acceptedTicketData?.TicketID)
                 }
